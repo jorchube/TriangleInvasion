@@ -62,6 +62,9 @@
 		B52CA0DB17A973EE00AD54D0 /* slingshotTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "slingshotTests-Info.plist"; sourceTree = "<group>"; };
 		B52CA0DD17A973EE00AD54D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B52CA0DF17A973EE00AD54D0 /* slingshotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = slingshotTests.m; sourceTree = "<group>"; };
+		B52CA0E917A9BED400AD54D0 /* Slingshot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Slingshot.h; sourceTree = "<group>"; };
+		B52CA0EA17A9BED400AD54D0 /* Slingshot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Slingshot.m; sourceTree = "<group>"; };
+		B52CA0EB17A9BF1D00AD54D0 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,8 +132,11 @@
 				B52CA0C117A973ED00AD54D0 /* Main_iPad.storyboard */,
 				B52CA0C417A973ED00AD54D0 /* ViewController.h */,
 				B52CA0C517A973ED00AD54D0 /* ViewController.m */,
+				B52CA0EB17A9BF1D00AD54D0 /* Constants.h */,
 				B52CA0C717A973ED00AD54D0 /* MyScene.h */,
 				B52CA0C817A973EE00AD54D0 /* MyScene.m */,
+				B52CA0E917A9BED400AD54D0 /* Slingshot.h */,
+				B52CA0EA17A9BED400AD54D0 /* Slingshot.m */,
 				B52CA0CA17A973EE00AD54D0 /* Spaceship.png */,
 				B52CA0CC17A973EE00AD54D0 /* Images.xcassets */,
 				B52CA0B317A973ED00AD54D0 /* Supporting Files */,
