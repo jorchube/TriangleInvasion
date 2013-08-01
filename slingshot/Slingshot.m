@@ -11,7 +11,6 @@
 
 @implementation Slingshot
 
-@synthesize node;
 @synthesize powerup;
 
 -(id) init {

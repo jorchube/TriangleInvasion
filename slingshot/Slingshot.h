@@ -10,11 +10,9 @@
 #import <SpriteKit/SpriteKit.h>
 
 
-@interface Slingshot : NSObject
+@interface Slingshot : SKShapeNode
 
-@property SKShapeNode *node;
 @property int powerup;
-
 
 -(id) init;
 

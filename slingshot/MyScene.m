@@ -66,14 +66,14 @@
 
 -(void) addSlingshot {
 	slingshot = [[Slingshot alloc] init];
-	[slingshot setNode:[[SKShapeNode alloc] init] ];
-	[slingshot node].path = CGPathCreateWithEllipseInRect(CGRectMake(0.0,
+
+	slingshot.path = CGPathCreateWithEllipseInRect(CGRectMake(0.0,
 															  0.0,
 															  slingshotHeight,
 															  slingshotWidth),
 												   nil);
 
-	[slingshot node].position = CGPointMake(CGRectGetMidX(self.frame)-slingshotHeight/2,
+	slingshot.position = CGPointMake(CGRectGetMidX(self.frame)-slingshotHeight/2,
 									 CGRectGetMinY(self.frame)+slingshotYFromBottom);
 	
 
@@ -85,10 +85,10 @@
 	[pb setAffectedByGravity:NO];
 	[pb setUsesPreciseCollisionDetection:YES];
 	
-	[slingshot.node setPhysicsBody:pb];
+	[slingshot setPhysicsBody:pb];
 	
 	
-	[self addChild:[slingshot node]];
+	[self addChild:slingshot];
 }
 
 #pragma mark touch detection
@@ -122,10 +122,10 @@
 
 -(void) shotSling {
 	
-	[[slingshot node].physicsBody setDynamic:YES];
-	[[slingshot node].physicsBody setCategoryBitMask:collisionMask];
-	[[slingshot node].physicsBody setCollisionBitMask:collisionMask];
-	[[slingshot node].physicsBody applyImpulse:CGPointMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
+	[slingshot.physicsBody setDynamic:YES];
+	[slingshot.physicsBody setCategoryBitMask:collisionMask];
+	[slingshot.physicsBody setCollisionBitMask:collisionMask];
+	[slingshot.physicsBody applyImpulse:CGPointMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
 													(touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
 	
 	
