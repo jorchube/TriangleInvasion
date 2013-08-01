@@ -56,8 +56,8 @@
 	SKPhysicsBody *pb2 = [SKPhysicsBody bodyWithPolygonFromPath:cube.path];
 	
 	[pb2 setAffectedByGravity:NO];
-	[pb2 setCategoryBitMask:collisionMask];
-	[pb2 setCollisionBitMask:collisionMask];
+	[pb2 setCategoryBitMask:cat_simpleObject];
+	[pb2 setCollisionBitMask:cat_simpleObject | cat_sling];
 	[cube setPhysicsBody:pb2];
 	
 	[self addChild:cube];
@@ -79,8 +79,8 @@
 
 	SKPhysicsBody *pb = [SKPhysicsBody bodyWithCircleOfRadius:slingshotHeight/2];
 	
-	[pb setCategoryBitMask:noCollideMask];
-	[pb setCollisionBitMask:noCollideMask];
+	[pb setCategoryBitMask:cat_notCollide];
+	[pb setCollisionBitMask:cat_notCollide];
 	[pb setMass:slingshotMass];
 	[pb setAffectedByGravity:NO];
 	[pb setUsesPreciseCollisionDetection:YES];
@@ -122,10 +122,10 @@
 
 -(void) shotSling {
 	
-	[slingshot.physicsBody setContactTestBitMask:collisionMask];
+	[slingshot.physicsBody setContactTestBitMask:cat_sling | cat_simpleObject];
 	[slingshot.physicsBody setDynamic:YES];
-	[slingshot.physicsBody setCategoryBitMask:collisionMask];
-	[slingshot.physicsBody setCollisionBitMask:collisionMask];
+	[slingshot.physicsBody setCategoryBitMask:cat_sling];
+	[slingshot.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject];
 	[slingshot.physicsBody applyImpulse:CGPointMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
 													(touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
 	
