@@ -11,7 +11,7 @@
 #import "Slingshot.h"
 #import "ContactDelegate.h"
 
-@interface MyScene : SKScene
+@interface MyScene : SKScene <SKPhysicsContactDelegate>
 
 @property Slingshot *slingshot;
 @property SKLabelNode *scoreLabel;

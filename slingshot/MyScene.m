@@ -32,7 +32,7 @@
 		[self addScoreLabel];
 		[self addSlingshot];
         [self setTouchMoved:false];
-		[self addDummy];
+		[self addDummyAtX:100 atY:800];
 		
     }
     return self;
@@ -50,9 +50,9 @@
 	[self addChild:scoreLabel];
 }
 
--(void) addDummy{
+-(void) addDummyAtX: (CGFloat)X atY:(CGFloat)Y{
 	SKShapeNode *cube = [[SKShapeNode alloc]init];
-	cube.path = CGPathCreateWithRect(CGRectMake(100, 800, 500, 100), nil);
+	cube.path = CGPathCreateWithRect(CGRectMake(X, Y, 500, 100), nil);
 	SKPhysicsBody *pb2 = [SKPhysicsBody bodyWithPolygonFromPath:cube.path];
 	
 	[pb2 setAffectedByGravity:NO];
@@ -122,14 +122,14 @@
 
 -(void) shotSling {
 	
+	[slingshot.physicsBody setContactTestBitMask:collisionMask];
 	[slingshot.physicsBody setDynamic:YES];
 	[slingshot.physicsBody setCategoryBitMask:collisionMask];
 	[slingshot.physicsBody setCollisionBitMask:collisionMask];
 	[slingshot.physicsBody applyImpulse:CGPointMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
 													(touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
 	
-	
-	
+	[self addSlingshot];
 }
 
 -(void)update:(CFTimeInterval)currentTime {

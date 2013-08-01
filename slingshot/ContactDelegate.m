@@ -20,7 +20,6 @@
 }
 
 -(void) didEndContact:(SKPhysicsContact *)contact {
-	NSLog(@"endopuch");
 }
 
 @end
