@@ -19,7 +19,7 @@ const double slingshotYFromBottom = 150;
 
 const uint32_t cat_notCollide = 0x0;
 const uint32_t cat_sling = 0x1 << 0;
-const uint32_t cat_simpleObject = 0x1 << 2;
+const uint32_t cat_simpleObject = 0x1 << 1;
 
 const double slingshotMass = 1.0;
 const double slingshotForceMult = 1.0;
