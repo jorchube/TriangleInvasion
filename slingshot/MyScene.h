@@ -7,8 +7,9 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "Slingshot.h"
 #import "Constants.h"
+#import "Slingshot.h"
+#import "ContactDelegate.h"
 
 @interface MyScene : SKScene
 
@@ -17,5 +18,6 @@
 @property CGPoint touchInitPos;
 @property CGPoint touchEndPos;
 @property Boolean touchMoved;
+@property id<SKPhysicsContactDelegate> contactDelegate;
 
 @end

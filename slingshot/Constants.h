@@ -11,20 +11,21 @@
 
 #pragma mark slingshot body and position
 
-#define slingshotWidth 5.0
-#define slingshotHeight slingshotWidth
-#define slingshotYFromBottom 150
+const double slingshotWidth = 5.0;
+const double slingshotHeight = slingshotWidth;
+const double slingshotYFromBottom = 150;
 
 #pragma mark slingshot physic parameters
 
-#define noCollideMask (uint32_t)0
-#define collisionMask (uint32_t)1
-#define slingshotMass 1
-#define slingshotForceMult 1
+const uint32_t noCollideMask = 0x0;
+const uint32_t collisionMask = 0x1 << 0;
+
+const double slingshotMass = 1.0;
+const double slingshotForceMult = 1.0;
 
 #pragma mark powerup
 
-#define pow_none 0
+const int pow_none = 0;
 
 
 #endif

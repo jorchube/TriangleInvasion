@@ -1,5 +1,5 @@
 //
-//  Slingshot.h
+//  ContactDelegate.h
 //  slingshot
 //
 //  Created by Jordi Chulia on 8/1/13.
@@ -9,13 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
 
-
-@interface Slingshot : NSObject
-
-@property SKShapeNode *node;
-@property int powerup;
-
+@interface ContactDelegate : NSObject <SKPhysicsContactDelegate>
 
 -(id) init;
+-(void) didBeginContact:(SKPhysicsContact *)contact;
+-(void) didEndContact:(SKPhysicsContact *)contact;
 
 @end
