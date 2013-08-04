@@ -7,13 +7,15 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+
 #import "Constants.h"
-#import "Slingshot.h"
+#import "Sling.h"
 #import "ContactDelegate.h"
+#import "Triangle.h"
 
 @interface MyScene : SKScene <SKPhysicsContactDelegate>
 
-@property Slingshot *slingshot;
+@property Sling *sling;
 @property SKLabelNode *scoreLabel;
 @property CGPoint touchInitPos;
 @property CGPoint touchEndPos;

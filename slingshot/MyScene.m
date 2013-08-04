@@ -10,29 +10,32 @@
 
 @implementation MyScene
 
-@synthesize slingshot;
+@synthesize sling;
 @synthesize scoreLabel;
 @synthesize touchInitPos;
 @synthesize touchEndPos;
 @synthesize touchMoved;
 @synthesize contactDelegate;
 
--(id)initWithSize:(CGSize)size {    
+#define slingshotPosition CGPointMake(CGRectGetMidX(self.frame)-slingshotHeight/2,		\
+									  CGRectGetMinY(self.frame)+slingshotYFromBottom);
+
+-(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
 		
-		contactDelegate = [[ContactDelegate alloc]init];
+		contactDelegate = [[ContactDelegate alloc]initWithPhysicsWorld:self.physicsWorld];
 		[self.physicsWorld setContactDelegate:contactDelegate];
+
 		
-		if ([self.physicsWorld.contactDelegate respondsToSelector:@selector(didBeginContact:)]) NSLog(@"DEL");
-		else NSLog(@"NODEL");
-		
-        self.backgroundColor = [SKColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+        self.backgroundColor = [SKColor blackColor];
         
 		[self addScoreLabel];
-		[self addSlingshot];
+		[self addSling];
         [self setTouchMoved:false];
-		[self addDummyAtX:100 atY:800];
+		
+		NSTimer *triangleTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(launchTriangle) userInfo:nil repeats:YES];
+		[[NSRunLoop currentRunLoop] addTimer:triangleTimer forMode:NSDefaultRunLoopMode];
 		
     }
     return self;
@@ -51,44 +54,35 @@
 }
 
 -(void) addDummyAtX: (CGFloat)X atY:(CGFloat)Y{
-	SKShapeNode *cube = [[SKShapeNode alloc]init];
-	cube.path = CGPathCreateWithRect(CGRectMake(X, Y, 500, 100), nil);
-	SKPhysicsBody *pb2 = [SKPhysicsBody bodyWithPolygonFromPath:cube.path];
+	Triangle *tri = [[Triangle alloc] init];
+	tri.position = CGPointMake(X, Y);
 	
-	[pb2 setAffectedByGravity:NO];
-	[pb2 setCategoryBitMask:cat_simpleObject];
-	[pb2 setCollisionBitMask:cat_simpleObject | cat_sling];
-	[cube setPhysicsBody:pb2];
-	
-	[self addChild:cube];
+	[self addChild:tri];
 
 }
 
--(void) addSlingshot {
-	slingshot = [[Slingshot alloc] init];
+-(void) addSling {
+	sling = [[Sling alloc] init];
+	sling.position = slingshotPosition;
+	[self addChild:sling];
+}
 
-	slingshot.path = CGPathCreateWithEllipseInRect(CGRectMake(0.0,
-															  0.0,
-															  slingshotHeight,
-															  slingshotWidth),
-												   nil);
+# pragma mark object launchers
 
-	slingshot.position = CGPointMake(CGRectGetMidX(self.frame)-slingshotHeight/2,
-									 CGRectGetMinY(self.frame)+slingshotYFromBottom);
-	
+-(void) launchTriangle {
+	Triangle *tri = [[Triangle alloc]init];
+	[self launchObject:tri];
+}
 
-	SKPhysicsBody *pb = [SKPhysicsBody bodyWithCircleOfRadius:slingshotHeight/2];
+-(void) launchObject: (SKShapeNode *)object {
+	CGFloat Ypos = CGRectGetMaxY(self.frame);
+	/* this -100 +50 stuff is to have a 50 units margin in each side. */
+	CGFloat Xpos = ( rand() % (int)(CGRectGetMaxX(self.frame)-100) ) + 50;
 	
-	[pb setCategoryBitMask:cat_notCollide];
-	[pb setCollisionBitMask:cat_notCollide];
-	[pb setMass:slingshotMass];
-	[pb setAffectedByGravity:NO];
-	[pb setUsesPreciseCollisionDetection:YES];
+	[object.physicsBody setVelocity:CGPointMake(0, -100)];
 	
-	[slingshot setPhysicsBody:pb];
-	
-	
-	[self addChild:slingshot];
+	object.position = CGPointMake(Xpos, Ypos);
+	[self addChild:object];
 }
 
 #pragma mark touch detection
@@ -122,14 +116,14 @@
 
 -(void) shotSling {
 	
-	[slingshot.physicsBody setContactTestBitMask:cat_sling | cat_simpleObject];
-	[slingshot.physicsBody setDynamic:YES];
-	[slingshot.physicsBody setCategoryBitMask:cat_sling];
-	[slingshot.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject];
-	[slingshot.physicsBody applyImpulse:CGPointMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
+	[sling.physicsBody setContactTestBitMask:cat_sling | cat_simpleObject];
+	[sling.physicsBody setDynamic:YES];
+	[sling.physicsBody setCategoryBitMask:cat_sling];
+	[sling.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject];
+	[sling.physicsBody applyImpulse:CGPointMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
 													(touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
 	
-	[self addSlingshot];
+	[self addSling];
 }
 
 -(void)update:(CFTimeInterval)currentTime {

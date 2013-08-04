@@ -24,7 +24,8 @@
 		B52CA0D617A973EE00AD54D0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B52CA0AE17A973ED00AD54D0 /* UIKit.framework */; };
 		B52CA0DE17A973EE00AD54D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B52CA0DC17A973EE00AD54D0 /* InfoPlist.strings */; };
 		B52CA0E017A973EE00AD54D0 /* slingshotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B52CA0DF17A973EE00AD54D0 /* slingshotTests.m */; };
-		B595A1A617AA691A00F8AAC1 /* Slingshot.m in Sources */ = {isa = PBXBuildFile; fileRef = B595A1A517AA691A00F8AAC1 /* Slingshot.m */; };
+		B53FC27417AEB2AC00199BD4 /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = B53FC27317AEB2AC00199BD4 /* Triangle.m */; };
+		B595A1A617AA691A00F8AAC1 /* Sling.m in Sources */ = {isa = PBXBuildFile; fileRef = B595A1A517AA691A00F8AAC1 /* Sling.m */; };
 		B595A1AC17AB035100F8AAC1 /* ContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B595A1AB17AB035100F8AAC1 /* ContactDelegate.m */; };
 /* End PBXBuildFile section */
 
@@ -63,8 +64,10 @@
 		B52CA0DD17A973EE00AD54D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B52CA0DF17A973EE00AD54D0 /* slingshotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = slingshotTests.m; sourceTree = "<group>"; };
 		B52CA0EB17A9BF1D00AD54D0 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		B595A1A417AA691900F8AAC1 /* Slingshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slingshot.h; sourceTree = "<group>"; };
-		B595A1A517AA691A00F8AAC1 /* Slingshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Slingshot.m; sourceTree = "<group>"; };
+		B53FC27217AEB2AC00199BD4 /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
+		B53FC27317AEB2AC00199BD4 /* Triangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Triangle.m; sourceTree = "<group>"; };
+		B595A1A417AA691900F8AAC1 /* Sling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sling.h; sourceTree = "<group>"; };
+		B595A1A517AA691A00F8AAC1 /* Sling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sling.m; sourceTree = "<group>"; };
 		B595A1AA17AB035100F8AAC1 /* ContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDelegate.h; sourceTree = "<group>"; };
 		B595A1AB17AB035100F8AAC1 /* ContactDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,8 +140,10 @@
 				B52CA0EB17A9BF1D00AD54D0 /* Constants.h */,
 				B595A1AA17AB035100F8AAC1 /* ContactDelegate.h */,
 				B595A1AB17AB035100F8AAC1 /* ContactDelegate.m */,
-				B595A1A417AA691900F8AAC1 /* Slingshot.h */,
-				B595A1A517AA691A00F8AAC1 /* Slingshot.m */,
+				B53FC27217AEB2AC00199BD4 /* Triangle.h */,
+				B53FC27317AEB2AC00199BD4 /* Triangle.m */,
+				B595A1A417AA691900F8AAC1 /* Sling.h */,
+				B595A1A517AA691A00F8AAC1 /* Sling.m */,
 				B52CA0C717A973ED00AD54D0 /* MyScene.h */,
 				B52CA0C817A973EE00AD54D0 /* MyScene.m */,
 				B52CA0CC17A973EE00AD54D0 /* Images.xcassets */,
@@ -274,10 +279,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B53FC27417AEB2AC00199BD4 /* Triangle.m in Sources */,
 				B52CA0C917A973EE00AD54D0 /* MyScene.m in Sources */,
 				B595A1AC17AB035100F8AAC1 /* ContactDelegate.m in Sources */,
 				B52CA0C617A973ED00AD54D0 /* ViewController.m in Sources */,
-				B595A1A617AA691A00F8AAC1 /* Slingshot.m in Sources */,
+				B595A1A617AA691A00F8AAC1 /* Sling.m in Sources */,
 				B52CA0BD17A973ED00AD54D0 /* AppDelegate.m in Sources */,
 				B52CA0B917A973ED00AD54D0 /* main.m in Sources */,
 			);

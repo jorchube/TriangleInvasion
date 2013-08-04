@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
+#import "Constants.h"
 
-
-@interface Slingshot : SKShapeNode
+@interface Sling : SKShapeNode
 
 @property int powerup;
 

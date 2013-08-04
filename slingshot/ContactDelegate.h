@@ -12,7 +12,11 @@
 
 @interface ContactDelegate : NSObject <SKPhysicsContactDelegate>
 
+/* this physycsWorld is the one from the SKScene delegating to this class*/
+@property SKPhysicsWorld *physicsWorld;
+
 -(id) init;
+-(id) initWithPhysicsWorld:(SKPhysicsWorld *) pWorld;
 -(void) didBeginContact:(SKPhysicsContact *)contact;
 -(void) didEndContact:(SKPhysicsContact *)contact;
 
