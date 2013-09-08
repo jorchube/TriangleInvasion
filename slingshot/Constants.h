@@ -9,6 +9,10 @@
 #ifndef slingshot_Constants_h
 #define slingshot_Constants_h
 
+#pragma mark scene
+
+const int Xmargin = 20;
+
 #pragma mark slingshot body and position
 
 const double slingshotWidth = 5.0;
@@ -24,7 +28,10 @@ const uint32_t cat_simpleObject = 0x1 << 1;
 const double slingshotMass = 1.0;
 const double slingshotForceMult = 2.5;
 
-#pragma mark triangle
+#pragma mark objects
+
+const int minSpeed = 60;
+const int varSpeed = 60;
 
 const double triangleScale = 0.5;
 const double triangleMass = slingshotMass;

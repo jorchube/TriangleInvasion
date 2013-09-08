@@ -44,11 +44,11 @@
 #pragma mark add initial elements
 
 -(void) addScoreLabel {
-	scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+	scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
 	scoreLabel.text = @"Hello, Score!";
-	scoreLabel.fontSize = 30;
-	scoreLabel.position = CGPointMake(CGRectGetMinX(self.frame)+150,
-								   CGRectGetMaxY(self.frame)-60);
+	scoreLabel.fontSize = 12;
+	scoreLabel.position = CGPointMake(CGRectGetMinX(self.frame)+50,
+								   CGRectGetMaxY(self.frame)-30);
 	
 	[self addChild:scoreLabel];
 }
@@ -76,10 +76,9 @@
 
 -(void) launchObject: (SKShapeNode *)object {
 	CGFloat Ypos = CGRectGetMaxY(self.frame);
-	/* this -100 +50 stuff is to have a 50 units margin in each side. */
-	CGFloat Xpos = ( rand() % (int)(CGRectGetMaxX(self.frame)-100) ) + 50;
+	CGFloat Xpos = ( rand() % (int)(CGRectGetMaxX(self.frame)-(Xmargin*2)) ) + Xmargin;
 	
-	[object.physicsBody setVelocity:CGVectorMake(0, -100)];
+    [object.physicsBody setVelocity:CGVectorMake(0, -((rand()%varSpeed)+minSpeed))];
 	
 	object.position = CGPointMake(Xpos, Ypos);
 	[self addChild:object];
