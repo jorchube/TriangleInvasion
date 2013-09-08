@@ -25,6 +25,7 @@
 		B52CA0DE17A973EE00AD54D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B52CA0DC17A973EE00AD54D0 /* InfoPlist.strings */; };
 		B52CA0E017A973EE00AD54D0 /* slingshotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B52CA0DF17A973EE00AD54D0 /* slingshotTests.m */; };
 		B53FC27417AEB2AC00199BD4 /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = B53FC27317AEB2AC00199BD4 /* Triangle.m */; };
+		B56DCC8B17DCCE58001D88A7 /* Deadline.m in Sources */ = {isa = PBXBuildFile; fileRef = B56DCC8A17DCCE58001D88A7 /* Deadline.m */; };
 		B595A1A617AA691A00F8AAC1 /* Sling.m in Sources */ = {isa = PBXBuildFile; fileRef = B595A1A517AA691A00F8AAC1 /* Sling.m */; };
 		B595A1AC17AB035100F8AAC1 /* ContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B595A1AB17AB035100F8AAC1 /* ContactDelegate.m */; };
 /* End PBXBuildFile section */
@@ -66,6 +67,8 @@
 		B52CA0EB17A9BF1D00AD54D0 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		B53FC27217AEB2AC00199BD4 /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
 		B53FC27317AEB2AC00199BD4 /* Triangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Triangle.m; sourceTree = "<group>"; };
+		B56DCC8917DCCE58001D88A7 /* Deadline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deadline.h; sourceTree = "<group>"; };
+		B56DCC8A17DCCE58001D88A7 /* Deadline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deadline.m; sourceTree = "<group>"; };
 		B595A1A417AA691900F8AAC1 /* Sling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sling.h; sourceTree = "<group>"; };
 		B595A1A517AA691A00F8AAC1 /* Sling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sling.m; sourceTree = "<group>"; };
 		B595A1AA17AB035100F8AAC1 /* ContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDelegate.h; sourceTree = "<group>"; };
@@ -142,6 +145,8 @@
 				B595A1AB17AB035100F8AAC1 /* ContactDelegate.m */,
 				B53FC27217AEB2AC00199BD4 /* Triangle.h */,
 				B53FC27317AEB2AC00199BD4 /* Triangle.m */,
+				B56DCC8917DCCE58001D88A7 /* Deadline.h */,
+				B56DCC8A17DCCE58001D88A7 /* Deadline.m */,
 				B595A1A417AA691900F8AAC1 /* Sling.h */,
 				B595A1A517AA691A00F8AAC1 /* Sling.m */,
 				B52CA0C717A973ED00AD54D0 /* MyScene.h */,
@@ -285,6 +290,7 @@
 				B53FC27417AEB2AC00199BD4 /* Triangle.m in Sources */,
 				B52CA0C917A973EE00AD54D0 /* MyScene.m in Sources */,
 				B595A1AC17AB035100F8AAC1 /* ContactDelegate.m in Sources */,
+				B56DCC8B17DCCE58001D88A7 /* Deadline.m in Sources */,
 				B52CA0C617A973ED00AD54D0 /* ViewController.m in Sources */,
 				B595A1A617AA691A00F8AAC1 /* Sling.m in Sources */,
 				B52CA0BD17A973ED00AD54D0 /* AppDelegate.m in Sources */,

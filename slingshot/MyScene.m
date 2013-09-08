@@ -13,12 +13,13 @@
 @synthesize idleSling;
 @synthesize scoreLabel;
 @synthesize touchInitPos;
+@synthesize touchMiddlePos;
 @synthesize touchEndPos;
 @synthesize touchMoved;
 @synthesize contactDelegate;
-
-#define slingshotPosition CGPointMake(CGRectGetMidX(self.frame)-slingshotHeight/2,		\
-									  CGRectGetMinY(self.frame)+slingshotYFromBottom);
+@synthesize slingshotPosition;
+@synthesize hint;
+@synthesize deadline;
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -27,12 +28,26 @@
 		contactDelegate = [[ContactDelegate alloc]initWithPhysicsWorld:self.physicsWorld];
 		[self.physicsWorld setContactDelegate:contactDelegate];
 
-		
+        /* Line at the bottom that means the geometric apocalypse will start */
+        deadline = [[Deadline alloc] initWithFrame:self.frame];
+        [self addChild:deadline];
+        
+        /* Where new slings born */
+		slingshotPosition = CGPointMake(CGRectGetMidX(self.frame)-slingshotHeight/2,
+                                        CGRectGetMinY(self.frame)+slingshotYFromBottom);
+        
+
+        hint = [[SKShapeNode alloc]init];
+        hint.alpha = 0.0;
+        [self addChild:hint];
+        
         self.backgroundColor = [SKColor blackColor];
         
 		[self addScoreLabel];
 		[self addSling];
         [self setTouchMoved:false];
+        
+        
 		
 		NSTimer *triangleTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(launchTriangle) userInfo:nil repeats:YES];
 		[[NSRunLoop currentRunLoop] addTimer:triangleTimer forMode:NSDefaultRunLoopMode];
@@ -97,6 +112,22 @@
 
 -(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	[self setTouchMoved:true];
+    for (UITouch *touch in touches){
+        touchMiddlePos = [touch locationInNode:self];
+        
+        CGMutablePathRef path = CGPathCreateMutable();
+        CGPathMoveToPoint(path,
+                          nil,
+                          slingshotPosition.x + (slingshotWidth/2),
+                          slingshotPosition.y + (slingshotHeight/2));
+        CGPathAddLineToPoint(path,
+                             nil,
+                             (slingshotPosition.x + 10*(touchInitPos.x-touchMiddlePos.x)),
+                             (slingshotPosition.y + 10*(touchInitPos.y-touchMiddlePos.y)));
+        
+        hint.path = path;
+        hint.alpha = hintAlpha;
+    }
 }
 
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -109,6 +140,7 @@
 		[self shotSling];
 	}
 	[self setTouchMoved:false];
+    hint.alpha = 0.0;
 }
 
 #pragma mark shot

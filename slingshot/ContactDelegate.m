@@ -48,6 +48,11 @@
     }
     else if( (AMask | BMask) == cat_simpleObject)
         [self collisionBetweenSimpleObjects:bodyA and:bodyB];
+    else if( (AMask | BMask) == (cat_simpleObject | cat_deadline) ){
+        if(AMask == cat_simpleObject)
+            [self reachedDeadlineObject:bodyA];
+        else [self reachedDeadlineObject:bodyB];
+    }
 }
 
 -(void) didEndContact:(SKPhysicsContact *)contact {
@@ -73,6 +78,11 @@
 -(void) collisionBetweenSimpleObjects: (SKPhysicsBody*) bodyA and: (SKPhysicsBody*) bodyB {
     [self killSimpleObject:bodyA];
     [self killSimpleObject:bodyB];
+}
+
+-(void) reachedDeadlineObject: (SKPhysicsBody*) body {
+    /* Game over, substracting one life... whatever */
+    [self killSimpleObject:body];
 }
 
 @end

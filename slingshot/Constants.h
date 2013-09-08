@@ -15,15 +15,20 @@ const int Xmargin = 20;
 
 #pragma mark slingshot body and position
 
-const double slingshotWidth = 5.0;
+const double slingshotWidth = 2.5;
 const double slingshotHeight = slingshotWidth;
-const double slingshotYFromBottom = 150;
+const double slingshotYFromBottom = 75;
+
+/* Some linker shit happens if I try to declare const double hintAlpha = 0.5 */
+#define hintAlpha 0.1
 
 #pragma mark slingshot physic parameters
 
 const uint32_t cat_notCollide = 0x0;
 const uint32_t cat_sling = 0x1 << 0;
 const uint32_t cat_simpleObject = 0x1 << 1;
+
+const uint32_t cat_deadline = 0x1 << 31;
 
 const double slingshotMass = 1.0;
 const double slingshotForceMult = 2.5;
@@ -34,7 +39,8 @@ const int minSpeed = 60;
 const int varSpeed = 60;
 
 const double triangleScale = 0.5;
-const double triangleMass = slingshotMass;
+const double triangleMass = slingshotMass/2;
+
 
 #pragma mark powerup
 

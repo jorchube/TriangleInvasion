@@ -14,7 +14,7 @@
 	self = [super init];
 	if (self)
 	{
-		self.strokeColor = [SKColor magentaColor];
+		self.strokeColor = [self getColor];
 		//self.fillColor = [SKColor magentaColor];
 		
 		CGMutablePathRef path = CGPathCreateMutable();
@@ -27,8 +27,8 @@
 		SKPhysicsBody *pb = [SKPhysicsBody bodyWithPolygonFromPath:path];
 		
 		[pb setCategoryBitMask:cat_simpleObject];
-		[pb setCollisionBitMask:cat_simpleObject | cat_sling];
-        [pb setContactTestBitMask:cat_simpleObject | cat_sling];
+		[pb setCollisionBitMask:cat_simpleObject | cat_sling | cat_deadline];
+        [pb setContactTestBitMask:cat_simpleObject | cat_sling | cat_deadline];
 		[pb setMass:triangleMass];
 		[pb setFriction:0.0];
 		[pb setLinearDamping:0.0];
@@ -37,6 +37,15 @@
 		[self setPhysicsBody:pb];
 	}
 	return self;
+}
+
+-(SKColor*) getColor {
+    sranddev();
+    NSArray *colors = @[[SKColor cyanColor],
+                        [SKColor magentaColor],
+                        [SKColor yellowColor],
+                        [SKColor orangeColor]];
+    return [colors objectAtIndex:rand()%[colors count]];
 }
 
 @end
