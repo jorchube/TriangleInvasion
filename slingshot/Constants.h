@@ -24,9 +24,21 @@ const uint32_t cat_simpleObject = 0x1 << 1;
 const double slingshotMass = 1.0;
 const double slingshotForceMult = 2.5;
 
+#pragma mark triangle
+
+const double triangleScale = 0.5;
+const double triangleMass = slingshotMass;
+
 #pragma mark powerup
 
 const int pow_none = 0;
 
+#pragma mark actions
+
+/* Actual sling lifespan is slingLifespan + slingFadingTime */
+const double slingLifespan = 1.5;
+const double slingFadingTime = 0.5;
+
+const double timeForObjectToDisappearAfterHit = 1.5;
 
 #endif

@@ -15,7 +15,7 @@
 
 @interface MyScene : SKScene <SKPhysicsContactDelegate>
 
-@property Sling *sling;
+@property Sling *idleSling;
 @property SKLabelNode *scoreLabel;
 @property CGPoint touchInitPos;
 @property CGPoint touchEndPos;

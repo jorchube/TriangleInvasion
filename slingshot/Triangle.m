@@ -14,21 +14,22 @@
 	self = [super init];
 	if (self)
 	{
-		self.strokeColor = [SKColor whiteColor];
-		self.fillColor = [SKColor whiteColor];
+		self.strokeColor = [SKColor magentaColor];
+		//self.fillColor = [SKColor magentaColor];
 		
 		CGMutablePathRef path = CGPathCreateMutable();
 		CGPathMoveToPoint(path, nil, 0, 0);
-		CGPathAddLineToPoint(path, nil, 50, 0);
-		CGPathAddLineToPoint(path, nil, 25, 43);
+		CGPathAddLineToPoint(path, nil, 50*triangleScale, 0);
+		CGPathAddLineToPoint(path, nil, 25*triangleScale, 43*triangleScale);
 		CGPathCloseSubpath(path);
-		
+        
 		self.path = path;
 		SKPhysicsBody *pb = [SKPhysicsBody bodyWithPolygonFromPath:path];
 		
 		[pb setCategoryBitMask:cat_simpleObject];
 		[pb setCollisionBitMask:cat_simpleObject | cat_sling];
-		[pb setMass:slingshotMass];
+        [pb setContactTestBitMask:cat_simpleObject | cat_sling];
+		[pb setMass:triangleMass];
 		[pb setFriction:0.0];
 		[pb setLinearDamping:0.0];
 		[pb setAffectedByGravity:NO];

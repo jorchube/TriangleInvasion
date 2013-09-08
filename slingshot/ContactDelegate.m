@@ -35,9 +35,19 @@
 	SKPhysicsBody *bodyA = [contact bodyA];
 	SKPhysicsBody *bodyB = [contact bodyB];
 	
-	if ( ( bodyA.categoryBitMask | bodyB.categoryBitMask ) == cat_sling)
+    uint32_t AMask = bodyA.categoryBitMask;
+    uint32_t BMask = bodyB.categoryBitMask;
+    
+    
+	if ( (AMask | BMask) == cat_sling)
 		[self collisionBetweenSlings:bodyA and:bodyB];
-	
+    else if( (AMask | BMask) == (cat_sling | cat_simpleObject) ) {
+        if(AMask == cat_sling)
+            [self sling:bodyA hitSimpleObject:bodyB];
+        else [self sling:bodyB hitSimpleObject:bodyA];
+    }
+    else if( (AMask | BMask) == cat_simpleObject)
+        [self collisionBetweenSimpleObjects:bodyA and:bodyB];
 }
 
 -(void) didEndContact:(SKPhysicsContact *)contact {
@@ -47,6 +57,22 @@
 
 -(void) collisionBetweenSlings: (SKPhysicsBody*) slingA and: (SKPhysicsBody*) slingB {
 	NSLog(@"two slings collide");
+}
+
+-(void) killSimpleObject: (SKPhysicsBody*) body {
+    [[body node] runAction:[SKAction fadeOutWithDuration:timeForObjectToDisappearAfterHit]
+                completion: ^{
+                    [[body node] runAction:[SKAction removeFromParent]];
+                }];
+}
+
+-(void) sling: (SKPhysicsBody*) sling hitSimpleObject: (SKPhysicsBody*) body {
+    [self killSimpleObject:body];
+}
+
+-(void) collisionBetweenSimpleObjects: (SKPhysicsBody*) bodyA and: (SKPhysicsBody*) bodyB {
+    [self killSimpleObject:bodyA];
+    [self killSimpleObject:bodyB];
 }
 
 @end

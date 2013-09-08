@@ -10,7 +10,7 @@
 
 @implementation MyScene
 
-@synthesize sling;
+@synthesize idleSling;
 @synthesize scoreLabel;
 @synthesize touchInitPos;
 @synthesize touchEndPos;
@@ -62,9 +62,9 @@
 }
 
 -(void) addSling {
-	sling = [[Sling alloc] init];
-	sling.position = slingshotPosition;
-	[self addChild:sling];
+	idleSling = [[Sling alloc] init];
+	idleSling.position = slingshotPosition;
+	[self addChild:idleSling];
 }
 
 # pragma mark object launchers
@@ -79,7 +79,7 @@
 	/* this -100 +50 stuff is to have a 50 units margin in each side. */
 	CGFloat Xpos = ( rand() % (int)(CGRectGetMaxX(self.frame)-100) ) + 50;
 	
-	[object.physicsBody setVelocity:CGPointMake(0, -100)];
+	[object.physicsBody setVelocity:CGVectorMake(0, -100)];
 	
 	object.position = CGPointMake(Xpos, Ypos);
 	[self addChild:object];
@@ -116,14 +116,26 @@
 
 -(void) shotSling {
 	
+    Sling *sling = idleSling;
+    
 	[sling.physicsBody setContactTestBitMask:cat_sling | cat_simpleObject];
 	[sling.physicsBody setDynamic:YES];
 	[sling.physicsBody setCategoryBitMask:cat_sling];
 	[sling.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject];
-	[sling.physicsBody applyImpulse:CGPointMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
+	[sling.physicsBody applyImpulse:CGVectorMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
 													(touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
-	
-	[self addSling];
+    
+    
+    [sling runAction:[SKAction waitForDuration:slingLifespan]
+          completion: ^{
+              [sling runAction:[SKAction fadeOutWithDuration:slingFadingTime]];
+              [sling runAction:[SKAction waitForDuration:slingFadingTime]
+                    completion:^{
+                        [sling runAction:[SKAction removeFromParent]];
+                    }];
+          }];
+    
+    [self addSling];
 }
 
 -(void)update:(CFTimeInterval)currentTime {
