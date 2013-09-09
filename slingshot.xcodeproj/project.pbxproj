@@ -26,6 +26,8 @@
 		B52CA0E017A973EE00AD54D0 /* slingshotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B52CA0DF17A973EE00AD54D0 /* slingshotTests.m */; };
 		B53FC27417AEB2AC00199BD4 /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = B53FC27317AEB2AC00199BD4 /* Triangle.m */; };
 		B56DCC8B17DCCE58001D88A7 /* Deadline.m in Sources */ = {isa = PBXBuildFile; fileRef = B56DCC8A17DCCE58001D88A7 /* Deadline.m */; };
+		B582149217DDDDC80003F958 /* collisionSparks.sks in Resources */ = {isa = PBXBuildFile; fileRef = B582149017DDDDC80003F958 /* collisionSparks.sks */; };
+		B582149317DDDDC80003F958 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = B582149117DDDDC80003F958 /* spark.png */; };
 		B595A1A617AA691A00F8AAC1 /* Sling.m in Sources */ = {isa = PBXBuildFile; fileRef = B595A1A517AA691A00F8AAC1 /* Sling.m */; };
 		B595A1AC17AB035100F8AAC1 /* ContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B595A1AB17AB035100F8AAC1 /* ContactDelegate.m */; };
 /* End PBXBuildFile section */
@@ -69,6 +71,8 @@
 		B53FC27317AEB2AC00199BD4 /* Triangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Triangle.m; sourceTree = "<group>"; };
 		B56DCC8917DCCE58001D88A7 /* Deadline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Deadline.h; sourceTree = "<group>"; };
 		B56DCC8A17DCCE58001D88A7 /* Deadline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Deadline.m; sourceTree = "<group>"; };
+		B582149017DDDDC80003F958 /* collisionSparks.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = collisionSparks.sks; sourceTree = "<group>"; };
+		B582149117DDDDC80003F958 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		B595A1A417AA691900F8AAC1 /* Sling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sling.h; sourceTree = "<group>"; };
 		B595A1A517AA691A00F8AAC1 /* Sling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sling.m; sourceTree = "<group>"; };
 		B595A1AA17AB035100F8AAC1 /* ContactDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDelegate.h; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 				B595A1A517AA691A00F8AAC1 /* Sling.m */,
 				B52CA0C717A973ED00AD54D0 /* MyScene.h */,
 				B52CA0C817A973EE00AD54D0 /* MyScene.m */,
+				B582148F17DDDDAC0003F958 /* Particles */,
 				B52CA0CC17A973EE00AD54D0 /* Images.xcassets */,
 				B52CA0B317A973ED00AD54D0 /* Supporting Files */,
 			);
@@ -184,6 +189,15 @@
 				B52CA0DC17A973EE00AD54D0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B582148F17DDDDAC0003F958 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				B582149017DDDDC80003F958 /* collisionSparks.sks */,
+				B582149117DDDDC80003F958 /* spark.png */,
+			);
+			name = Particles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +279,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B582149217DDDDC80003F958 /* collisionSparks.sks in Resources */,
+				B582149317DDDDC80003F958 /* spark.png in Resources */,
 				B52CA0CD17A973EE00AD54D0 /* Images.xcassets in Resources */,
 				B52CA0C317A973ED00AD54D0 /* Main_iPad.storyboard in Resources */,
 				B52CA0C017A973ED00AD54D0 /* Main_iPhone.storyboard in Resources */,

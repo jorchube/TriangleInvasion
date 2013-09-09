@@ -14,9 +14,11 @@
 
 /* this physycsWorld is the one from the SKScene delegating to this class*/
 @property SKPhysicsWorld *physicsWorld;
+@property id delegatorID;
 
 -(id) init;
--(id) initWithPhysicsWorld:(SKPhysicsWorld *) pWorld;
+/* delID is the ID of the scene delegating. Used to add particles on collisions */
+-(id) initWithPhysicsWorld:(SKPhysicsWorld *) pWorld andDelegator: (id) delID;
 -(void) didBeginContact:(SKPhysicsContact *)contact;
 -(void) didEndContact:(SKPhysicsContact *)contact;
 

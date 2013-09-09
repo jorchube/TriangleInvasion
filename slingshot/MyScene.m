@@ -25,7 +25,7 @@
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
 		
-		contactDelegate = [[ContactDelegate alloc]initWithPhysicsWorld:self.physicsWorld];
+		contactDelegate = [[ContactDelegate alloc]initWithPhysicsWorld:self.physicsWorld andDelegator:self];
 		[self.physicsWorld setContactDelegate:contactDelegate];
 
         /* Line at the bottom that means the geometric apocalypse will start */
@@ -36,7 +36,7 @@
 		slingshotPosition = CGPointMake(CGRectGetMidX(self.frame)-slingshotHeight/2,
                                         CGRectGetMinY(self.frame)+slingshotYFromBottom);
         
-
+        
         hint = [[SKShapeNode alloc]init];
         hint.alpha = 0.0;
         [self addChild:hint];
