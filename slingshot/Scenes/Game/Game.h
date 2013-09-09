@@ -14,7 +14,7 @@
 #import "Triangle.h"
 #import "Deadline.h"
 
-@interface MyScene : SKScene <SKPhysicsContactDelegate>
+@interface Game : SKScene <SKPhysicsContactDelegate>
 
 @property Sling *idleSling;
 @property SKLabelNode *scoreLabel;

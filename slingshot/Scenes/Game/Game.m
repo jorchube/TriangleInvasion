@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Jordi Chulia. All rights reserved.
 //
 
-#import "MyScene.h"
+#import "Game.h"
 
-@implementation MyScene
+@implementation Game
 
 @synthesize idleSling;
 @synthesize scoreLabel;
@@ -27,7 +27,7 @@
 		
 		contactDelegate = [[ContactDelegate alloc]initWithPhysicsWorld:self.physicsWorld andDelegator:self];
 		[self.physicsWorld setContactDelegate:contactDelegate];
-
+        
         /* Line at the bottom that means the geometric apocalypse will start */
         deadline = [[Deadline alloc] initWithFrame:self.frame];
         [self addChild:deadline];
@@ -63,7 +63,7 @@
 	scoreLabel.text = @"Hello, Score!";
 	scoreLabel.fontSize = 12;
 	scoreLabel.position = CGPointMake(CGRectGetMinX(self.frame)+50,
-								   CGRectGetMaxY(self.frame)-30);
+                                      CGRectGetMaxY(self.frame)-30);
 	
 	[self addChild:scoreLabel];
 }
@@ -73,7 +73,7 @@
 	tri.position = CGPointMake(X, Y);
 	
 	[self addChild:tri];
-
+    
 }
 
 -(void) addSling {
@@ -154,7 +154,7 @@
 	[sling.physicsBody setCategoryBitMask:cat_sling];
 	[sling.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject];
 	[sling.physicsBody applyImpulse:CGVectorMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
-													(touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
+                                                 (touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
     
     
     [sling runAction:[SKAction waitForDuration:slingLifespan]

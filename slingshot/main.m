@@ -2,8 +2,8 @@
 //  main.m
 //  slingshot
 //
-//  Created by Jordi Chulia on 7/31/13.
-//  Copyright (c) 2013 Jordi Chulia. All rights reserved.
+//  Created by Pau Sastre Miguel on 06/09/13.
+//  Copyright (c) 2013 Pau Sastre Miguel. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -12,7 +12,7 @@
 
 int main(int argc, char * argv[])
 {
-	@autoreleasepool {
-	    return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
-	}
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
 }

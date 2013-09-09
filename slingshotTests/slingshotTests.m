@@ -2,8 +2,8 @@
 //  slingshotTests.m
 //  slingshotTests
 //
-//  Created by Jordi Chulia on 7/31/13.
-//  Copyright (c) 2013 Jordi Chulia. All rights reserved.
+//  Created by Pau Sastre Miguel on 06/09/13.
+//  Copyright (c) 2013 Pau Sastre Miguel. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
@@ -17,14 +17,12 @@
 - (void)setUp
 {
     [super setUp];
-    
-    // Set-up code here.
+    // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown
 {
-    // Tear-down code here.
-    
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 

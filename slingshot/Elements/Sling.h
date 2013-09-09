@@ -14,6 +14,5 @@
 
 @property int powerup;
 
--(id) init;
 
 @end

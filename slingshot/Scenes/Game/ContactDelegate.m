@@ -91,7 +91,7 @@
     [self killSimpleObject:bodyB];
     
     SKEmitterNode *sparksA = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                             [[NSBundle mainBundle] pathForResource:@"collisionSparks" ofType:@"sks"]];
+                              [[NSBundle mainBundle] pathForResource:@"collisionSparks" ofType:@"sks"]];
     sparksA.position = point;
     sparksA.numParticlesToEmit = 5;
     sparksA.targetNode = delegatorID;

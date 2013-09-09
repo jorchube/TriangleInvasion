@@ -11,6 +11,4 @@
 
 @interface Triangle : SKShapeNode
 
--(id) init;
-
 @end

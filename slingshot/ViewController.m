@@ -2,26 +2,26 @@
 //  ViewController.m
 //  slingshot
 //
-//  Created by Jordi Chulia on 7/31/13.
-//  Copyright (c) 2013 Jordi Chulia. All rights reserved.
+//  Created by Pau Sastre Miguel on 06/09/13.
+//  Copyright (c) 2013 Pau Sastre Miguel. All rights reserved.
 //
 
 #import "ViewController.h"
-#import "MyScene.h"
+#import "MainMenu.h"
 
 @implementation ViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+
     // Configure the view.
     SKView * skView = (SKView *)self.view;
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
     
     // Create and configure the scene.
-    SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
+    SKScene * scene = [MainMenu sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Present the scene.

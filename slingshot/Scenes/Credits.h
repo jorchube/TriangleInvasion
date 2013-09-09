@@ -1,14 +1,13 @@
 //
-//  ViewController.h
+//  Credits.h
 //  slingshot
 //
-
+//  Created by Pau Sastre Miguel on 08/09/13.
 //  Copyright (c) 2013 Pau Sastre Miguel. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 
-@interface ViewController : UIViewController
+@interface Credits : SKScene
 
 @end

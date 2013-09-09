@@ -1,14 +1,13 @@
 //
-//  ViewController.h
+//  MyScene.h
 //  slingshot
 //
 
 //  Copyright (c) 2013 Pau Sastre Miguel. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 
-@interface ViewController : UIViewController
+@interface MainMenu : SKScene <SKPhysicsContactDelegate>
 
 @end

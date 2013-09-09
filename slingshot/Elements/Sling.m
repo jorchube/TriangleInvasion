@@ -21,11 +21,11 @@
 		[self setPowerup:pow_none];
 		
 		self.path = CGPathCreateWithEllipseInRect(CGRectMake(0.0,
-															  0.0,
-															  slingshotHeight,
-															  slingshotWidth),
-												   nil);
-
+                                                             0.0,
+                                                             slingshotHeight,
+                                                             slingshotWidth),
+                                                  nil);
+        
 		SKPhysicsBody *pb = [SKPhysicsBody bodyWithCircleOfRadius:slingshotHeight/2];
 		
 		[pb setCategoryBitMask:cat_notCollide];
