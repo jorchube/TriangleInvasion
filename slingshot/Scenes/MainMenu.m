@@ -24,11 +24,21 @@
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         
+        self.backgroundColor = [SKColor blackColor];
+        
         self.anchorPoint = CGPointMake(0.5, -1);
         
         [self addLabels];
         [Sling addSlingAtScene:self];
         [self addChild:[[Deadline alloc] initWithFrame:self.frame]];
+        
+        
+        SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                                 [[NSBundle mainBundle] pathForResource:@"test" ofType:@"sks"]];
+        sparks.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame));
+        sparks.targetNode = self;
+        [sparks advanceSimulationTime:100];
+        [self addChild:sparks];
         
         
         [self.physicsWorld setContactDelegate:self];
@@ -40,18 +50,18 @@
 
 -(void) addLabels {
     
-    newGame = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-    credits = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+    newGame = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
+    credits = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
     
-    newGame.fontSize = 12;
-    credits.fontSize = 12;
+    newGame.fontSize = 18;
+    credits.fontSize = 18;
     
-    newGame.position = CGPointMake(CGRectGetMidX(self.frame)-50,
+    newGame.position = CGPointMake(CGRectGetMidX(self.frame)-70,
                                    self.size.height - 100);
-    credits.position = CGPointMake(CGRectGetMidX(self.frame)+50,
+    credits.position = CGPointMake(CGRectGetMidX(self.frame)+70,
                                    self.size.height - 100);
     
-    newGame.text = @"Juego Nuevo";
+    newGame.text = NSLocalizedString(@"New Game", nil) ;
     credits.text = @"Creditos";
     
     SKAction *act = [SKAction moveToY:CGRectGetMidY(self.frame)+50 duration:1];

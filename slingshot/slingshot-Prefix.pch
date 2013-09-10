@@ -15,3 +15,8 @@
     #import <Foundation/Foundation.h>
     #import "Constants.h"
 #endif
+
+
+
+#define NSLocalizedString(key, comment) \
+        [[NSBundle mainBundle] localizedStringForKey:(key) value:@"" table:nil]

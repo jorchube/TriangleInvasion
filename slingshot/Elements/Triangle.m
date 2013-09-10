@@ -15,17 +15,18 @@
 	if (self)
 	{
 		self.strokeColor = [self getColor];
-        //self.strokeColor = [SKColor clearColor];
-		//self.fillColor = [self getColor];
-		
-		CGMutablePathRef path = CGPathCreateMutable();
+        self.antialiased = NO;
+        
+        CGMutablePathRef path = CGPathCreateMutable();
 		CGPathMoveToPoint(path, nil, 0, 0);
 		CGPathAddLineToPoint(path, nil, 50*triangleScale, 0);
 		CGPathAddLineToPoint(path, nil, 25*triangleScale, 43*triangleScale);
 		CGPathCloseSubpath(path);
         
+        
 		self.path = path;
-        self.lineWidth = 0.2;
+        self.lineWidth = 2
+        ;
         self.blendMode = SKBlendModeAlpha;
 		SKPhysicsBody *pb = [SKPhysicsBody bodyWithPolygonFromPath:path];
 		

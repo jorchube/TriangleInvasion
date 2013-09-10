@@ -14,8 +14,8 @@
     self = [super init];
     if (self) {
         self.strokeColor = [SKColor whiteColor];
-        self.lineWidth = 0.1;
-        self.alpha = 0.75;
+        self.fillColor = [SKColor blackColor];
+        self.lineWidth = 0.01;
         
         float circleDiameter = (frame.size.height*2)+140;
 		self.path = CGPathCreateWithEllipseInRect(CGRectMake(-circleDiameter/2,
@@ -35,6 +35,9 @@
         [pb setDynamic:NO];
         
         [self setPhysicsBody:pb];
+        
+        self.zPosition = 10;
+        
     }
     return self;
 }

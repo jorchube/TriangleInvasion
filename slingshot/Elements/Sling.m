@@ -37,6 +37,7 @@ static SKShapeNode *hint;
 		slingshotPosition = CGPointMake(CGRectGetMidX(frame)-slingshotHeight/2,
                                         CGRectGetMinY(frame)+slingshotYFromBottom);
         
+        self.antialiased = NO;
 		self.strokeColor = [SKColor whiteColor];
 		self.fillColor = [SKColor whiteColor];
 		[self setPowerup:pow_none];
@@ -139,19 +140,18 @@ static SKShapeNode *hint;
                                                      (touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
     }
     
+    SKAction *scaleAction = [SKAction scaleBy:0.1 duration:slingLifespan];
+    [scaleAction setTimingMode:SKActionTimingEaseIn];
     
-    [sling runAction:[SKAction waitForDuration:slingLifespan]
-          completion: ^{
-              [sling runAction:[SKAction fadeOutWithDuration:slingFadingTime]];
-              [sling runAction:[SKAction waitForDuration:slingFadingTime]
-                    completion:^{
-                        [sling runAction:[SKAction removeFromParent]];
-                    }];
-          }];
+    [sling runAction:[SKAction sequence:@[
+                                          scaleAction,
+                                          [SKAction removeFromParent]
+                                          ]]];
     
     [Sling addSlingAtScene: self.scene];
     if (self.parent.class == [Game class]) {
         [(Game*)self.parent updateScore:score_slingIsShot];
+        [(Game*)self.parent resetComboCounter];
     }
 }
 

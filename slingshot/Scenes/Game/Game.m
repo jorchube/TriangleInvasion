@@ -53,7 +53,7 @@
 		[Sling addSlingAtScene:self];
         
 		
-		NSTimer *triangleTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(launchTriangle) userInfo:nil repeats:YES];
+		NSTimer *triangleTimer = [NSTimer timerWithTimeInterval:.8 target:self selector:@selector(launchTriangle) userInfo:nil repeats:YES];
 		[[NSRunLoop currentRunLoop] addTimer:triangleTimer forMode:NSDefaultRunLoopMode];
 		
     }
@@ -168,57 +168,17 @@
     /* Called when a touch begins */
     
     [[Sling getIdlesling] touchesBegan:touches withEvent:event];
-    /*
-    for (UITouch *touch in touches) {
-        touchInitPos = [touch locationInNode:self];
-        NSLog(@"init touch x=%f y=%f", self.touchInitPos.x, self.touchInitPos.y);
-    }*/
+
 }
 
 -(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     [[Sling getIdlesling] touchesMoved:touches withEvent:event];
-	/*[self setTouchMoved:true];
-    for (UITouch *touch in touches){
-        touchMiddlePos = [touch locationInNode:self];
-        
-        CGMutablePathRef path = CGPathCreateMutable();
-        CGPathMoveToPoint(path,
-                          nil,
-                          slingshotPosition.x + (slingshotWidth/2),
-                          slingshotPosition.y + (slingshotHeight/2));
-        
-        // Shooting as if were dragging the ball
-        if(touchInitPos.y - touchMiddlePos.y < 0) {
-            CGPathAddLineToPoint(path,
-                                 nil,
-                                 (slingshotPosition.x + 10*(touchMiddlePos.x-touchInitPos.x)),
-                                 (slingshotPosition.y + 10*(touchMiddlePos.y-touchInitPos.y)));
-        }
-        // Shooting as a slingshot
-        else {
-            CGPathAddLineToPoint(path,
-                                 nil,
-                                 (slingshotPosition.x + 10*(touchInitPos.x-touchMiddlePos.x)),
-                                 (slingshotPosition.y + 10*(touchInitPos.y-touchMiddlePos.y)));
-        }
-        
-        hint.path = path;
-        hint.alpha = hintAlpha;
-    }*/
+	
 }
 
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [[Sling getIdlesling] touchesEnded:touches withEvent:event];
-	/*for (UITouch *touch in touches) {
-        touchEndPos = [touch locationInNode:self];
-        NSLog(@"end touch x=%f y=%f", self.touchEndPos.x, self.touchEndPos.y);
-    }
-	if ([self touchMoved]) {
-		NSLog(@"Moved!");
-		[self shotSling];
-	}
-	[self setTouchMoved:false];
-    hint.alpha = 0.0;*/
+
 }
 
 -(void)update:(CFTimeInterval)currentTime {
