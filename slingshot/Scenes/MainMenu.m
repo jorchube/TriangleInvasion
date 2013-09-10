@@ -141,7 +141,7 @@
         [self.view presentScene:game transition:trans];
     }];
 
-    [self runAction:[SKAction sequence:@[[SKAction waitForDuration:3], changeView]]];
+    [self runAction:[SKAction sequence:@[[SKAction rotateByAngle:1 duration:3], changeView]]];
 }
 
 

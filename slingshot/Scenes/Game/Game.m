@@ -32,7 +32,7 @@
 		[self.physicsWorld setContactDelegate:contactDelegate];
         
         /* Line at the bottom that means the geometric apocalypse will start */
-        deadline = [[Deadline alloc] initWithFrame:self.frame];
+        deadline = [[Deadline alloc] initWithSize:size];
         [self addChild:deadline];
         
         [self addScoreLabel];
