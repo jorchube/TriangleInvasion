@@ -32,7 +32,7 @@
 		[self.physicsWorld setContactDelegate:contactDelegate];
         
         /* Line at the bottom that means the geometric apocalypse will start */
-        deadline = [[Deadline alloc] initWithSize:size];
+        deadline = [[Deadline alloc] initWithFrame:self.frame];
         [self addChild:deadline];
         
         [self addScoreLabel];
@@ -46,7 +46,6 @@
         self.backgroundColor = [SKColor blackColor];
 
 		[Sling addSlingAtScene:self];
-        
         
 		
 		NSTimer *triangleTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(launchTriangle) userInfo:nil repeats:YES];

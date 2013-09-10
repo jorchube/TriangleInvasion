@@ -10,21 +10,22 @@
 
 @implementation Deadline
 
--(id) initWithSize:(CGSize) size {
+-(id) initWithFrame:(CGRect) frame {
     self = [super init];
     if (self) {
         self.strokeColor = [SKColor whiteColor];
         self.lineWidth = 0.1;
         self.alpha = 0.75;
         
-        float circleDiameter = size.height;
+        float circleDiameter = (frame.size.height*2)+140;
 		self.path = CGPathCreateWithEllipseInRect(CGRectMake(-circleDiameter/2,
                                                              -circleDiameter/2,
                                                              circleDiameter,
                                                              circleDiameter),
                                                   nil);
 
-        self.position = CGPointMake(size.width/2, 60-(circleDiameter/2));
+        CGPoint rect = CGPointMake(CGRectGetMidX(frame), CGRectGetMinY(frame)-CGRectGetHeight(frame));
+        self.position = rect;
 
         SKPhysicsBody *pb = [SKPhysicsBody bodyWithCircleOfRadius:circleDiameter/2];
 		

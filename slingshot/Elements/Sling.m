@@ -150,7 +150,9 @@ static SKShapeNode *hint;
           }];
     
     [Sling addSlingAtScene: self.scene];
-    [(Game*)self.parent updateScore:score_slingIsShot];
+    if (self.parent.class == [Game class]) {
+        [(Game*)self.parent updateScore:score_slingIsShot];
+    }
 }
 
 +(void) addSlingAtScene:(SKScene *)scene {

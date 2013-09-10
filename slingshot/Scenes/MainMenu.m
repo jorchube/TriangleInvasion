@@ -24,13 +24,11 @@
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         
-        self.anchorPoint = CGPointMake(0.5, 0);
+        self.anchorPoint = CGPointMake(0.5, -1);
         
         [self addLabels];
         [Sling addSlingAtScene:self];
-        
-        /* Line at the bottom that means the geometric apocalypse will start */
-        [self addChild:[[Deadline alloc] initWithSize:size]];
+        [self addChild:[[Deadline alloc] initWithFrame:self.frame]];
         
         
         [self.physicsWorld setContactDelegate:self];

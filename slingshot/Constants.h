@@ -15,8 +15,8 @@
 
 #pragma mark slingshot body and position
 
-#define  slingshotWidth 2.5
-#define  slingshotHeight 2.5
+#define  slingshotWidth 10
+#define  slingshotHeight 10
 #define  slingshotYFromBottom 75
 
 /* Some linker shit happens if I try to declare const double hintAlpha  0.5 */
