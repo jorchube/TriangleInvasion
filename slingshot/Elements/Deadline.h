@@ -11,6 +11,6 @@
 
 @interface Deadline : SKShapeNode
 
-- (id) initWithFrame: (CGRect)frame;
+- (id) initWithSize: (CGSize)size;
 
 @end

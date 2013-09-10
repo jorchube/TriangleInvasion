@@ -153,11 +153,17 @@ static SKShapeNode *hint;
 +(void) addSlingAtScene:(SKScene *)scene {
     idleSling = [[Sling alloc] initWithFrame: scene.frame];
     [scene addChild:idleSling];
+    
+    
     if (!hint) {
         hint = [[SKShapeNode alloc]init];
         hint.alpha = 0.0;
         [scene addChild:hint];
+    }else if(hint.scene != scene){
+        [hint removeFromParent];
+        [scene addChild:hint];
     }
+    
 }
 
 +(Sling*) getIdlesling {

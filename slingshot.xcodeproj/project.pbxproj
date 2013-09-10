@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7C17A46B17DA41EE003FE842 /* menuParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7C17A46917DA41EE003FE842 /* menuParticles.sks */; };
 		7C17A47017DA4279003FE842 /* Sling.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17A46F17DA4279003FE842 /* Sling.m */; };
 		7C2AAAE817DE82F700A9AD29 /* Deadline.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2AAAE717DE82F700A9AD29 /* Deadline.m */; };
 		7C2AAAEE17DE833300A9AD29 /* ContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2AAAEB17DE833300A9AD29 /* ContactDelegate.m */; };
 		7C2AAAEF17DE833300A9AD29 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2AAAED17DE833300A9AD29 /* Game.m */; };
-		7C2AAAF417DE83DF00A9AD29 /* collisionSpark.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2AAAF017DE83DF00A9AD29 /* collisionSpark.png */; };
 		7C2AAAF517DE83DF00A9AD29 /* collisionSparks.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7C2AAAF117DE83DF00A9AD29 /* collisionSparks.sks */; };
 		7C2AAAF717DE83DF00A9AD29 /* menuSpark.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2AAAF317DE83DF00A9AD29 /* menuSpark.png */; };
 		7C3D2DAA17DCEB2A00B3362C /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D2DA917DCEB2A00B3362C /* Triangle.m */; };
@@ -47,7 +45,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7C17A46917DA41EE003FE842 /* menuParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = menuParticles.sks; path = Resources/menuParticles.sks; sourceTree = "<group>"; };
 		7C17A46E17DA4279003FE842 /* Sling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sling.h; path = Elements/Sling.h; sourceTree = "<group>"; };
 		7C17A46F17DA4279003FE842 /* Sling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sling.m; path = Elements/Sling.m; sourceTree = "<group>"; };
 		7C2AAAE617DE82F700A9AD29 /* Deadline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deadline.h; path = Elements/Deadline.h; sourceTree = "<group>"; };
@@ -56,7 +53,6 @@
 		7C2AAAEB17DE833300A9AD29 /* ContactDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactDelegate.m; path = Scenes/Game/ContactDelegate.m; sourceTree = "<group>"; };
 		7C2AAAEC17DE833300A9AD29 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = Scenes/Game/Game.h; sourceTree = "<group>"; };
 		7C2AAAED17DE833300A9AD29 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Game.m; path = Scenes/Game/Game.m; sourceTree = "<group>"; };
-		7C2AAAF017DE83DF00A9AD29 /* collisionSpark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = collisionSpark.png; path = Resources/collisionSpark.png; sourceTree = "<group>"; };
 		7C2AAAF117DE83DF00A9AD29 /* collisionSparks.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = collisionSparks.sks; path = Resources/collisionSparks.sks; sourceTree = "<group>"; };
 		7C2AAAF317DE83DF00A9AD29 /* menuSpark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menuSpark.png; path = Resources/menuSpark.png; sourceTree = "<group>"; };
 		7C3D2DA817DCEB2A00B3362C /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Triangle.h; path = Elements/Triangle.h; sourceTree = "<group>"; };
@@ -117,8 +113,6 @@
 		7C17A46D17DA41F9003FE842 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				7C17A46917DA41EE003FE842 /* menuParticles.sks */,
-				7C2AAAF017DE83DF00A9AD29 /* collisionSpark.png */,
 				7C2AAAF117DE83DF00A9AD29 /* collisionSparks.sks */,
 				7C2AAAF317DE83DF00A9AD29 /* menuSpark.png */,
 			);
@@ -321,9 +315,7 @@
 			files = (
 				7CB2518A17DA345D00FA592D /* Main_iPhone.storyboard in Resources */,
 				7C2AAAF517DE83DF00A9AD29 /* collisionSparks.sks in Resources */,
-				7C2AAAF417DE83DF00A9AD29 /* collisionSpark.png in Resources */,
 				7CB2518B17DA345D00FA592D /* Main_iPad.storyboard in Resources */,
-				7C17A46B17DA41EE003FE842 /* menuParticles.sks in Resources */,
 				7C2AAAF717DE83DF00A9AD29 /* menuSpark.png in Resources */,
 				7CB2516117DA1DDD00FA592D /* Images.xcassets in Resources */,
 				7CB2514B17DA1DDD00FA592D /* InfoPlist.strings in Resources */,
