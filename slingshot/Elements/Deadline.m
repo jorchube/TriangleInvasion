@@ -17,16 +17,16 @@
         self.lineWidth = 0.1;
         self.alpha = 0.75;
         
-        CGPoint init = CGPointMake(0.0, slingshotYFromBottom/4);
-        CGPoint end = CGPointMake(frame.size.width, slingshotYFromBottom/4);
+        float circleDiameter = frame.size.height;
+		self.path = CGPathCreateWithEllipseInRect(CGRectMake((frame.size.width/2) - (circleDiameter/2),
+                                                             50 - frame.size.height ,
+                                                             circleDiameter,
+                                                             circleDiameter),
+                                                  nil);
+
+    
         
-        CGMutablePathRef path = CGPathCreateMutable();
-        CGPathMoveToPoint(path, nil, init.x, init.y);
-        CGPathAddLineToPoint(path, nil, end.x, end.y);
-        
-        self.path = path;
-        
-        SKPhysicsBody *pb = [SKPhysicsBody bodyWithEdgeFromPoint:init toPoint:end];
+        SKPhysicsBody *pb = [SKPhysicsBody bodyWithCircleOfRadius:slingshotHeight/2];
 		
 		[pb setCategoryBitMask:cat_deadline];
 		[pb setAffectedByGravity:NO];

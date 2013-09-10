@@ -10,13 +10,11 @@
 #import "Sling.h"
 #import "Game.h"
 #import "Credits.h"
+#import "Deadline.h"
 
 @interface MainMenu() {
     @private
     SKLabelNode *newGame, *credits;
-    CGPoint touchInitPos;
-    CGPoint touchEndPos;
-    Boolean touchMoved;
     Sling *sling;
 }
 @end
@@ -28,6 +26,10 @@
         
         [self addLabels];
         [self addSling];
+        
+        /* Line at the bottom that means the geometric apocalypse will start */
+        [self addChild:[[Deadline alloc] initWithFrame:self.frame]];
+        
         
         [self.physicsWorld setContactDelegate:self];
         
@@ -91,7 +93,7 @@
 }
 
 -(void)shotSling {
-
+    
     float time = 1;
     float initialGlow = sling.glowWidth;
     [sling runAction:[SKAction customActionWithDuration:time actionBlock:^(SKNode *node, CGFloat elapsedTime) {
@@ -108,8 +110,8 @@
 	[sling.physicsBody setDynamic:YES];
 	[sling.physicsBody setCategoryBitMask:cat_sling];
 	[sling.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject];
-	[sling.physicsBody applyImpulse:CGVectorMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
-                                                 (touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
+//	[sling.physicsBody applyImpulse:CGVectorMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
+//                                                 (touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
 	
 	[self addSling];
 }
@@ -118,35 +120,15 @@
 #pragma mark touch detection
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-
-    
-    for (UITouch *touch in touches) {
-        touchInitPos = [touch locationInNode:self];
-    }
+    [sling touchesBegan:touches withEvent:event];
 }
 
 -(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    touchMoved = true;
-    for (UITouch *touch in touches) {
-        touchEndPos = [touch locationInNode:self];
-        float inc = (touchInitPos.y-touchEndPos.y);
-
-        [sling setGlowWidth:inc/50];
-        float colorInc = 1-(inc/180);
-        UIColor *color = [UIColor colorWithRed:1 green:colorInc blue:colorInc alpha:1];
-        [sling setFillColor:color];
-        [sling setStrokeColor:color];
-    }
+    [sling touchesMoved:touches withEvent:event];
 }
 
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	for (UITouch *touch in touches) {
-        touchEndPos = [touch locationInNode:self];
-    }
-	if (touchMoved) {
-		[self shotSling];
-	}
-	touchMoved = false;
+    [sling touchesEnded:touches withEvent:event];
 }
 
 
