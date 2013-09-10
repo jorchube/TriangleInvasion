@@ -17,7 +17,6 @@
 @synthesize touchEndPos;
 @synthesize touchMoved;
 @synthesize contactDelegate;
-@synthesize slingshotPosition;
 @synthesize hint;
 @synthesize deadline;
 
@@ -32,10 +31,6 @@
         deadline = [[Deadline alloc] initWithFrame:self.frame];
         [self addChild:deadline];
         
-        /* Where new slings born */
-		slingshotPosition = CGPointMake(CGRectGetMidX(self.frame)-slingshotHeight/2,
-                                        CGRectGetMinY(self.frame)+slingshotYFromBottom);
-        
         
         hint = [[SKShapeNode alloc]init];
         hint.alpha = 0.0;
@@ -44,7 +39,7 @@
         self.backgroundColor = [SKColor blackColor];
         
 		[self addScoreLabel];
-		[self addSling];
+		[Sling addSlingAtScene:self];
         [self setTouchMoved:false];
         
         
@@ -76,11 +71,12 @@
     
 }
 
--(void) addSling {
-	idleSling = [[Sling alloc] init];
-	idleSling.position = slingshotPosition;
+-(void) addSlingAtPosition:(CGPoint)pos {
+    idleSling = [[Sling alloc] init];
+	idleSling.position = pos;
 	[self addChild:idleSling];
 }
+
 
 # pragma mark object launchers
 
@@ -104,14 +100,17 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
+    [[Sling getIdlesling] touchesBegan:touches withEvent:event];
+    /*
     for (UITouch *touch in touches) {
         touchInitPos = [touch locationInNode:self];
         NSLog(@"init touch x=%f y=%f", self.touchInitPos.x, self.touchInitPos.y);
-    }
+    }*/
 }
 
 -(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	[self setTouchMoved:true];
+    [[Sling getIdlesling] touchesMoved:touches withEvent:event];
+	/*[self setTouchMoved:true];
     for (UITouch *touch in touches){
         touchMiddlePos = [touch locationInNode:self];
         
@@ -120,18 +119,30 @@
                           nil,
                           slingshotPosition.x + (slingshotWidth/2),
                           slingshotPosition.y + (slingshotHeight/2));
-        CGPathAddLineToPoint(path,
-                             nil,
-                             (slingshotPosition.x + 10*(touchInitPos.x-touchMiddlePos.x)),
-                             (slingshotPosition.y + 10*(touchInitPos.y-touchMiddlePos.y)));
+        
+        // Shooting as if were dragging the ball
+        if(touchInitPos.y - touchMiddlePos.y < 0) {
+            CGPathAddLineToPoint(path,
+                                 nil,
+                                 (slingshotPosition.x + 10*(touchMiddlePos.x-touchInitPos.x)),
+                                 (slingshotPosition.y + 10*(touchMiddlePos.y-touchInitPos.y)));
+        }
+        // Shooting as a slingshot
+        else {
+            CGPathAddLineToPoint(path,
+                                 nil,
+                                 (slingshotPosition.x + 10*(touchInitPos.x-touchMiddlePos.x)),
+                                 (slingshotPosition.y + 10*(touchInitPos.y-touchMiddlePos.y)));
+        }
         
         hint.path = path;
         hint.alpha = hintAlpha;
-    }
+    }*/
 }
 
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	for (UITouch *touch in touches) {
+    [[Sling getIdlesling] touchesEnded:touches withEvent:event];
+	/*for (UITouch *touch in touches) {
         touchEndPos = [touch locationInNode:self];
         NSLog(@"end touch x=%f y=%f", self.touchEndPos.x, self.touchEndPos.y);
     }
@@ -140,33 +151,7 @@
 		[self shotSling];
 	}
 	[self setTouchMoved:false];
-    hint.alpha = 0.0;
-}
-
-#pragma mark shot
-
--(void) shotSling {
-	
-    Sling *sling = idleSling;
-    
-	[sling.physicsBody setContactTestBitMask:cat_sling | cat_simpleObject];
-	[sling.physicsBody setDynamic:YES];
-	[sling.physicsBody setCategoryBitMask:cat_sling];
-	[sling.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject];
-	[sling.physicsBody applyImpulse:CGVectorMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
-                                                 (touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
-    
-    
-    [sling runAction:[SKAction waitForDuration:slingLifespan]
-          completion: ^{
-              [sling runAction:[SKAction fadeOutWithDuration:slingFadingTime]];
-              [sling runAction:[SKAction waitForDuration:slingFadingTime]
-                    completion:^{
-                        [sling runAction:[SKAction removeFromParent]];
-                    }];
-          }];
-    
-    [self addSling];
+    hint.alpha = 0.0;*/
 }
 
 -(void)update:(CFTimeInterval)currentTime {
