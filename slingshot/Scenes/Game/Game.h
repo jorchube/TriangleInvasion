@@ -23,8 +23,10 @@
 @property CGPoint touchEndPos;
 @property Boolean touchMoved;
 @property id<SKPhysicsContactDelegate> contactDelegate;
-@property CGPoint slingshotPosition;
 @property SKShapeNode *hint;
 @property Deadline *deadline;
+
+//-(void) shotSlingWithInitPos: (CGPoint) init andEndPos: (CGPoint) end;
+//-(void) addSlingAtPosition: (CGPoint) pos;
 
 @end

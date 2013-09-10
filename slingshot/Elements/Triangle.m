@@ -15,7 +15,8 @@
 	if (self)
 	{
 		self.strokeColor = [self getColor];
-		//self.fillColor = [SKColor magentaColor];
+        //self.strokeColor = [SKColor clearColor];
+		//self.fillColor = [self getColor];
 		
 		CGMutablePathRef path = CGPathCreateMutable();
 		CGPathMoveToPoint(path, nil, 0, 0);
@@ -24,6 +25,8 @@
 		CGPathCloseSubpath(path);
         
 		self.path = path;
+        self.lineWidth = 0.2;
+        self.blendMode = SKBlendModeAlpha;
 		SKPhysicsBody *pb = [SKPhysicsBody bodyWithPolygonFromPath:path];
 		
 		[pb setCategoryBitMask:cat_simpleObject];
