@@ -61,8 +61,9 @@
 }
 
 -(void) updateScore:(double)scr {
+    int mult = (comboCounter<=0)? 1 : comboCounter;
     if(scr > 0)
-        score += scr*comboCounter;
+        score += scr*mult;
     else
         score += scr;
     if (score < 0) score = 0;
@@ -86,7 +87,7 @@
     comboLabel.fontColor = [self getColor];
     comboLabel.alpha = comboLabelAlpha;
     comboLabel.text = [NSString stringWithFormat:@"Combo x%i", comboCounter];
-    NSLog(@"Combo x%i", comboCounter);
+    //NSLog(@"Combo x%i", comboCounter);
     [comboLabel runAction:[SKAction sequence:@[
                                                [SKAction fadeAlphaTo:comboLabelAlpha
                                                             duration:0.1],
