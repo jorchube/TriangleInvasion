@@ -16,17 +16,10 @@
 
 @interface Game : SKScene <SKPhysicsContactDelegate>
 
-@property Sling *idleSling;
 @property SKLabelNode *scoreLabel;
-@property CGPoint touchInitPos;
-@property CGPoint touchMiddlePos;
-@property CGPoint touchEndPos;
-@property Boolean touchMoved;
-@property id<SKPhysicsContactDelegate> contactDelegate;
-@property SKShapeNode *hint;
-@property Deadline *deadline;
 
 //-(void) shotSlingWithInitPos: (CGPoint) init andEndPos: (CGPoint) end;
 //-(void) addSlingAtPosition: (CGPoint) pos;
+-(void) updateScore: (double) scr;
 
 @end

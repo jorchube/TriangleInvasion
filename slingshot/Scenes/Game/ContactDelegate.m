@@ -8,6 +8,7 @@
 
 #import "ContactDelegate.h"
 #import "Constants.h"
+#import "Game.h"
 
 @implementation ContactDelegate
 
@@ -84,6 +85,7 @@
     sparks.particleColor = ((SKShapeNode*)body.node).strokeColor;
     
     [delegatorID addChild:sparks];
+    [delegatorID updateScore:score_slingHitsTriangle];
 }
 
 -(void) collisionBetweenSimpleObjects: (SKPhysicsBody*) bodyA and: (SKPhysicsBody*) bodyB At: (CGPoint) point {
@@ -106,11 +108,14 @@
     
     [delegatorID addChild:sparksA];
     [delegatorID addChild:sparksB];
+    
+    [delegatorID updateScore:score_triangleHitsTriangle];
 }
 
 -(void) reachedDeadlineObject: (SKPhysicsBody*) body At: (CGPoint) point {
     /* Game over, substracting one life... whatever */
     [self killSimpleObject:body];
+    [delegatorID updateScore:score_triangleHitsDeadline];
 }
 
 @end
