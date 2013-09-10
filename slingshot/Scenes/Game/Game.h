@@ -21,5 +21,8 @@
 //-(void) shotSlingWithInitPos: (CGPoint) init andEndPos: (CGPoint) end;
 //-(void) addSlingAtPosition: (CGPoint) pos;
 -(void) updateScore: (double) scr;
+-(void) increaseComboCounter;
+-(int) getComboCounter;
+-(void) resetComboCounter;
 
 @end

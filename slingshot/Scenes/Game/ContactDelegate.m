@@ -86,6 +86,7 @@
     
     [delegatorID addChild:sparks];
     [delegatorID updateScore:score_slingHitsTriangle];
+    [delegatorID increaseComboCounter];
 }
 
 -(void) collisionBetweenSimpleObjects: (SKPhysicsBody*) bodyA and: (SKPhysicsBody*) bodyB At: (CGPoint) point {
@@ -110,6 +111,7 @@
     [delegatorID addChild:sparksB];
     
     [delegatorID updateScore:score_triangleHitsTriangle];
+    if([delegatorID getComboCounter] > 1) [delegatorID increaseComboCounter];
 }
 
 -(void) reachedDeadlineObject: (SKPhysicsBody*) body At: (CGPoint) point {

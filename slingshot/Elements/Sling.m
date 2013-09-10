@@ -151,6 +151,7 @@ static SKShapeNode *hint;
     
     [Sling addSlingAtScene: self.scene];
     [(Game*)self.parent updateScore:score_slingIsShot];
+    [(Game*)self.parent resetComboCounter];
 }
 
 +(void) addSlingAtScene:(SKScene *)scene {
