@@ -14,8 +14,10 @@
     Sling *idleSling;
     ContactDelegate *contactDelegate;
     SKShapeNode *hint;
+    SKLabelNode *comboLabel;
     Deadline *deadline;
     double score;
+    int comboCounter;
 }
 
 @end
@@ -39,6 +41,9 @@
         score = 0;
         [self updateScore:0];
         
+        comboCounter = 0;
+        [self addComboLabel];
+        
         hint = [[SKShapeNode alloc]init];
         hint.alpha = 0.0;
         [self addChild:hint];
@@ -56,17 +61,70 @@
 }
 
 -(void) updateScore:(double)scr {
-    score += scr;
+    if(scr > 0)
+        score += scr*comboCounter;
+    else
+        score += scr;
+    if (score < 0) score = 0;
     self.scoreLabel.text = [NSString stringWithFormat:@"%.0f", score];
 }
 
+-(void) increaseComboCounter {
+    ++comboCounter;
+    if(comboCounter > 1) [self showCombo];
+}
+
+-(int) getComboCounter {
+    return comboCounter;
+}
+
+-(void) resetComboCounter {
+    comboCounter = 0;
+}
+
+-(void) showCombo {
+    comboLabel.fontColor = [self getColor];
+    comboLabel.alpha = comboLabelAlpha;
+    comboLabel.text = [NSString stringWithFormat:@"Combo x%i", comboCounter];
+    NSLog(@"Combo x%i", comboCounter);
+    [comboLabel runAction:[SKAction sequence:@[
+                                               [SKAction fadeAlphaTo:comboLabelAlpha
+                                                            duration:0.1],
+                                               [SKAction scaleTo:comboLabelSpawnScale
+                                                        duration:0.1],
+                                               [SKAction group:@[
+                                                                 [SKAction fadeAlphaTo:0.0
+                                                                              duration:2.0],
+                                                                 [SKAction scaleTo:1.0
+                                                                          duration:2.0]
+                                                                 ]]
+                                               ]]];
+}
+
+-(SKColor*) getColor {
+    sranddev();
+    NSArray *colors = color_allColors;
+    return [colors objectAtIndex:rand()%[colors count]];
+}
+
 #pragma mark add initial elements
+
+-(void) addComboLabel {
+    comboLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
+    comboLabel.text = [NSString stringWithFormat:@"Combo x%i", comboCounter];
+    comboLabel.fontSize = 16;
+    comboLabel.position = CGPointMake(CGRectGetMidX(self.frame),
+                                      CGRectGetMaxY(self.frame)-100);
+    comboLabel.alpha = 0.0;
+    
+    [self addChild:comboLabel];
+}
 
 -(void) addScoreLabel {
 	scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
 	scoreLabel.text = @"";
 	scoreLabel.fontSize = 12;
-	scoreLabel.position = CGPointMake(CGRectGetMinX(self.frame)+50,
+	scoreLabel.position = CGPointMake(CGRectGetMaxX(self.frame)-30,
                                       CGRectGetMaxY(self.frame)-30);
 	
 	[self addChild:scoreLabel];

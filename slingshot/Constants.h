@@ -58,7 +58,18 @@
 
 #define score_slingHitsTriangle 10.0
 #define score_triangleHitsTriangle 5.0
-#define score_triangleHitsDeadline -50.0
+#define score_triangleHitsDeadline -10.0
 #define score_slingIsShot -5.0
+
+#pragma mark colors
+
+#define color_allColors     @[[SKColor cyanColor],  \
+                            [SKColor magentaColor], \
+                            [SKColor yellowColor],  \
+                            [SKColor orangeColor],  \
+                            [SKColor greenColor]]
+
+#define comboLabelAlpha 0.9
+#define comboLabelSpawnScale 1.5
 
 #endif

@@ -44,10 +44,7 @@
 
 -(SKColor*) getColor {
     sranddev();
-    NSArray *colors = @[[SKColor cyanColor],
-                        [SKColor magentaColor],
-                        [SKColor yellowColor],
-                        [SKColor orangeColor]];
+    NSArray *colors = color_allColors;
     return [colors objectAtIndex:rand()%[colors count]];
 }
 
