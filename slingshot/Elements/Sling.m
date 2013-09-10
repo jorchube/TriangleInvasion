@@ -7,6 +7,7 @@
 //
 
 #import "Sling.h"
+#import "Game.h"
 
 @interface Sling(){
 @private
@@ -15,6 +16,7 @@
     CGPoint touchEndPos;
     Boolean touchMoved;
     CGPoint slingshotPosition;
+    Game *game;
 }
 @end
 
@@ -27,7 +29,7 @@ static SKShapeNode *hint;
 
 
 
--(id) initWithFrame: (CGRect) frame {
+-(id) initWithFrame: (CGRect) frame{
 	self = [super init];
 	if (self)
 	{
@@ -148,6 +150,7 @@ static SKShapeNode *hint;
           }];
     
     [Sling addSlingAtScene: self.scene];
+    [(Game*)self.parent updateScore:score_slingIsShot];
 }
 
 +(void) addSlingAtScene:(SKScene *)scene {

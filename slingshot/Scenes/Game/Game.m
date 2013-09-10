@@ -8,17 +8,21 @@
 
 #import "Game.h"
 
+
+@interface Game() {
+    @private
+    Sling *idleSling;
+    ContactDelegate *contactDelegate;
+    SKShapeNode *hint;
+    Deadline *deadline;
+    double score;
+}
+
+@end
+
 @implementation Game
 
-@synthesize idleSling;
 @synthesize scoreLabel;
-@synthesize touchInitPos;
-@synthesize touchMiddlePos;
-@synthesize touchEndPos;
-@synthesize touchMoved;
-@synthesize contactDelegate;
-@synthesize hint;
-@synthesize deadline;
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -31,16 +35,17 @@
         deadline = [[Deadline alloc] initWithFrame:self.frame];
         [self addChild:deadline];
         
+        [self addScoreLabel];
+        score = 0;
+        [self updateScore:0];
         
         hint = [[SKShapeNode alloc]init];
         hint.alpha = 0.0;
         [self addChild:hint];
         
         self.backgroundColor = [SKColor blackColor];
-        
-		[self addScoreLabel];
+
 		[Sling addSlingAtScene:self];
-        [self setTouchMoved:false];
         
         
 		
@@ -51,11 +56,16 @@
     return self;
 }
 
+-(void) updateScore:(double)scr {
+    score += scr;
+    self.scoreLabel.text = [NSString stringWithFormat:@"%.0f", score];
+}
+
 #pragma mark add initial elements
 
 -(void) addScoreLabel {
 	scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
-	scoreLabel.text = @"Hello, Score!";
+	scoreLabel.text = @"";
 	scoreLabel.fontSize = 12;
 	scoreLabel.position = CGPointMake(CGRectGetMinX(self.frame)+50,
                                       CGRectGetMaxY(self.frame)-30);

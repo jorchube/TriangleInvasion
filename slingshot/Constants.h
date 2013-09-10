@@ -54,4 +54,11 @@
 
 #define  timeForObjectToDisappearAfterHit  1.5
 
+#pragma mark scoring
+
+#define score_slingHitsTriangle 10.0
+#define score_triangleHitsTriangle 5.0
+#define score_triangleHitsDeadline -50.0
+#define score_slingIsShot -5.0
+
 #endif
