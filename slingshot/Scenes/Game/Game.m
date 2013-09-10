@@ -120,10 +120,21 @@
                           nil,
                           slingshotPosition.x + (slingshotWidth/2),
                           slingshotPosition.y + (slingshotHeight/2));
-        CGPathAddLineToPoint(path,
-                             nil,
-                             (slingshotPosition.x + 10*(touchInitPos.x-touchMiddlePos.x)),
-                             (slingshotPosition.y + 10*(touchInitPos.y-touchMiddlePos.y)));
+        
+        /* Shooting as if were dragging the ball */
+        if(touchInitPos.y - touchMiddlePos.y < 0) {
+            CGPathAddLineToPoint(path,
+                                 nil,
+                                 (slingshotPosition.x + 10*(touchMiddlePos.x-touchInitPos.x)),
+                                 (slingshotPosition.y + 10*(touchMiddlePos.y-touchInitPos.y)));
+        }
+        /* Shooting as a slingshot */
+        else {
+            CGPathAddLineToPoint(path,
+                                 nil,
+                                 (slingshotPosition.x + 10*(touchInitPos.x-touchMiddlePos.x)),
+                                 (slingshotPosition.y + 10*(touchInitPos.y-touchMiddlePos.y)));
+        }
         
         hint.path = path;
         hint.alpha = hintAlpha;
@@ -153,8 +164,17 @@
 	[sling.physicsBody setDynamic:YES];
 	[sling.physicsBody setCategoryBitMask:cat_sling];
 	[sling.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject];
-	[sling.physicsBody applyImpulse:CGVectorMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
-                                                 (touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
+    
+    /* Shooting as if were dragging the ball */
+    if(touchInitPos.y - touchEndPos.y < 0) {
+        [sling.physicsBody applyImpulse:CGVectorMake((touchEndPos.x-touchInitPos.x)*slingshotForceMult,
+                                                 (touchEndPos.y-touchInitPos.y)*slingshotForceMult)];
+    }
+    /* Shooting as a slingshot */
+    else {
+        [sling.physicsBody applyImpulse:CGVectorMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
+                                                     (touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
+    }
     
     
     [sling runAction:[SKAction waitForDuration:slingLifespan]
