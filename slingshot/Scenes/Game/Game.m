@@ -43,6 +43,8 @@
         score = 0;
         [self updateScore:0];
         
+        speedVariation = 0;
+        
         comboCounter = 0;
         [self addComboLabel];
         
@@ -54,17 +56,36 @@
 
 		[Sling addSlingAtScene:self];
 		
-		NSTimer *triangleTimer = [NSTimer timerWithTimeInterval:initialTimeIntervalForFallingTriangles
+		triangleTimer = [NSTimer timerWithTimeInterval:initialTimeIntervalForFallingTriangles
                                                          target:self
                                                        selector:@selector(launchTriangle)
                                                        userInfo:nil
                                                         repeats:YES];
         
 		[[NSRunLoop currentRunLoop] addTimer:triangleTimer forMode:NSDefaultRunLoopMode];
+        
+        NSTimer *increaseTriangleFreqTimer = [NSTimer timerWithTimeInterval:intervalForIncreasingTriangleCreationRate
+                                                                     target:self
+                                                                   selector:@selector(speedupTriangleGeneration)
+                                                                   userInfo:nil
+                                                                    repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:increaseTriangleFreqTimer forMode:NSDefaultRunLoopMode];
 		
         
     }
     return self;
+}
+
+-(void) speedupTriangleGeneration {
+    double interval = triangleTimer.timeInterval -0.1;
+    if(interval < minIntervalCreationRate) interval=minIntervalCreationRate;
+    [triangleTimer invalidate];
+    triangleTimer = [NSTimer timerWithTimeInterval:interval
+                                            target:self
+                                          selector:@selector(launchTriangle)
+                                          userInfo:nil
+                                           repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:triangleTimer forMode:NSDefaultRunLoopMode];
 }
 
 -(void) updateScore:(double)scr {
@@ -75,6 +96,7 @@
         score += scr;
     if (score < 0) score = 0;
     self.scoreLabel.text = [NSString stringWithFormat:@"%.0f", score];
+    speedVariation = score*ratioScoreSpeed;
 }
 
 -(void) increaseComboCounter {
@@ -85,9 +107,10 @@
                                                    userInfo:nil
                                                     repeats:NO];
     //[[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
-    [[NSRunLoop currentRunLoop] cancelPerformSelector:@selector(resetComboCounter)
+    /*[[NSRunLoop currentRunLoop] cancelPerformSelector:@selector(resetComboCounter)
                                                target:self
-                                             argument:nil];
+                                             argument:nil];*/
+    [resetComboCounterTimer invalidate];
     [[NSRunLoop currentRunLoop] addTimer:resetComboCounterTimer
                                  forMode:NSDefaultRunLoopMode];
     if(comboCounter > 1){
@@ -177,7 +200,7 @@
 	CGFloat Ypos = CGRectGetMaxY(self.frame);
 	CGFloat Xpos = ( rand() % (int)(CGRectGetMaxX(self.frame)-(Xmargin*2)) ) + Xmargin;
 	
-    [object.physicsBody setVelocity:CGVectorMake(0, -((rand()%varSpeed)+minSpeed))];
+    [object.physicsBody setVelocity:CGVectorMake(0, -((rand()%varSpeed)+minSpeed+speedVariation))];
 	
 	object.position = CGPointMake(Xpos, Ypos);
 	[self addChild:object];

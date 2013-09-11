@@ -15,7 +15,13 @@
 
 #pragma mark Game
 
-#define initialTimeIntervalForFallingTriangles 0.2
+#define initialTimeIntervalForFallingTriangles 1.2
+
+#pragma mark difficulty settings:
+
+#define intervalForIncreasingTriangleCreationRate 10
+#define minIntervalCreationRate 0.4
+#define ratioScoreSpeed (1/20)
 
 #pragma mark slingshot body and position
 
