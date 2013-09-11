@@ -15,7 +15,7 @@
     if (self) {
         self.strokeColor = [SKColor whiteColor];
         self.fillColor = [SKColor blackColor];
-        self.lineWidth = 0.01;
+        self.lineWidth = 5;
         
         float circleDiameter = (frame.size.height*2)+140;
 		self.path = CGPathCreateWithEllipseInRect(CGRectMake(-circleDiameter/2,

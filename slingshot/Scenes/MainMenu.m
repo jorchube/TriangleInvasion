@@ -18,6 +18,7 @@
     SKLabelNode *newGame, *credits;
     Sling *sling;
     SKSpriteNode *hand;
+    BOOL transitioning;
 }
 @end
 
@@ -25,6 +26,8 @@
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
+        
+        transitioning = false;
         
         self.backgroundColor = [SKColor blackColor];
         
@@ -152,10 +155,12 @@
 	SKNode *bodyA = [contact bodyA].node;
 	SKNode *bodyB = [contact bodyB].node;
 
-    if (bodyA == credits || bodyB == credits){
+    if (!transitioning && (bodyA == credits || bodyB == credits) ){
         [self showCredits];
-    }else if (bodyA == newGame || bodyB == newGame){
+        transitioning = true;
+    }else if (!transitioning && (bodyA == newGame || bodyB == newGame) ){
         [self setNewGame];
+        transitioning = true;
     }
 }
 

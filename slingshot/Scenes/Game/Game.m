@@ -19,6 +19,7 @@
     double score;
     int comboCounter;
     NSTimer *resetComboCounterTimer;
+    UIButton *stopButton;
 }
 
 @end
@@ -61,6 +62,7 @@
         
 		[[NSRunLoop currentRunLoop] addTimer:triangleTimer forMode:NSDefaultRunLoopMode];
 		
+        
     }
     return self;
 }
@@ -202,6 +204,27 @@
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+}
+
+
+-(void)didMoveToView:(SKView *)view {
+    stopButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    stopButton.frame = CGRectMake(5, 5, 100, 50);
+    [stopButton setTitle:@"stop" forState:UIControlStateNormal];
+    stopButton.titleLabel.textColor = [UIColor whiteColor];
+    
+    [stopButton addTarget:self action:@selector(stopGame) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:stopButton];
+}
+
+-(void)stopGame {
+    self.view.paused = true;
+    [stopButton addTarget:self action:@selector(resumeGame) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)resumeGame {
+    self.view.paused = false;
+    [stopButton addTarget:self action:@selector(stopGame) forControlEvents:UIControlEventTouchUpInside];
 }
 
 @end

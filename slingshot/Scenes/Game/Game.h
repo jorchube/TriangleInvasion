@@ -18,6 +18,7 @@
 
 @property SKLabelNode *scoreLabel;
 
+
 //-(void) shotSlingWithInitPos: (CGPoint) init andEndPos: (CGPoint) end;
 //-(void) addSlingAtPosition: (CGPoint) pos;
 -(void) updateScore: (double) scr;
