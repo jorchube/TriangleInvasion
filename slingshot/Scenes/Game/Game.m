@@ -19,6 +19,9 @@
     double score;
     int comboCounter;
     NSTimer *resetComboCounterTimer;
+    NSTimer *triangleTimer;
+    double currentTimeGeneration;
+    double speedVariation;
     UIButton *stopButton;
 }
 
@@ -56,14 +59,11 @@
 
 		[Sling addSlingAtScene:self];
 		
-		triangleTimer = [NSTimer timerWithTimeInterval:initialTimeIntervalForFallingTriangles
-                                                         target:self
-                                                       selector:@selector(launchTriangle)
-                                                       userInfo:nil
-                                                        repeats:YES];
+        currentTimeGeneration = initialTimeIntervalForFallingTriangles;
+        [self createTriangleTimer];
         
-		[[NSRunLoop currentRunLoop] addTimer:triangleTimer forMode:NSDefaultRunLoopMode];
         
+        //si se invalida uno hay que invalidar los dos...
         NSTimer *increaseTriangleFreqTimer = [NSTimer timerWithTimeInterval:intervalForIncreasingTriangleCreationRate
                                                                      target:self
                                                                    selector:@selector(speedupTriangleGeneration)
@@ -77,10 +77,14 @@
 }
 
 -(void) speedupTriangleGeneration {
-    double interval = triangleTimer.timeInterval -0.1;
-    if(interval < minIntervalCreationRate) interval=minIntervalCreationRate;
+    if (currentTimeGeneration > minIntervalCreationRate)
+        currentTimeGeneration = currentTimeGeneration -0.1;
+
     [triangleTimer invalidate];
-    triangleTimer = [NSTimer timerWithTimeInterval:interval
+    [self createTriangleTimer];
+}
+-(void)createTriangleTimer {
+    triangleTimer = [NSTimer timerWithTimeInterval:currentTimeGeneration
                                             target:self
                                           selector:@selector(launchTriangle)
                                           userInfo:nil
@@ -242,11 +246,14 @@
 
 -(void)stopGame {
     self.view.paused = true;
+    [triangleTimer invalidate];
+    [
     [stopButton addTarget:self action:@selector(resumeGame) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)resumeGame {
     self.view.paused = false;
+    [self createTriangleTimer];
     [stopButton addTarget:self action:@selector(stopGame) forControlEvents:UIControlEventTouchUpInside];
 }
 
