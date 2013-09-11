@@ -18,6 +18,7 @@
     Deadline *deadline;
     double score;
     int comboCounter;
+    NSTimer *resetComboCounterTimer;
 }
 
 @end
@@ -51,9 +52,13 @@
         self.backgroundColor = [SKColor blackColor];
 
 		[Sling addSlingAtScene:self];
-        
 		
-		NSTimer *triangleTimer = [NSTimer timerWithTimeInterval:.8 target:self selector:@selector(launchTriangle) userInfo:nil repeats:YES];
+		NSTimer *triangleTimer = [NSTimer timerWithTimeInterval:initialTimeIntervalForFallingTriangles
+                                                         target:self
+                                                       selector:@selector(launchTriangle)
+                                                       userInfo:nil
+                                                        repeats:YES];
+        
 		[[NSRunLoop currentRunLoop] addTimer:triangleTimer forMode:NSDefaultRunLoopMode];
 		
     }
@@ -72,7 +77,20 @@
 
 -(void) increaseComboCounter {
     ++comboCounter;
-    if(comboCounter > 1) [self showCombo];
+    resetComboCounterTimer = [NSTimer timerWithTimeInterval:comboTime
+                                                     target:self
+                                                   selector:@selector(resetComboCounter)
+                                                   userInfo:nil
+                                                    repeats:NO];
+    //[[NSRunLoop currentRunLoop] cancelPerformSelectorsWithTarget:self];
+    [[NSRunLoop currentRunLoop] cancelPerformSelector:@selector(resetComboCounter)
+                                               target:self
+                                             argument:nil];
+    [[NSRunLoop currentRunLoop] addTimer:resetComboCounterTimer
+                                 forMode:NSDefaultRunLoopMode];
+    if(comboCounter > 1){
+        [self showCombo];
+    }
 }
 
 -(int) getComboCounter {
@@ -95,9 +113,9 @@
                                                         duration:0.1],
                                                [SKAction group:@[
                                                                  [SKAction fadeAlphaTo:0.0
-                                                                              duration:2.0],
+                                                                              duration:comboTime],
                                                                  [SKAction scaleTo:1.0
-                                                                          duration:2.0]
+                                                                          duration:comboTime]
                                                                  ]]
                                                ]]];
 }

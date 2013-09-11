@@ -16,7 +16,6 @@
     CGPoint touchEndPos;
     Boolean touchMoved;
     CGPoint slingshotPosition;
-    Game *game;
 }
 @end
 
@@ -25,8 +24,10 @@
 @synthesize powerup;
 
 static Sling *idleSling;
+static Sling *rightBonusSling;
+static Sling *leftBonusSling;
 static SKShapeNode *hint;
-
+static Sling *bonusSlings[8];
 
 
 -(id) initWithFrame: (CGRect) frame{
@@ -129,16 +130,18 @@ static SKShapeNode *hint;
 	[sling.physicsBody setCategoryBitMask:cat_sling];
 	[sling.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject];
     
+    CGVector impulse;
     // Shooting as if were dragging the ball
     if(touchInitPos.y - touchEndPos.y < 0) {
-        [sling.physicsBody applyImpulse:CGVectorMake((touchEndPos.x-touchInitPos.x)*slingshotForceMult,
-                                                     (touchEndPos.y-touchInitPos.y)*slingshotForceMult)];
+        impulse = CGVectorMake((touchEndPos.x-touchInitPos.x)*slingshotForceMult,
+                               (touchEndPos.y-touchInitPos.y)*slingshotForceMult);
     }
     // Shooting as a slingshot
     else {
-        [sling.physicsBody applyImpulse:CGVectorMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
-                                                     (touchInitPos.y-touchEndPos.y)*slingshotForceMult)];
+        impulse = CGVectorMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
+                               (touchInitPos.y-touchEndPos.y)*slingshotForceMult);
     }
+    [sling.physicsBody applyImpulse:impulse];
     
     SKAction *scaleAction = [SKAction scaleBy:0.1 duration:slingLifespan];
     [scaleAction setTimingMode:SKActionTimingEaseIn];
@@ -149,10 +152,49 @@ static SKShapeNode *hint;
                                           ]]];
     
     [Sling addSlingAtScene: self.scene];
+    
+    if(bonusSlings[0]){
+        [self shootBonusSlingsWithImpulse: impulse];
+    }
+    
+    if(self.parent.class == [Game class]){
+        [Sling addBonusSlings:[(Game*)self.parent getComboCounter] AtScene:self.scene];
+    }
+    
     if (self.parent.class == [Game class]) {
         [(Game*)self.parent updateScore:score_slingIsShot];
         [(Game*)self.parent resetComboCounter];
     }
+    
+}
+
+-(void) shootBonusSlingsWithImpulse: (CGVector) impulse{
+    int i = 0;
+    
+    while (bonusSlings[i]) {
+        Sling *sling = bonusSlings[i];
+        
+        [sling.physicsBody setContactTestBitMask:cat_sling | cat_simpleObject];
+        [sling.physicsBody setDynamic:YES];
+        [sling.physicsBody setCategoryBitMask:cat_sling];
+        [sling.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject];
+        
+        
+        [sling.physicsBody applyImpulse:impulse];
+
+        
+        SKAction *scaleAction = [SKAction scaleBy:0.1 duration:slingLifespan];
+        [scaleAction setTimingMode:SKActionTimingEaseIn];
+        
+        [sling runAction:[SKAction sequence:@[
+                                               scaleAction,
+                                               [SKAction removeFromParent]
+                                               ]]];
+        
+        bonusSlings[i++] = NULL;
+    }
+    
+
 }
 
 +(void) addSlingAtScene:(SKScene *)scene {
@@ -168,7 +210,24 @@ static SKShapeNode *hint;
         [hint removeFromParent];
         [scene addChild:hint];
     }
+}
+
++(void) addBonusSlings:(int)slings AtScene: (SKScene *) scene {
     
+    int i;
+    unsigned char numberOfSlings = (slings >> 1) & 0x06;
+    
+    for (i = 0; i < numberOfSlings; i++) {
+        bonusSlings[i] = [[Sling alloc] initWithFrame:scene.frame];
+        
+        [bonusSlings[i] runAction:[SKAction moveTo:CGPointMake(bonusSlings[i].position.x+((i%2)?33*((i/2)+1):-33*((i/2)+1)),
+                                                              bonusSlings[i].position.y- ((i/2)+1)*2 )
+                                         duration:0.2]];
+        
+        [scene addChild:bonusSlings[i]];
+        
+    }
+
 }
 
 +(Sling*) getIdlesling {

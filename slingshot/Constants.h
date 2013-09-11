@@ -13,6 +13,10 @@
 
 #define Xmargin 20
 
+#pragma mark Game
+
+#define initialTimeIntervalForFallingTriangles 0.2
+
 #pragma mark slingshot body and position
 
 #define  slingshotWidth 10
@@ -71,5 +75,6 @@
 
 #define comboLabelAlpha 0.9
 #define comboLabelSpawnScale 1.5
+#define comboTime 2.0
 
 #endif
