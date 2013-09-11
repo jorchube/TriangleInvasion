@@ -11,11 +11,13 @@
 #import "Game.h"
 #import "Credits.h"
 #import "Deadline.h"
+#import "Story.h"
 
 @interface MainMenu() {
     @private
     SKLabelNode *newGame, *credits;
     Sling *sling;
+    SKSpriteNode *hand;
 }
 @end
 
@@ -34,7 +36,7 @@
         
         
         SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                                 [[NSBundle mainBundle] pathForResource:@"test" ofType:@"sks"]];
+                                 [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"sks"]];
         sparks.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame));
         sparks.targetNode = self;
         [sparks advanceSimulationTime:100];
@@ -42,11 +44,33 @@
         
         
         [self.physicsWorld setContactDelegate:self];
+     
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        if (![defaults objectForKey:@"hand"]){
+            [self showHand];
+            [defaults setObject:[NSNumber numberWithBool:true] forKey:@"hand"];
+            [defaults synchronize];
+        }
         
     }
     return self;
 }
 
+-(void)showHand {
+    hand = [SKSpriteNode spriteNodeWithImageNamed:@"hand.png"];
+    hand.zPosition = 11;
+    hand.size = CGSizeMake(100, 100);
+    hand.zRotation = -0.8;
+    hand.position = CGPointMake(CGRectGetMidX(self.frame)-70, CGRectGetMinY(self.frame)+20);
+    [self addChild:hand];
+    
+    SKAction *handMove = [SKAction moveByX:20 y:20 duration:1];
+    SKAction *loop = [SKAction repeatActionForever:[SKAction sequence:@[handMove,
+                                                                        [handMove reversedAction]]]];
+
+    [hand runAction:loop withKey:@"loop"];
+}
 
 -(void) addLabels {
     
@@ -64,7 +88,17 @@
     newGame.text = NSLocalizedString(@"New Game", nil) ;
     credits.text = @"Creditos";
     
-    SKAction *act = [SKAction moveToY:CGRectGetMidY(self.frame)+50 duration:1];
+    newGame.alpha = 0;
+    credits.alpha = 0;
+    
+#define LABELSCALE 0.4
+    newGame.xScale = LABELSCALE; newGame.yScale = LABELSCALE;
+    credits.xScale = LABELSCALE; credits.yScale = LABELSCALE;
+    
+    SKAction *act = [SKAction group:@[ [SKAction moveToY:CGRectGetMidY(self.frame)+50 duration:1],
+                                       [SKAction fadeAlphaTo:1 duration:1],
+                                       [SKAction scaleTo:1 duration:1]
+                                       ]];
     [act setTimingMode:SKActionTimingEaseOut];
     [newGame runAction:act];
     [credits runAction:act];
@@ -93,6 +127,13 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [[Sling getIdlesling] touchesBegan:touches withEvent:event];
+    if(hand){
+        [hand removeActionForKey:@"loop"];
+        [hand runAction:[SKAction moveByX:0 y:-200 duration:1] completion:^{
+            [hand removeFromParent];
+        }];
+
+    }
 }
 
 -(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -123,8 +164,6 @@
 #pragma mark menu functions
 
 -(void) showCredits {
-
-    [credits setFontColor:[UIColor colorWithRed:1 green:0 blue:0 alpha:1]];
     
     SKAction *changeView = [SKAction runBlock:^{
         SKTransition *trans = [SKTransition fadeWithDuration:1];
@@ -138,18 +177,28 @@
 }
 
 -(void) setNewGame {
-
-    [newGame setFontColor:[UIColor colorWithRed:1 green:0 blue:0 alpha:1]];
+    
+    SKScene *nextScene;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (![defaults objectForKey:@"story"]){
+        
+        nextScene = [Story sceneWithSize:self.view.bounds.size];
+        [defaults setObject:[NSNumber numberWithBool:true] forKey:@"story"];
+        [defaults synchronize];
+    }else{
+        nextScene = [Game sceneWithSize:self.view.bounds.size];
+    }
+    nextScene.scaleMode = SKSceneScaleModeAspectFill;
     
     SKAction *changeView = [SKAction runBlock:^{
-        SKTransition *trans = [SKTransition fadeWithDuration:1];
-        Game *game =    [Game sceneWithSize:self.view.bounds.size];
-        game.scaleMode = SKSceneScaleModeAspectFill;
         
-        [self.view presentScene:game transition:trans];
+        SKTransition *trans = [SKTransition fadeWithDuration:1];
+        [self.view presentScene:nextScene transition:trans];
+        
     }];
 
-    [self runAction:[SKAction sequence:@[[SKAction rotateByAngle:1 duration:3], changeView]]];
+    [self runAction:[SKAction sequence:@[[SKAction rotateByAngle:-1 duration:3], changeView]]];
 }
 
 
