@@ -89,7 +89,7 @@
                                    self.size.height - 100);
     
     newGame.text = NSLocalizedString(@"New Game", nil) ;
-    credits.text = @"Creditos";
+    credits.text = NSLocalizedString(@"Credits", nil) ;
     
     newGame.alpha = 0;
     credits.alpha = 0;

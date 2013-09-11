@@ -19,6 +19,8 @@
 		7C3D2DAA17DCEB2A00B3362C /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D2DA917DCEB2A00B3362C /* Triangle.m */; };
 		7C3D2DB117DCEB6700B3362C /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D2DAF17DCEB6700B3362C /* MainMenu.m */; };
 		7C3D2DB717DCF4EE00B3362C /* Credits.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D2DB617DCF4EE00B3362C /* Credits.m */; };
+		7C9189E017E11CA1007F3CBC /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C9189DF17E11CA1007F3CBC /* line.png */; };
+		7C9189E617E11CEF007F3CBC /* universe.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7C9189E417E11CEF007F3CBC /* universe.sks */; };
 		7CB2513F17DA1DDC00FA592D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB2513E17DA1DDC00FA592D /* Foundation.framework */; };
 		7CB2514117DA1DDD00FA592D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB2514017DA1DDD00FA592D /* CoreGraphics.framework */; };
 		7CB2514317DA1DDD00FA592D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB2514217DA1DDD00FA592D /* UIKit.framework */; };
@@ -70,6 +72,8 @@
 		7C3D2DAF17DCEB6700B3362C /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenu.m; path = Scenes/MainMenu.m; sourceTree = "<group>"; };
 		7C3D2DB517DCF4EE00B3362C /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Credits.h; path = Scenes/Credits.h; sourceTree = "<group>"; };
 		7C3D2DB617DCF4EE00B3362C /* Credits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Credits.m; path = Scenes/Credits.m; sourceTree = "<group>"; };
+		7C9189DF17E11CA1007F3CBC /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = line.png; path = Resources/line.png; sourceTree = "<group>"; };
+		7C9189E417E11CEF007F3CBC /* universe.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = universe.sks; path = Resources/universe.sks; sourceTree = "<group>"; };
 		7CB2513B17DA1DDC00FA592D /* slingshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slingshot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CB2513E17DA1DDC00FA592D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7CB2514017DA1DDD00FA592D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -126,6 +130,8 @@
 		7C17A46D17DA41F9003FE842 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				7C9189E417E11CEF007F3CBC /* universe.sks */,
+				7C9189DF17E11CA1007F3CBC /* line.png */,
 				7C1193E117DFD65300D4D5C0 /* hand.png */,
 				7CE570DD17DF929E00F90752 /* menu.sks */,
 				7C1193DF17DFD4F100D4D5C0 /* credits.sks */,
@@ -339,7 +345,9 @@
 				7CE570D117DF8BD500F90752 /* Main_iPad.storyboard in Resources */,
 				7C1193E017DFD4F100D4D5C0 /* credits.sks in Resources */,
 				7CB2516117DA1DDD00FA592D /* Images.xcassets in Resources */,
+				7C9189E017E11CA1007F3CBC /* line.png in Resources */,
 				7C1193E217DFD65300D4D5C0 /* hand.png in Resources */,
+				7C9189E617E11CEF007F3CBC /* universe.sks in Resources */,
 				7CE570D217DF8BD500F90752 /* Main_iPhone.storyboard in Resources */,
 				7CB2514B17DA1DDD00FA592D /* InfoPlist.strings in Resources */,
 				7CE570DF17DF929E00F90752 /* menu.sks in Resources */,
