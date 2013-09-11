@@ -7,6 +7,7 @@
 //
 
 #import "Game.h"
+#import "MainMenu.h"
 
 
 @interface Game() {
@@ -22,6 +23,8 @@
     double currentTimeGeneration;
     double speedVariation;
     UIButton *stopButton;
+    UIButton *continueButton;
+    UIButton *exitButton;
 }
 
 @end
@@ -238,22 +241,97 @@
 
 -(void)didMoveToView:(SKView *)view {
     stopButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    stopButton.frame = CGRectMake(5, 5, 100, 50);
-    [stopButton setTitle:@"stop" forState:UIControlStateNormal];
-    stopButton.titleLabel.textColor = [UIColor whiteColor];
-    
+    stopButton.frame = CGRectMake(5, 5, 80, 50);
+    [stopButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];
+    [stopButton setTitleColor:[SKColor whiteColor] forState:UIControlStateNormal];
+    stopButton.titleLabel.font = [UIFont systemFontOfSize:18];
+    stopButton.alpha = 0;
     [stopButton addTarget:self action:@selector(stopGame) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    continueButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    continueButton.frame = CGRectMake(CGRectGetMidX(self.frame)-100, CGRectGetMidY(self.frame)-90, 200, 50);
+    [continueButton setTitle:NSLocalizedString(@"Continue", nil) forState:UIControlStateNormal];
+    [continueButton setTitleColor:[SKColor whiteColor] forState:UIControlStateNormal];
+    continueButton.titleLabel.font = [UIFont systemFontOfSize:28];
+    [continueButton addTarget:self action:@selector(resumeGame) forControlEvents:UIControlEventTouchUpInside];
+    continueButton.alpha = 0;
+    continueButton.center = CGPointMake(-200,continueButton.center.y);
+    
+    
+    exitButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    exitButton.frame = CGRectMake(CGRectGetMidX(self.frame)-100, CGRectGetMidY(self.frame)-30, 200, 50);
+    [exitButton setTitle:NSLocalizedString(@"Exit", nil) forState:UIControlStateNormal];
+    [exitButton setTitleColor:[SKColor whiteColor] forState:UIControlStateNormal];
+    exitButton.titleLabel.font = [UIFont systemFontOfSize:28];
+    [exitButton addTarget:self action:@selector(exitGame) forControlEvents:UIControlEventTouchUpInside];
+    exitButton.alpha = 0;
+    exitButton.center = CGPointMake(CGRectGetMidX(self.frame)+200,exitButton.center.y);
+    
     [view addSubview:stopButton];
+    [UIView animateWithDuration:1 animations:^{
+        stopButton.alpha = 1;
+    }];
+    
 }
 
 -(void)stopGame {
+    
     self.view.paused = true;
-    [stopButton addTarget:self action:@selector(resumeGame) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:continueButton];
+    [self.view addSubview:exitButton];
+    
+    [UIView animateWithDuration:1 animations:^{
+        continueButton.alpha = 1;
+        continueButton.center = CGPointMake(CGRectGetMidX(self.frame),continueButton.center.y);
+        exitButton.alpha = 1;
+        exitButton.center = CGPointMake(CGRectGetMidX(self.frame),exitButton.center.y);
+        stopButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        [stopButton removeFromSuperview];
+    }];
+    
 }
 
 -(void)resumeGame {
+
+    [self.view addSubview:stopButton];
+    [UIView animateWithDuration:1 animations:^{
+        exitButton.center = CGPointMake(-200,exitButton.center.y);
+        continueButton.center = CGPointMake(CGRectGetMidX(self.frame)+200,continueButton.center.y);
+        continueButton.alpha = 0;
+        exitButton.alpha = 0;
+        stopButton.alpha = 1;
+    } completion:^(BOOL finished) {
+        [continueButton removeFromSuperview];
+        [exitButton removeFromSuperview];
+        exitButton.center = CGPointMake(CGRectGetMidX(self.frame)+200,exitButton.center.y);
+        continueButton.center = CGPointMake(-200,continueButton.center.y);
+        self.view.paused = false;
+    }];
+}
+
+-(void)exitGame {
+    
     self.view.paused = false;
-    [stopButton addTarget:self action:@selector(stopGame) forControlEvents:UIControlEventTouchUpInside];
+    SKTransition *trans = [SKTransition fadeWithDuration:1];
+    MainMenu *scene =    [MainMenu sceneWithSize:self.view.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+
+    [self.view presentScene:scene transition:trans];
+    
+    [UIView animateWithDuration:.5 animations:^{
+        continueButton.alpha = 0;
+        exitButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        [continueButton removeFromSuperview];
+        [exitButton removeFromSuperview];
+    }];
+    
+
+
+    
 }
 
 -(void) decreaseDeadlineLife {

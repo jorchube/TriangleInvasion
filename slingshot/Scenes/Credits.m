@@ -122,15 +122,14 @@
 
 -(void)goBack {
     
-    SKAction *changeView = [SKAction runBlock:^{
-        SKTransition *trans = [SKTransition fadeWithDuration:1];
-        MainMenu *scene =    [MainMenu sceneWithSize:self.view.bounds.size];
-        scene.scaleMode = SKSceneScaleModeAspectFill;
-        
-        [self.view presentScene:scene transition:trans];
-    }];
     
-    [self runAction:changeView];
+    SKTransition *trans = [SKTransition fadeWithDuration:1];
+    MainMenu *scene =    [MainMenu sceneWithSize:self.view.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    
+    [self.view presentScene:scene transition:trans];
+
+    
 }
 
 
