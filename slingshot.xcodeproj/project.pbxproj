@@ -37,6 +37,7 @@
 		7CE570D117DF8BD500F90752 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE570CD17DF8BD500F90752 /* Main_iPad.storyboard */; };
 		7CE570D217DF8BD500F90752 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE570CF17DF8BD500F90752 /* Main_iPhone.storyboard */; };
 		7CE570DF17DF929E00F90752 /* menu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7CE570DD17DF929E00F90752 /* menu.sks */; };
+		B574949217E13089004C82D7 /* deadlineSparks.sks in Resources */ = {isa = PBXBuildFile; fileRef = B574949117E13089004C82D7 /* deadlineSparks.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		7CE570D317DF8BEA00F90752 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7CE570D417DF8EEA00F90752 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7CE570DD17DF929E00F90752 /* menu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = menu.sks; path = Resources/menu.sks; sourceTree = "<group>"; };
+		B574949117E13089004C82D7 /* deadlineSparks.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = deadlineSparks.sks; path = Resources/deadlineSparks.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				7C1193E117DFD65300D4D5C0 /* hand.png */,
+				B574949117E13089004C82D7 /* deadlineSparks.sks */,
 				7CE570DD17DF929E00F90752 /* menu.sks */,
 				7C1193DF17DFD4F100D4D5C0 /* credits.sks */,
 				7C2AAAF117DE83DF00A9AD29 /* collisionSparks.sks */,
@@ -338,6 +341,7 @@
 				7C2AAAF717DE83DF00A9AD29 /* menuSpark.png in Resources */,
 				7CE570D117DF8BD500F90752 /* Main_iPad.storyboard in Resources */,
 				7C1193E017DFD4F100D4D5C0 /* credits.sks in Resources */,
+				B574949217E13089004C82D7 /* deadlineSparks.sks in Resources */,
 				7CB2516117DA1DDD00FA592D /* Images.xcassets in Resources */,
 				7C1193E217DFD65300D4D5C0 /* hand.png in Resources */,
 				7CE570D217DF8BD500F90752 /* Main_iPhone.storyboard in Resources */,

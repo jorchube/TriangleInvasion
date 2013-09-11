@@ -256,4 +256,17 @@
     [stopButton addTarget:self action:@selector(stopGame) forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(void) decreaseDeadlineLife {
+    if (deadline.alpha - deadlineLifeDecreaseForAnImpact <= 0){
+        deadline.alpha = 0;
+        [self gameFuckingOver];
+        deadline.physicsBody.collisionBitMask = cat_notCollide;
+    }
+    else deadline.alpha -= deadlineLifeDecreaseForAnImpact;
+}
+
+-(void) gameFuckingOver {
+    NSLog(@"GAME OVER YOU ASSHOLE");
+}
+
 @end

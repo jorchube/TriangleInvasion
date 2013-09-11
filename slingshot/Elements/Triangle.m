@@ -10,6 +10,8 @@
 
 @implementation Triangle
 
+@synthesize isAlive;
+
 -(id) init {
 	self = [super init];
 	if (self)
@@ -23,6 +25,7 @@
 		CGPathAddLineToPoint(path, nil, 25*triangleScale, 43*triangleScale);
 		CGPathCloseSubpath(path);
         
+        isAlive = YES;
         
 		self.path = path;
         self.lineWidth = 2

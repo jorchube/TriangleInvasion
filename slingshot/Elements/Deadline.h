@@ -11,6 +11,8 @@
 
 @interface Deadline : SKShapeNode
 
+@property double life;
+
 -(id) initWithFrame:(CGRect) frame;
 
 @end

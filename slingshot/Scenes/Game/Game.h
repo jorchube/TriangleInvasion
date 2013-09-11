@@ -25,5 +25,6 @@
 -(void) increaseComboCounter;
 -(int) getComboCounter;
 -(void) resetComboCounter;
+-(void) decreaseDeadlineLife;
 
 @end

@@ -23,6 +23,7 @@
 #define minIntervalCreationRate 0.4
 #define ratioScoreSpeed (1/20)
 #define intervalDecrementForCreationRate 0.1
+#define deadlineLifeDecreaseForAnImpact 0.4
 
 #pragma mark slingshot body and position
 
@@ -64,6 +65,7 @@
 #define  slingFadingTime  0.5
 
 #define  timeForObjectToDisappearAfterHit  1.5
+#define  timeForObjectToDisappearAfterLanding 0.5
 
 #pragma mark scoring
 

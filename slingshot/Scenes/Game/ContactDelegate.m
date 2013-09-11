@@ -63,8 +63,8 @@
 }
 
 
--(void) killSimpleObject: (SKPhysicsBody*) body {
-    [[body node] runAction:[SKAction fadeOutWithDuration:timeForObjectToDisappearAfterHit]
+-(void) killSimpleObject: (SKPhysicsBody*) body withTime:(double) time {
+    [[body node] runAction:[SKAction fadeOutWithDuration:time]
                 completion: ^{
                     [[body node] runAction:[SKAction removeFromParent]];
                 }];
@@ -77,7 +77,9 @@
 }
 
 -(void) sling: (SKPhysicsBody*) sling hitSimpleObject: (SKPhysicsBody*) body At: (CGPoint) point {
-    [self killSimpleObject:body];
+    [self killSimpleObject:body withTime:timeForObjectToDisappearAfterHit];
+    [(Triangle*)body.node setIsAlive:NO];
+    
     SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
                              [[NSBundle mainBundle] pathForResource:@"collisionSparks" ofType:@"sks"]];
     sparks.position = point;
@@ -90,8 +92,11 @@
 }
 
 -(void) collisionBetweenSimpleObjects: (SKPhysicsBody*) bodyA and: (SKPhysicsBody*) bodyB At: (CGPoint) point {
-    [self killSimpleObject:bodyA];
-    [self killSimpleObject:bodyB];
+    [self killSimpleObject:bodyA withTime:timeForObjectToDisappearAfterHit];
+    [self killSimpleObject:bodyB withTime:timeForObjectToDisappearAfterHit];
+    
+    [(Triangle*)bodyA.node setIsAlive:NO];
+    [(Triangle*)bodyB.node setIsAlive:NO];
     
     SKEmitterNode *sparksA = [NSKeyedUnarchiver unarchiveObjectWithFile:
                               [[NSBundle mainBundle] pathForResource:@"collisionSparks" ofType:@"sks"]];
@@ -116,8 +121,38 @@
 
 -(void) reachedDeadlineObject: (SKPhysicsBody*) body At: (CGPoint) point {
     /* Game over, substracting one life... whatever */
-    [self killSimpleObject:body];
-    [delegatorID updateScore:score_triangleHitsDeadline];
+    
+    if([(Triangle*)body.node isAlive]){
+        [(Triangle*)body.node setIsAlive:NO];
+        [body setVelocity:CGVectorMake(0, 0)];
+        [body setAngularVelocity:0];
+        [body setCollisionBitMask: cat_notCollide];
+        
+        [self killSimpleObject:body withTime:timeForObjectToDisappearAfterLanding];
+        [delegatorID updateScore:score_triangleHitsDeadline];
+        [delegatorID decreaseDeadlineLife];
+        
+        SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                                [[NSBundle mainBundle] pathForResource:@"deadlineSparks" ofType:@"sks"]];
+        sparks.position = point;
+        sparks.targetNode = delegatorID;
+        sparks.particleColor = ((SKShapeNode*)body.node).strokeColor;
+        [delegatorID addChild:sparks];
+        
+       /* SKEmitterNode *smoke = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                                  [[NSBundle mainBundle] pathForResource:@"collisionSmoke" ofType:@"sks"]];
+        smoke.position = point;
+        smoke.targetNode = delegatorID;
+        smoke.particleColor = ((SKShapeNode*)body.node).strokeColor;
+        [delegatorID addChild:smoke];*/
+    }
+    else {
+        [body setVelocity:CGVectorMake(0, 0)];
+        [body setAngularVelocity:0];
+        [body setCollisionBitMask: cat_notCollide];
+        
+        [self killSimpleObject:body withTime:timeForObjectToDisappearAfterLanding];
+    }
 }
 
 @end

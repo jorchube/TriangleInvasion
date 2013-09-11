@@ -10,6 +10,8 @@
 
 @implementation Deadline
 
+@synthesize life;
+
 -(id) initWithFrame:(CGRect) frame {
     self = [super init];
     if (self) {
@@ -30,6 +32,7 @@
         SKPhysicsBody *pb = [SKPhysicsBody bodyWithCircleOfRadius:circleDiameter/2];
 		
 		[pb setCategoryBitMask:cat_deadline];
+        
 		[pb setAffectedByGravity:NO];
 		[pb setUsesPreciseCollisionDetection:YES];
         [pb setDynamic:NO];
