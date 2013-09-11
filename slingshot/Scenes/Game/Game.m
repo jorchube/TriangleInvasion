@@ -19,7 +19,6 @@
     double score;
     int comboCounter;
     NSTimer *resetComboCounterTimer;
-    NSTimer *triangleTimer;
     double currentTimeGeneration;
     double speedVariation;
     UIButton *stopButton;
@@ -60,37 +59,40 @@
 		[Sling addSlingAtScene:self];
 		
         currentTimeGeneration = initialTimeIntervalForFallingTriangles;
-        [self createTriangleTimer];
         
-        
-        //si se invalida uno hay que invalidar los dos...
-        NSTimer *increaseTriangleFreqTimer = [NSTimer timerWithTimeInterval:intervalForIncreasingTriangleCreationRate
-                                                                     target:self
-                                                                   selector:@selector(speedupTriangleGeneration)
-                                                                   userInfo:nil
-                                                                    repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:increaseTriangleFreqTimer forMode:NSDefaultRunLoopMode];
-		
+        [self launchTimer];
+		[self speedUpTimer];
         
     }
     return self;
 }
 
--(void) speedupTriangleGeneration {
-    if (currentTimeGeneration > minIntervalCreationRate)
-        currentTimeGeneration = currentTimeGeneration -0.1;
 
-    [triangleTimer invalidate];
-    [self createTriangleTimer];
+-(void) launchTimer {
+    SKAction *launch = [SKAction repeatActionForever:[SKAction sequence:@[[SKAction waitForDuration:currentTimeGeneration],
+                                                                          [SKAction runBlock:^{[self launchTriangle];}],
+                                                                          ]]];
+    [self runAction:launch withKey:@"launchTime"];
 }
--(void)createTriangleTimer {
-    triangleTimer = [NSTimer timerWithTimeInterval:currentTimeGeneration
-                                            target:self
-                                          selector:@selector(launchTriangle)
-                                          userInfo:nil
-                                           repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:triangleTimer forMode:NSDefaultRunLoopMode];
+-(void) speedUpTimer {
+    SKAction *launch = [SKAction repeatActionForever:[SKAction sequence:@[[SKAction waitForDuration:intervalForIncreasingTriangleCreationRate],
+                                                                          [SKAction runBlock:^{
+
+        currentTimeGeneration -= intervalDecrementForCreationRate;
+        if (currentTimeGeneration < minIntervalCreationRate) {
+            currentTimeGeneration = minIntervalCreationRate;
+        }
+        [self removeActionForKey:@"launchTime"];
+        [self launchTimer];
+        if (currentTimeGeneration == minIntervalCreationRate) {
+            [self removeActionForKey:@"speedUpTimer"];
+        }
+        
+        
+                                                                            }]]]];
+    [self runAction:launch withKey:@"speedUpTimer"];
 }
+
 
 -(void) updateScore:(double)scr {
     int mult = (comboCounter<=0)? 1 : comboCounter;
@@ -246,14 +248,11 @@
 
 -(void)stopGame {
     self.view.paused = true;
-    [triangleTimer invalidate];
-    [
     [stopButton addTarget:self action:@selector(resumeGame) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)resumeGame {
     self.view.paused = false;
-    [self createTriangleTimer];
     [stopButton addTarget:self action:@selector(stopGame) forControlEvents:UIControlEventTouchUpInside];
 }
 

@@ -22,6 +22,7 @@
 #define intervalForIncreasingTriangleCreationRate 10
 #define minIntervalCreationRate 0.4
 #define ratioScoreSpeed (1/20)
+#define intervalDecrementForCreationRate 0.1
 
 #pragma mark slingshot body and position
 
