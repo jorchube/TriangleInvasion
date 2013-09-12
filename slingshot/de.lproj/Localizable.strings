@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  slingshot
+
+  Created by Pau Sastre Miguel on 10/09/13.
+  Copyright (c) 2013 Pau Sastre Miguel. All rights reserved.
+*/
+
+"New Game" = "Neu Spiel";
+"Credits" = "Kredit";
+
+"Back" = "Zurück";
+
+"Exit" = "Beenden";
+"Continue" = "Weiter";
+"Stop" = "Pause";
