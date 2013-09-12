@@ -8,7 +8,7 @@
 
 #import "Game.h"
 #import "MainMenu.h"
-
+#import "GameKit.h"
 
 @interface Game() {
     @private
@@ -25,6 +25,10 @@
     UIButton *stopButton;
     UIButton *continueButton;
     UIButton *exitButton;
+    UIButton *mainMenuButton;
+    UILabel *gameOverLabel;
+    UILabel *punctuationLabel;
+    
 }
 
 @end
@@ -268,6 +272,18 @@
     exitButton.alpha = 0;
     exitButton.center = CGPointMake(CGRectGetMidX(self.frame)+200,exitButton.center.y);
     
+    
+    mainMenuButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    mainMenuButton.frame = CGRectMake(CGRectGetMidX(self.frame)-100, CGRectGetMidY(self.frame)-30, 200, 50);
+    [mainMenuButton setTitle:NSLocalizedString(@"Main Menu", nil) forState:UIControlStateNormal];
+    [mainMenuButton setTitleColor:[SKColor whiteColor] forState:UIControlStateNormal];
+    mainMenuButton.titleLabel.font = [UIFont fontWithName:@"fipps" size:20];
+    [mainMenuButton addTarget:self action:@selector(goMainMenuFromEnd) forControlEvents:UIControlEventTouchUpInside];
+    mainMenuButton.alpha = 0;
+    mainMenuButton.center = CGPointMake(CGRectGetMidX(self.frame),CGRectGetMinX(self.frame)-100);
+    
+    
+    
     [view addSubview:stopButton];
     [UIView animateWithDuration:1 animations:^{
         stopButton.alpha = 1;
@@ -337,14 +353,75 @@
 -(void) decreaseDeadlineLife {
     if (deadline.alpha - deadlineLifeDecreaseForAnImpact <= 0){
         deadline.alpha = 0;
-        [self gameFuckingOver];
+        [self runAction:[SKAction sequence:@[[SKAction waitForDuration:0.4],
+                                             [SKAction runBlock:^{[self gameFuckingOver];}]]]];
+        
         deadline.physicsBody.collisionBitMask = cat_notCollide;
     }
     else deadline.alpha -= deadlineLifeDecreaseForAnImpact;
 }
 
 -(void) gameFuckingOver {
-    NSLog(@"GAME OVER YOU ASSHOLE");
+    
+    [[GameKit singleton] saveScore:score];
+    
+    
+    gameOverLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame)-150, -100, 300, 50)];
+    gameOverLabel.font = [UIFont fontWithName:@"fipps" size:35];
+    gameOverLabel.textAlignment = NSTextAlignmentCenter;
+    gameOverLabel.textColor = [SKColor whiteColor];
+    gameOverLabel.text = NSLocalizedString(@"Game Over", nil);
+    gameOverLabel.alpha = 0;
+    [self.view addSubview:gameOverLabel];
+    
+    punctuationLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame)-150, -100, 300, 50)];
+    punctuationLabel.font = [UIFont fontWithName:@"fipps" size:20];
+    punctuationLabel.textAlignment = NSTextAlignmentCenter;
+    punctuationLabel.textColor = [SKColor whiteColor];
+    punctuationLabel.text = [NSString stringWithFormat:@"%.0f",score];
+    punctuationLabel.alpha = 0;
+    [self.view addSubview:punctuationLabel];
+    
+    
+    self.view.paused = true;
+    [self.view addSubview:mainMenuButton];
+    
+    [scoreLabel removeFromParent];
+    deadline.fillColor = [SKColor redColor];
+    deadline.alpha = 0.5;
+    
+    [UIView animateWithDuration:1 animations:^{
+        mainMenuButton.alpha = 1;
+        mainMenuButton.center = CGPointMake(mainMenuButton.center.x,CGRectGetMidY(self.frame)+100);
+        gameOverLabel.alpha = 1;
+        gameOverLabel.center = CGPointMake(gameOverLabel.center.x,100);
+        punctuationLabel.alpha = 1;
+        punctuationLabel.center = CGPointMake(punctuationLabel.center.x,200);
+        stopButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        [stopButton removeFromSuperview];
+    }];
+}
+
+-(void) goMainMenuFromEnd {
+    
+    self.view.paused = false;
+    
+    SKTransition *trans = [SKTransition fadeWithDuration:1];
+    MainMenu *scene =    [MainMenu sceneWithSize:self.view.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+    
+    [self.view presentScene:scene transition:trans];
+    
+    [UIView animateWithDuration:.5 animations:^{
+        mainMenuButton.alpha = 0;
+        gameOverLabel.alpha = 0;
+        punctuationLabel.alpha = 0;
+    } completion:^(BOOL finished) {
+        [mainMenuButton removeFromSuperview];
+        [gameOverLabel removeFromSuperview];
+        [punctuationLabel removeFromSuperview];
+    }];
 }
 
 @end

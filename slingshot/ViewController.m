@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "MainMenu.h"
+#import "GameKit.h"
 
 @implementation ViewController
 
@@ -15,6 +16,8 @@
 {
     [super viewDidLoad];
 
+    [[GameKit singleton] authenticatePlayerInViewController:self];
+    
     // Configure the view.
     SKView * skView = (SKView *)self.view;
     skView.showsFPS = YES;
@@ -23,6 +26,8 @@
     // Create and configure the scene.
     SKScene * scene = [MainMenu sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
+    
+
     
     // Present the scene.
     [skView presentScene:scene];
