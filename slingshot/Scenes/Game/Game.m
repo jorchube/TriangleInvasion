@@ -28,7 +28,7 @@
     UIButton *mainMenuButton;
     UILabel *gameOverLabel;
     UILabel *punctuationLabel;
-    
+    int maxCombo;
 }
 
 @end
@@ -55,6 +55,7 @@
         speedVariation = 0;
         
         comboCounter = 0;
+        maxCombo = 0;
         [self addComboLabel];
         
         hint = [[SKShapeNode alloc]init];
@@ -107,13 +108,14 @@
         score += scr*mult;
     else
         score += scr;
-    if (score < 0) score = 0;
+    //if (score < 0) score = 0;
     self.scoreLabel.text = [NSString stringWithFormat:@"%.0f", score];
     speedVariation = score*ratioScoreSpeed;
 }
 
 -(void) increaseComboCounter {
     ++comboCounter;
+    if (comboCounter > maxCombo) maxCombo = comboCounter;
     resetComboCounterTimer = [NSTimer timerWithTimeInterval:comboTime
                                                      target:self
                                                    selector:@selector(resetComboCounter)
