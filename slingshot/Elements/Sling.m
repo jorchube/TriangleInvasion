@@ -122,6 +122,8 @@ static Sling *bonusSlings[8];
 #pragma mark shot
 
 -(void) shotSling {
+    
+    [self runAction:[SKAction playSoundFileNamed:@"shoot.mp3" waitForCompletion:NO]];
 	
     Sling *sling = idleSling;
     
@@ -192,6 +194,7 @@ static Sling *bonusSlings[8];
                                                ]]];
         
         bonusSlings[i++] = NULL;
+        
     }
     
 
