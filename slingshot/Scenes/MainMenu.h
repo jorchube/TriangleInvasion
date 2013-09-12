@@ -7,7 +7,8 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import <StoreKit/StoreKit.h>
 
-@interface MainMenu : SKScene <SKPhysicsContactDelegate>
+@interface MainMenu : SKScene <SKPhysicsContactDelegate,SKProductsRequestDelegate,SKPaymentTransactionObserver>
 
 @end

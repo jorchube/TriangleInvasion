@@ -12,11 +12,21 @@
 
 @implementation ViewController
 
+static ViewController *viewController;
+
++(ViewController*)getSingleton {
+    return viewController;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    viewController = self;
 
     [[GameKit singleton] authenticatePlayerInViewController:self];
+    
+    [self checkAd];
     
     // Configure the view.
     SKView * skView = (SKView *)self.view;
@@ -31,6 +41,26 @@
     
     // Present the scene.
     [skView presentScene:scene];
+}
+
+
+-(void)checkAd {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    if ([defaults boolForKey:@"removeAd"]) {
+        [_adBanner removeFromSuperview];
+        _adBanner = nil;
+    }
+}
+
+-(void)removeAd {
+    [UIView animateWithDuration:1 animations:^{
+        _adBanner.alpha = 0;
+    } completion:^(BOOL finished) {
+        [_adBanner removeFromSuperview];
+        _adBanner = nil;
+    }];
 }
 
 - (BOOL)shouldAutorotate

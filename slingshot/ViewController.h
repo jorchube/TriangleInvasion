@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
+#import <iAd/iAd.h>
 
 @interface ViewController : UIViewController
+
+@property (weak, nonatomic) IBOutlet ADBannerView *adBanner;
+
++(ViewController*)getSingleton;
+-(void)removeAd;
 
 @end

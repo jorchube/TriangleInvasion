@@ -12,6 +12,8 @@
 #import "Credits.h"
 #import "Deadline.h"
 #import "Story.h"
+#import "ViewController.h"
+#import <StoreKit/StoreKit.h>
 
 @interface MainMenu() {
     @private
@@ -19,6 +21,7 @@
     Sling *sling;
     SKSpriteNode *hand;
     BOOL transitioning;
+    UIButton *removeAdButton;
 }
 @end
 
@@ -170,6 +173,8 @@
 
 -(void) showCredits {
     
+    [self removeAdButton];
+    
     SKAction *changeView = [SKAction runBlock:^{
         SKTransition *trans = [SKTransition fadeWithDuration:1];
         Credits *creditView =    [Credits sceneWithSize:self.view.bounds.size];
@@ -182,6 +187,8 @@
 }
 
 -(void) setNewGame {
+    
+    [self removeAdButton];
     
     SKScene *nextScene;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -207,6 +214,83 @@
 }
 
 
+
+
+#pragma mark removing ad button
+
+-(void)removeAdButton {
+    [UIView animateWithDuration:.5 animations:^{
+        removeAdButton.alpha = 0;
+    } completion:^(BOOL finished) {
+        [removeAdButton removeFromSuperview];
+    }];
+}
+
+-(void)didMoveToView:(SKView *)view {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (![defaults boolForKey:@"removeAd"]) {
+
+        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+        
+        removeAdButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        removeAdButton.frame = CGRectMake(0, 5, self.frame.size.width, 50);
+        [removeAdButton setTitle:NSLocalizedString(@"Remove Ads", nil) forState:UIControlStateNormal];
+        removeAdButton.titleLabel.font = [UIFont systemFontOfSize:18];
+        removeAdButton.alpha = 0;
+        [removeAdButton addTarget:self action:@selector(buyRemoveAd) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view addSubview:removeAdButton];
+        
+        [UIView animateWithDuration:1 animations:^{
+            removeAdButton.alpha = 1;
+        }];
+
+    }
+}
+
+-(void)buyRemoveAd {
+    
+    NSSet *productID = [NSSet setWithObjects:@"removeAd", nil];
+    SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:productID];
+    request.delegate = self;
+    
+}
+
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
+
+    SKProduct *product = [response.products firstObject];
+    SKPayment *payment = [SKPayment paymentWithProduct:product];
+    [[SKPaymentQueue defaultQueue] addPayment:payment];
+    
+}
+
+
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    for (SKPaymentTransaction * transaction in transactions) {
+        switch (transaction.transactionState)
+        {
+            case SKPaymentTransactionStatePurchased:
+                [defaults setBool:YES forKey:@"removeAd"];
+                [self removeAdButton];
+                [[ViewController getSingleton] removeAd];
+                [self removeAdButton];
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                break;
+            case SKPaymentTransactionStateFailed:
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                break;
+            case SKPaymentTransactionStateRestored:
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+            default:
+                break;
+        }
+    };
+}
 
 
 
