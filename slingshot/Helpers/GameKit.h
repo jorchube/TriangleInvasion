@@ -14,6 +14,7 @@
 
 +(GameKit*)singleton;
 -(void)saveScore:(int)score;
+-(void)saveMaxBonus:(int)bonus;
 -(void)authenticatePlayerInViewController:(UIViewController*)rootViewController;
 -(void)defaultLeaderboard;
 @end

@@ -252,6 +252,11 @@
 
 -(void)buyRemoveAd {
     
+    //For removing the ad without buying it
+    [self removeAdPurchased];
+    //
+    
+    
     NSSet *productID = [NSSet setWithObjects:@"removeAd", nil];
     SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:productID];
     request.delegate = self;
@@ -269,16 +274,13 @@
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
     
     for (SKPaymentTransaction * transaction in transactions) {
         switch (transaction.transactionState)
         {
             case SKPaymentTransactionStatePurchased:
-                [defaults setBool:YES forKey:@"removeAd"];
-                [self removeAdButton];
-                [[ViewController getSingleton] removeAd];
-                [self removeAdButton];
+                [self removeAdPurchased];
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 break;
             case SKPaymentTransactionStateFailed:
@@ -292,6 +294,12 @@
     };
 }
 
+-(void)removeAdPurchased {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"removeAd"];
+    [self removeAdButton];
+    [[ViewController getSingleton] removeAd];
+    [self removeAdButton];
 
+}
 
 @end

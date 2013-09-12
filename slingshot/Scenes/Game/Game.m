@@ -364,6 +364,8 @@
 -(void) gameFuckingOver {
     
     [[GameKit singleton] saveScore:score];
+    [[GameKit singleton] saveMaxBonus:maxCombo];
+    
     
     
     gameOverLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame)-150, -100, 300, 50)];

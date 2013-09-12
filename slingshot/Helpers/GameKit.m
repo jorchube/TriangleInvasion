@@ -55,7 +55,9 @@ static GameKit *GKsingleton;
 
 -(void)saveScore:(int)score {
 
-    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"defendtheworld"];
+    NSString *leaderboard = (score < 0)?@"worstscore":@"defendtheworld";
+    
+    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:leaderboard];
     scoreReporter.value = score;
     scoreReporter.context = 0;
     
@@ -65,5 +67,21 @@ static GameKit *GKsingleton;
     }];
     
 }
+
+-(void)saveMaxBonus:(int)bonus {
+    
+    GKScore *scoreReporter = [[GKScore alloc] initWithLeaderboardIdentifier:@"biggestcombo"];
+    scoreReporter.value = bonus;
+    scoreReporter.context = 0;
+    
+    [GKScore reportScores:@[scoreReporter] withCompletionHandler:^(NSError *error) {
+        if (error)
+            NSLog(@"error reporting the score");
+    }];
+    
+}
+
+
+
 
 @end

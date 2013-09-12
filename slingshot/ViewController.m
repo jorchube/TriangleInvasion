@@ -41,6 +41,9 @@ static ViewController *viewController;
     
     // Present the scene.
     [skView presentScene:scene];
+    
+    [UIApplication sharedApplication].statusBarHidden = YES;
+
 }
 
 
@@ -82,5 +85,7 @@ static ViewController *viewController;
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
+
+
 
 @end
