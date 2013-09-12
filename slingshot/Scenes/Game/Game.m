@@ -110,7 +110,7 @@
         score += scr;
     //if (score < 0) score = 0;
     self.scoreLabel.text = [NSString stringWithFormat:@"%.0f", score];
-    speedVariation = score*ratioScoreSpeed;
+    speedVariation = ((score<0)?-score:score)*ratioScoreSpeed;
 }
 
 -(void) increaseComboCounter {
