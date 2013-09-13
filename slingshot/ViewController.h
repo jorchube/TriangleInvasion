@@ -16,5 +16,7 @@
 
 +(ViewController*)getSingleton;
 -(void)removeAd;
+-(void)pauseGame;
+-(void)resumeGame;
 
 @end

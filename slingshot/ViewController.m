@@ -9,6 +9,13 @@
 #import "ViewController.h"
 #import "MainMenu.h"
 #import "GameKit.h"
+#import "Game.h"
+
+@interface ViewController() {
+    SKView *mainView;
+}
+
+@end
 
 @implementation ViewController
 
@@ -29,21 +36,32 @@ static ViewController *viewController;
     [self checkAd];
     
     // Configure the view.
-    SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+    mainView = (SKView *)self.view;
+    mainView.showsFPS = YES;
+    mainView.showsNodeCount = YES;
     
     // Create and configure the scene.
-    SKScene * scene = [MainMenu sceneWithSize:skView.bounds.size];
+    SKScene * scene = [MainMenu sceneWithSize:mainView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
 
     
     // Present the scene.
-    [skView presentScene:scene];
+    [mainView presentScene:scene];
     
     [UIApplication sharedApplication].statusBarHidden = YES;
 
+}
+
+-(void)pauseGame {
+    if ([mainView.scene class] == [Game class]){
+        [(Game*)mainView.scene stopGame];
+    }
+}
+-(void)resumeGame {
+    if ([mainView.scene class] == [Game class]){
+        [(Game*)mainView.scene resumeGame];
+    }
 }
 
 

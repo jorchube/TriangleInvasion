@@ -29,6 +29,8 @@
     UILabel *gameOverLabel;
     UILabel *punctuationLabel;
     int maxCombo;
+    BOOL gameEnded;
+    BOOL gameStoped;
 }
 
 @end
@@ -39,8 +41,10 @@
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        /* Setup your scene here */
-		
+        
+        gameEnded = false;
+        gameStoped = false;
+        
 		contactDelegate = [[ContactDelegate alloc]initWithPhysicsWorld:self.physicsWorld andDelegator:self];
 		[self.physicsWorld setContactDelegate:contactDelegate];
         
@@ -295,6 +299,10 @@
 
 -(void)stopGame {
     
+    if (gameEnded || gameStoped) return;
+    
+    gameStoped = true;
+    
     self.view.paused = true;
     
     [self.view addSubview:continueButton];
@@ -313,6 +321,10 @@
 }
 
 -(void)resumeGame {
+    
+    if (gameEnded || !gameStoped) return;
+    
+    gameStoped = false;
 
     [self.view addSubview:stopButton];
     [UIView animateWithDuration:1 animations:^{
@@ -364,6 +376,8 @@
 }
 
 -(void) gameFuckingOver {
+    
+    gameEnded = true;
     
     [[GameKit singleton] saveScore:score];
     [[GameKit singleton] saveMaxBonus:maxCombo];

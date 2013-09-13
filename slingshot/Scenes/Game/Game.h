@@ -27,4 +27,7 @@
 -(void) resetComboCounter;
 -(void) decreaseDeadlineLife;
 
+-(void)stopGame;
+-(void)resumeGame;
+
 @end
