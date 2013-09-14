@@ -14,6 +14,8 @@
 #import "Story.h"
 #import "ViewController.h"
 #import <StoreKit/StoreKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import <CoreMotion/CoreMotion.h>
 
 @interface MainMenu() {
     @private
@@ -22,6 +24,9 @@
     SKSpriteNode *hand;
     BOOL transitioning;
     UIButton *removeAdButton;
+    AVAudioPlayer *menuPlayer;
+    CMMotionManager *motionManager;
+    SKEmitterNode *sparks;
 }
 @end
 
@@ -30,10 +35,26 @@
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         
+        
+        motionManager = [[CMMotionManager alloc] init];
+        motionManager.accelerometerUpdateInterval = .2;
+        
+        
+        [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
+                                                 withHandler:^(CMAccelerometerData  *accelerometerData, NSError *error) {
+                                                     [self outputAccelertionData:accelerometerData.acceleration];
+                                                     if(error){
+                                                         
+                                                         NSLog(@"%@", error);
+                                                     }
+                                                 }];
+    
+    
+    
         transitioning = false;
-        
-        [self runAction:[SKAction repeatActionForever:[SKAction playSoundFileNamed:@"MainMenu.mp3" waitForCompletion:YES] ] withKey:@"music"];
-        
+    
+        [self startMusic];
+    
         self.backgroundColor = [SKColor blackColor];
         
         self.anchorPoint = CGPointMake(0.5, -1);
@@ -43,7 +64,7 @@
         [self addChild:[[Deadline alloc] initWithFrame:self.frame]];
         
         
-        SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
+        sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
                                  [[NSBundle mainBundle] pathForResource:@"menu" ofType:@"sks"]];
         sparks.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame));
         sparks.targetNode = self;
@@ -63,6 +84,31 @@
         
     }
     return self;
+}
+
+
+
+-(void)outputAccelertionData:(CMAcceleration)acceleration
+{
+
+    sparks.xAcceleration = 30*acceleration.x;
+    sparks.yAcceleration = 30*acceleration.y;
+    
+}
+
+
+
+-(void)startMusic {
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/MainMenu.mp3", [[NSBundle mainBundle] resourcePath]]];
+	
+	NSError *error;
+	menuPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	menuPlayer.numberOfLoops = -1;
+	
+	if (menuPlayer == nil)
+		NSLog(@"%@",error);
+	else
+		[menuPlayer play];
 }
 
 -(void)showHand {
@@ -176,7 +222,7 @@
 -(void) showCredits {
     
     [self removeAdButton];
-    [self removeActionForKey:@"music"];
+    [menuPlayer stop];
     
     SKAction *changeView = [SKAction runBlock:^{
         SKTransition *trans = [SKTransition fadeWithDuration:1];
@@ -192,7 +238,7 @@
 -(void) setNewGame {
     
     [self removeAdButton];
-    [self removeActionForKey:@"music"];
+    [menuPlayer stop];
 
     
     SKScene *nextScene;
@@ -258,7 +304,7 @@
 -(void)buyRemoveAd {
     
     //For removing the ad without buying it
-    [self removeAdPurchased];
+    //[self removeAdPurchased];
     //
     
     NSSet *productID = [NSSet setWithObjects:@"removeAd", nil];
@@ -299,6 +345,7 @@
 }
 
 -(void)removeAdPurchased {
+    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"removeAd"];
     [self removeAdButton];
     [[ViewController getSingleton] removeAd];

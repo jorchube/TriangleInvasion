@@ -10,9 +10,11 @@
 #import "Sling.h"
 #import "Deadline.h"
 #import "MainMenu.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface Credits() {
     SKLabelNode *backLabel;
+    AVAudioPlayer *creditsPlayer;
 }
 @end
 
@@ -22,8 +24,9 @@
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
-        self.backgroundColor = [SKColor blackColor];
+        [self startMusic];
         
+        self.backgroundColor = [SKColor blackColor];
         
         [self addLabels];
         [Sling addSlingAtScene:self];
@@ -45,39 +48,61 @@
 }
 
 
+
+-(void)startMusic {
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Credits.mp3", [[NSBundle mainBundle] resourcePath]]];
+	
+	NSError *error;
+	creditsPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	creditsPlayer.numberOfLoops = -1;
+	
+	if (creditsPlayer == nil)
+		NSLog(@"%@",error);
+	else
+		[creditsPlayer play];
+}
+
+
+
 -(void) addLabels {
 
     backLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
     SKLabelNode *pau = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
     SKLabelNode *jordi = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
     SKLabelNode *kengo = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
+    SKLabelNode *alex = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
     
     backLabel.fontSize = 18;
     pau.fontSize = 18;
     jordi.fontSize = 18;
     kengo.fontSize = 18;
+    alex.fontSize = 18;
     
     
     backLabel.position = CGPointMake(CGRectGetMidX(self.frame)-70,
                                CGRectGetMidY(self.frame));
     pau.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                   CGRectGetMidY(self.frame));
+                                   CGRectGetMidY(self.frame)-25);
     jordi.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                   CGRectGetMidY(self.frame)-50);
+                                   CGRectGetMidY(self.frame)-75);
     kengo.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                 CGRectGetMidY(self.frame)+50);
+                                 CGRectGetMidY(self.frame)+25);
+    alex.position = CGPointMake(CGRectGetMidX(self.frame)+70,
+                                 CGRectGetMidY(self.frame)+75);
 
     
     backLabel.text = NSLocalizedString(@"Back", nil);
     pau.text = @"Pau Sastre";
     jordi.text = @"Jordi Chulia";
     kengo.text = @"白木研伍";
+    alex.text = @"Alex Ortiz";
     
     
     SKPhysicsBody *backLabelPB = [SKPhysicsBody bodyWithRectangleOfSize:pau.frame.size];
     SKPhysicsBody *pauPB = [SKPhysicsBody bodyWithRectangleOfSize:pau.frame.size];
     SKPhysicsBody *jordiPB = [SKPhysicsBody bodyWithRectangleOfSize:jordi.frame.size];
     SKPhysicsBody *kengoPB = [SKPhysicsBody bodyWithRectangleOfSize:kengo.frame.size];
+    SKPhysicsBody *alexPB = [SKPhysicsBody bodyWithRectangleOfSize:kengo.frame.size];
     
 
     [backLabelPB setDynamic:NO];
@@ -91,16 +116,21 @@
     
     [kengoPB setDynamic:NO];
     [kengoPB setAffectedByGravity:NO];
+    
+    [alexPB setDynamic:NO];
+    [alexPB setAffectedByGravity:NO];
 
     [backLabel setPhysicsBody:backLabelPB];
     [pau setPhysicsBody:pauPB];
     [kengo setPhysicsBody:kengoPB];
     [jordi setPhysicsBody:jordiPB];
+    [alex setPhysicsBody:alexPB];
     
     [self addChild:backLabel];
     [self addChild:pau];
     [self addChild:jordi];
     [self addChild:kengo];
+    [self addChild:alex];
     
 }
 
@@ -135,6 +165,7 @@
 
 -(void)goBack {
     
+    [creditsPlayer stop];
     
     SKTransition *trans = [SKTransition fadeWithDuration:1];
     MainMenu *scene =    [MainMenu sceneWithSize:self.view.bounds.size];
