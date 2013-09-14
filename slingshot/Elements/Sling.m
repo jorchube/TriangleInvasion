@@ -71,7 +71,7 @@ static Sling *bonusSlings[8];
     
     for (UITouch *touch in touches) {
         touchInitPos = [touch locationInNode:self.scene];
-        NSLog(@"init touch x=%f y=%f", touchInitPos.x, touchInitPos.y);
+        //NSLog(@"init touch x=%f y=%f", touchInitPos.x, touchInitPos.y);
     }
 }
 
@@ -109,10 +109,10 @@ static Sling *bonusSlings[8];
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	for (UITouch *touch in touches) {
         touchEndPos = [touch locationInNode:self.scene];
-        NSLog(@"end touch x=%f y=%f", touchEndPos.x, touchEndPos.y);
+        //NSLog(@"end touch x=%f y=%f", touchEndPos.x, touchEndPos.y);
     }
 	if (touchMoved) {
-		NSLog(@"Moved!");
+		//NSLog(@"Moved!");
 		[self shotSling];
 	}
 	touchMoved = false;

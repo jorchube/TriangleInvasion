@@ -73,7 +73,7 @@
 # pragma mark collisions
 
 -(void) collisionBetweenSlings: (SKPhysicsBody*) slingA and: (SKPhysicsBody*) slingB At: (CGPoint) point {
-	NSLog(@"two slings collide");
+	//NSLog(@"two slings collide");
 }
 
 -(void) sling: (SKPhysicsBody*) sling hitSimpleObject: (SKPhysicsBody*) body At: (CGPoint) point {

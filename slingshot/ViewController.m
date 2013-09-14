@@ -37,8 +37,8 @@ static ViewController *viewController;
     
     // Configure the view.
     mainView = (SKView *)self.view;
-    mainView.showsFPS = YES;
-    mainView.showsNodeCount = YES;
+    //mainView.showsFPS = YES;
+    //mainView.showsNodeCount = YES;
     
     // Create and configure the scene.
     SKScene * scene = [MainMenu sceneWithSize:mainView.bounds.size];

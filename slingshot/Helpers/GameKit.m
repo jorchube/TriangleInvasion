@@ -49,7 +49,7 @@ static GameKit *GKsingleton;
 -(void)defaultLeaderboard {
     [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:
      ^(NSString *leaderboardIdentifier, NSError *error) {
-         NSLog(@"%@",leaderboardIdentifier);
+         //NSLog(@"%@",leaderboardIdentifier);
      }];
 }
 

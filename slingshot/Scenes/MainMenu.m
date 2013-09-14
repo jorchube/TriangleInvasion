@@ -253,9 +253,8 @@
 -(void)buyRemoveAd {
     
     //For removing the ad without buying it
-    [self removeAdPurchased];
+    //[self removeAdPurchased];
     //
-    
     
     NSSet *productID = [NSSet setWithObjects:@"removeAd", nil];
     SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:productID];

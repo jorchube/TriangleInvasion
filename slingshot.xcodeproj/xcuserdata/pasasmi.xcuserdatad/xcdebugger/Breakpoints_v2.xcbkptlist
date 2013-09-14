@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "slingshot/Scenes/Game/Game.m"
-            timestampString = "400757365.379716"
+            filePath = "slingshot/Scenes/MainMenu.m"
+            timestampString = "400769793.522777"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
-            landmarkName = "-stopGame"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "-buyRemoveAd"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "slingshot/Scenes/Game/Game.m"
-            timestampString = "400757383.725179"
+            filePath = "slingshot/Scenes/MainMenu.m"
+            timestampString = "400769805.947581"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "325"
-            endingLineNumber = "325"
-            landmarkName = "-resumeGame"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "-productsRequest:didReceiveResponse:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
