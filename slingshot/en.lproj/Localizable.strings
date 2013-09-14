@@ -19,16 +19,30 @@
 
 "Remove Ads" = "Remove Ads";
 
-"story1" = "Once upon a time, somewhere in the galaxy...";
+"story11" = "Once upon a time";
+"story12" = "somewhere in the galaxy...";
+"story13" = "";
 
-"story2" = "... there was a peaceful planet, where every single inhabitant was happy.It was the Fatdot planet.";
+"story21" = "... there was a peaceful planet";
+"story22" = "where every single inhabitant was happy.";
+"story23" = "It was the Fatdot planet.";
 
-"story3" = "But, someday, something terrible happened...";
+"story31" = "But, someday";
+"story32" = " something terrible happened...";
+"story33" = "";
 
-"story4" = "... Fatdot planet was being attacked by an army of triangles!!!\nThere was no hope...";
+"story41" = "... Fatdot planet was being attacked";
+"story42" = " by an army of triangles!!!";
+"story43" = "There was no hope...";
 
-"story5" = "... or was there?";
+"story51" = "... or was there?";
+"story52" = "";
+"story53" = "";
 
-"story6" = "You, with your army of volunteers\r\nare willing to protect the planet as long as you can.";
+"story61" = "You, with your army of volunteers";
+"story62"= "are willing to protect the planet";
+"story63"= "as long as you can";
 
-"story7" = "Good luck. You are our last hope.";
+"story71" = "Good luck. You are our last hope.";
+"story72"= "";
+"story73"= "";

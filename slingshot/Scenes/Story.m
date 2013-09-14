@@ -14,7 +14,9 @@
     SKSpriteNode *fg_1;
     SKSpriteNode *fg_2;
     SKSpriteNode *fg_3;
-    SKLabelNode *textLabel;
+    SKLabelNode *textLabel1;
+    SKLabelNode *textLabel2;
+    SKLabelNode *textLabel3;
     SKAction* scene1;
     SKAction* scene2;
     SKAction* scene3;
@@ -40,12 +42,28 @@
         
         //SKShapeNode *planet = [SKShapeNode ]
         
-        textLabel = [[SKLabelNode alloc] init];
-        textLabel.alpha = 1;
-        textLabel.fontSize = 12;
-        textLabel.fontColor = [SKColor whiteColor];
-        textLabel.position = CGPointMake(150,400);
-        textLabel.zPosition = 30;
+        int fontsize = 16;
+        
+        textLabel1 = [[SKLabelNode alloc] init];
+        textLabel1.alpha = 0;
+        textLabel1.fontSize = fontsize;
+        textLabel1.fontColor = [SKColor whiteColor];
+        textLabel1.position = CGPointMake(160,400);
+        textLabel1.zPosition = 30;
+        
+        textLabel2 = [[SKLabelNode alloc] init];
+        textLabel2.alpha = 0;
+        textLabel2.fontSize = fontsize;
+        textLabel2.fontColor = [SKColor whiteColor];
+        textLabel2.position = CGPointMake(160,380);
+        textLabel2.zPosition = 30;
+        
+        textLabel3 = [[SKLabelNode alloc] init];
+        textLabel3.alpha = 0;
+        textLabel3.fontSize = fontsize;
+        textLabel3.fontColor = [SKColor whiteColor];
+        textLabel3.position = CGPointMake(160,360);
+        textLabel3.zPosition = 30;
         
         bg_1 = [[SKSpriteNode alloc] initWithImageNamed:@"story-bg-1.png"];
         bg_2 = [[SKSpriteNode alloc] initWithImageNamed:@"story-bg-2.png"];
@@ -84,7 +102,9 @@
         fg_2.zPosition = 20;
         fg_3.zPosition = 20;
         
-        [self addChild:textLabel];
+        [self addChild:textLabel1];
+        [self addChild:textLabel2];
+        [self addChild:textLabel3];
         [self addChild:bg_1];
         [self addChild:bg_2];
         [self addChild:fg_1];
@@ -114,32 +134,50 @@
     SKAction *moveUp = [SKAction moveByX:0 y:20 duration:story_showFadeInDuration+story_timeForEachCut+story_showFadeOutDuration];
     
     SKAction *setText1 = [SKAction runBlock:^{
-        textLabel.text = NSLocalizedString(@"story1", nil);
+        textLabel1.text = NSLocalizedString(@"story11", nil);
+        textLabel2.text = NSLocalizedString(@"story12", nil);
+        textLabel3.text = NSLocalizedString(@"story13", nil);
     }];
     SKAction *setText2 = [SKAction runBlock:^{
-        textLabel.text = NSLocalizedString(@"story2", nil);
+        textLabel1.text = NSLocalizedString(@"story21", nil);
+        textLabel2.text = NSLocalizedString(@"story22", nil);
+        textLabel3.text = NSLocalizedString(@"story23", nil);
     }];
     SKAction *setText3 = [SKAction runBlock:^{
-        textLabel.text = NSLocalizedString(@"story3", nil);
+        textLabel1.text = NSLocalizedString(@"story31", nil);
+        textLabel2.text = NSLocalizedString(@"story32", nil);
+        textLabel3.text = NSLocalizedString(@"story33", nil);
     }];
     SKAction *setText4 = [SKAction runBlock:^{
-        textLabel.text = NSLocalizedString(@"story4", nil);
+        textLabel1.text = NSLocalizedString(@"story41", nil);
+        textLabel2.text = NSLocalizedString(@"story42", nil);
+        textLabel3.text = NSLocalizedString(@"story43", nil);
     }];
     SKAction *setText5 = [SKAction runBlock:^{
-        textLabel.text = NSLocalizedString(@"story5", nil);
+        textLabel1.text = NSLocalizedString(@"story51", nil);
+        textLabel2.text = NSLocalizedString(@"story52", nil);
+        textLabel3.text = NSLocalizedString(@"story53", nil);
     }];
     SKAction *setText6 = [SKAction runBlock:^{
-        textLabel.text = NSLocalizedString(@"story6", nil);
+        textLabel1.text = NSLocalizedString(@"story61", nil);
+        textLabel2.text = NSLocalizedString(@"story62", nil);
+        textLabel3.text = NSLocalizedString(@"story63", nil);
     }];
     SKAction *setText7 = [SKAction runBlock:^{
-        textLabel.text = NSLocalizedString(@"story7", nil);
+        textLabel1.text = NSLocalizedString(@"story71", nil);
+        textLabel2.text = NSLocalizedString(@"story72", nil);
+        textLabel3.text = NSLocalizedString(@"story73", nil);
     }];
     
     SKAction *showText = [SKAction runBlock:^{
-        [textLabel runAction: show];
+        [textLabel1 runAction: show];
+        [textLabel2 runAction: show];
+        [textLabel3 runAction: show];
     }];
     SKAction *hideText = [SKAction runBlock:^{
-        [textLabel runAction: hide];
+        [textLabel1 runAction: hide];
+        [textLabel2 runAction: hide];
+        [textLabel3 runAction: hide];
     }];
     
     /* Setting scene events */
@@ -154,32 +192,44 @@
         [bg_1 runAction:show];
         [fg_1 runAction:show];
         [fg_1 runAction:moveRight];
-        [textLabel runAction:show];
+        [textLabel1 runAction:show];
+        [textLabel2 runAction:show];
+        [textLabel3 runAction:show];
     }];
     SKAction *scene1Out = [SKAction runBlock:^{
         [bg_1 runAction:hide];
         [fg_1 runAction:hide];
-        [textLabel runAction:hide];
+        [textLabel1 runAction:hide];
+        [textLabel2 runAction:hide];
+        [textLabel3 runAction:hide];
     }];
     SKAction *scene2In = [SKAction runBlock:^{
         [bg_2 runAction:show];
         [fg_2 runAction:show];
         [fg_2 runAction:moveLeft];
-        [textLabel runAction:show];
+        [textLabel1 runAction:show];
+        [textLabel2 runAction:show];
+        [textLabel3 runAction:show];
     }];
     SKAction *scene2Out = [SKAction runBlock:^{
         [bg_2 runAction:hide];
         [fg_2 runAction:hide];
-        [textLabel runAction:hide];
+        [textLabel1 runAction:hide];
+        [textLabel2 runAction:hide];
+        [textLabel3 runAction:hide];
     }];
     SKAction *scene3In = [SKAction runBlock:^{
         [fg_3 runAction:show];
         [fg_3 runAction:moveUp];
-        [textLabel runAction:show];
+        [textLabel1 runAction:show];
+        [textLabel2 runAction:show];
+        [textLabel3 runAction:show];
     }];
     SKAction *scene3Out = [SKAction runBlock:^{
         [fg_3 runAction:hide];
-        [textLabel runAction:hide];
+        [textLabel1 runAction:hide];
+        [textLabel2 runAction:hide];
+        [textLabel3 runAction:hide];
     }];
     
     /* Building sequence */

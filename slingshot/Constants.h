@@ -89,7 +89,7 @@
 #pragma mark story
 #define story_showFadeInDuration 0.5
 #define story_showFadeOutDuration 0.5
-#define story_timeBetweenCuts 1
-#define story_timeForEachCut 3
+#define story_timeBetweenCuts 3
+#define story_timeForEachCut 5
 
 #endif

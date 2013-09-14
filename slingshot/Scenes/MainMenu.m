@@ -244,7 +244,7 @@
     SKScene *nextScene;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if ([defaults objectForKey:@"story"]){
+    if (![defaults objectForKey:@"story"]){
         
         nextScene = [Story sceneWithSize:self.view.bounds.size];
         [defaults setObject:[NSNumber numberWithBool:true] forKey:@"story"];
