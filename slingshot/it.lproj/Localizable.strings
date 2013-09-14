@@ -1,0 +1,34 @@
+/*
+ Localizable.strings
+ slingshot
+ 
+ Created by Pau Sastre Miguel on 10/09/13.
+ Copyright (c) 2013 Pau Sastre Miguel. All rights reserved.
+ */
+
+"New Game" = "Nuova Partita";
+"Credits" = "Titoli di coda";
+
+"Back" = "Indietro";
+
+"Exit" = "Uscire";
+"Continue" = "Continuare";
+"Stop" = "Pausare";
+"Main Menu" = "Menu d'inizio";
+"Game Over" = "Game Over";
+
+"Remove Ads" = "Elimina pubblicità";
+
+"story1" = "-C'era una volta, da qualche parte nella galassia...";
+
+"story2" = "-... un pacifico pianeta, dove ogni abitante era felice. Era il pianeta Punto Grosso.";
+
+"story3" = "-Pero, un giorno, qualcosa di terribile era accaduto...";
+
+"story4" = "-... un esercito di triangoli stava attacando il pianeta Punto Grosso!!! Non c'era speranza...";
+
+"story5" = "-... o si?";
+
+"story6" = "-Tu, con il tuo essercito difenderete il pianeta il più tempo possibile.";
+
+"story7" = "-Buona fortuna. Sei la nostra ultima speranza.";

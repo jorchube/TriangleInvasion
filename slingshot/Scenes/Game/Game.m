@@ -9,6 +9,7 @@
 #import "Game.h"
 #import "MainMenu.h"
 #import "GameKit.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface Game() {
     @private
@@ -31,6 +32,7 @@
     int maxCombo;
     BOOL gameEnded;
     BOOL gameStoped;
+    AVAudioPlayer *gamePlayer;
 }
 
 @end
@@ -41,6 +43,8 @@
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+        
+        [self startMusic];
         
         gameEnded = false;
         gameStoped = false;
@@ -77,6 +81,19 @@
         
     }
     return self;
+}
+
+-(void)startMusic {
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Game.mp3", [[NSBundle mainBundle] resourcePath]]];
+	
+	NSError *error;
+	gamePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	gamePlayer.numberOfLoops = -1;
+	
+	if (gamePlayer == nil)
+		NSLog(@"%@",error);
+	else
+		[gamePlayer play];
 }
 
 
@@ -280,7 +297,7 @@
     
     
     mainMenuButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    mainMenuButton.frame = CGRectMake(CGRectGetMidX(self.frame)-100, CGRectGetMidY(self.frame)-30, 200, 50);
+    mainMenuButton.frame = CGRectMake(CGRectGetMidX(self.frame)-200, CGRectGetMidY(self.frame)-30, 400, 50);
     [mainMenuButton setTitle:NSLocalizedString(@"Main Menu", nil) forState:UIControlStateNormal];
     [mainMenuButton setTitleColor:[SKColor whiteColor] forState:UIControlStateNormal];
     mainMenuButton.titleLabel.font = [UIFont fontWithName:@"fipps" size:20];
@@ -344,6 +361,8 @@
 
 -(void)exitGame {
     
+    [gamePlayer stop];
+    
     self.view.paused = false;
     SKTransition *trans = [SKTransition fadeWithDuration:1];
     MainMenu *scene =    [MainMenu sceneWithSize:self.view.bounds.size];
@@ -358,6 +377,7 @@
         [continueButton removeFromSuperview];
         [exitButton removeFromSuperview];
     }];
+    
     
 
 
@@ -422,6 +442,9 @@
 }
 
 -(void) goMainMenuFromEnd {
+    
+    
+    [gamePlayer stop];
     
     self.view.paused = false;
     

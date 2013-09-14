@@ -18,6 +18,9 @@
 		7C3D2DB117DCEB6700B3362C /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D2DAF17DCEB6700B3362C /* MainMenu.m */; };
 		7C3D2DB717DCF4EE00B3362C /* Credits.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D2DB617DCF4EE00B3362C /* Credits.m */; };
 		7C404EF617E4CB6A00C3EB33 /* MainMenu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7C404EF517E4CB6A00C3EB33 /* MainMenu.mp3 */; };
+		7C404EF817E4D5F100C3EB33 /* Credits.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7C404EF717E4D5F100C3EB33 /* Credits.mp3 */; };
+		7C404EFA17E4E00800C3EB33 /* Game.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7C404EF917E4E00700C3EB33 /* Game.mp3 */; };
+		7C404EFC17E4FDC000C3EB33 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C404EFB17E4FDC000C3EB33 /* AudioToolbox.framework */; };
 		7C623F7E17E144AE00E2F1E4 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C623F7D17E144AE00E2F1E4 /* GameKit.framework */; };
 		7C623F8217E1454F00E2F1E4 /* GameKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C623F8117E1454F00E2F1E4 /* GameKit.m */; };
 		7C623F8417E1491800E2F1E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C623F8317E1491800E2F1E4 /* StoreKit.framework */; };
@@ -85,6 +88,10 @@
 		7C3D2DB517DCF4EE00B3362C /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Credits.h; path = Scenes/Credits.h; sourceTree = "<group>"; };
 		7C3D2DB617DCF4EE00B3362C /* Credits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Credits.m; path = Scenes/Credits.m; sourceTree = "<group>"; };
 		7C404EF517E4CB6A00C3EB33 /* MainMenu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = MainMenu.mp3; path = Resources/Sounds/MainMenu.mp3; sourceTree = "<group>"; };
+		7C404EF717E4D5F100C3EB33 /* Credits.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Credits.mp3; path = Resources/Sounds/Credits.mp3; sourceTree = "<group>"; };
+		7C404EF917E4E00700C3EB33 /* Game.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Game.mp3; path = Resources/Sounds/Game.mp3; sourceTree = "<group>"; };
+		7C404EFB17E4FDC000C3EB33 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7C404EFD17E501FD00C3EB33 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C623F7D17E144AE00E2F1E4 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		7C623F8017E1454F00E2F1E4 /* GameKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameKit.h; path = Helpers/GameKit.h; sourceTree = "<group>"; };
 		7C623F8117E1454F00E2F1E4 /* GameKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameKit.m; path = Helpers/GameKit.m; sourceTree = "<group>"; };
@@ -139,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C404EFC17E4FDC000C3EB33 /* AudioToolbox.framework in Frameworks */,
 				7C623F8617E1CCE400E2F1E4 /* iAd.framework in Frameworks */,
 				7CB2514117DA1DDD00FA592D /* CoreGraphics.framework in Frameworks */,
 				7CB2514317DA1DDD00FA592D /* UIKit.framework in Frameworks */,
@@ -241,6 +249,7 @@
 		7CB2513D17DA1DDC00FA592D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7C404EFB17E4FDC000C3EB33 /* AudioToolbox.framework */,
 				7C623F8517E1CCE400E2F1E4 /* iAd.framework */,
 				7C623F8317E1491800E2F1E4 /* StoreKit.framework */,
 				7C623F7D17E144AE00E2F1E4 /* GameKit.framework */,
@@ -319,6 +328,8 @@
 		7CDD204317E212340039F9E3 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				7C404EF917E4E00700C3EB33 /* Game.mp3 */,
+				7C404EF717E4D5F100C3EB33 /* Credits.mp3 */,
 				7C404EF517E4CB6A00C3EB33 /* MainMenu.mp3 */,
 				7CDD204917E237430039F9E3 /* shoot.mp3 */,
 			);
@@ -415,6 +426,7 @@
 				ca,
 				de,
 				ja,
+				it,
 			);
 			mainGroup = 7CB2513217DA1DDC00FA592D;
 			productRefGroup = 7CB2513C17DA1DDC00FA592D /* Products */;
@@ -450,7 +462,9 @@
 				B518BE3B17E4E19D00637E34 /* story-bg-2.png in Resources */,
 				7CDD204A17E237430039F9E3 /* shoot.mp3 in Resources */,
 				7C9189E617E11CEF007F3CBC /* universe.sks in Resources */,
+				7C404EF817E4D5F100C3EB33 /* Credits.mp3 in Resources */,
 				7CE570D217DF8BD500F90752 /* Main_iPhone.storyboard in Resources */,
+				7C404EFA17E4E00800C3EB33 /* Game.mp3 in Resources */,
 				7CB2514B17DA1DDD00FA592D /* InfoPlist.strings in Resources */,
 				7CE570DF17DF929E00F90752 /* menu.sks in Resources */,
 				7CDD204F17E2374F0039F9E3 /* appicon.png in Resources */,
@@ -531,6 +545,7 @@
 				B5D6348917E1380A0065FF8D /* ca */,
 				B5D6348A17E1388A0065FF8D /* de */,
 				7C74DCC217E3EFCC000499A2 /* ja */,
+				7C404EFD17E501FD00C3EB33 /* it */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

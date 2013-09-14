@@ -138,13 +138,7 @@
         sparks.targetNode = delegatorID;
         sparks.particleColor = ((SKShapeNode*)body.node).strokeColor;
         [delegatorID addChild:sparks];
-        
-       /* SKEmitterNode *smoke = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                                  [[NSBundle mainBundle] pathForResource:@"collisionSmoke" ofType:@"sks"]];
-        smoke.position = point;
-        smoke.targetNode = delegatorID;
-        smoke.particleColor = ((SKShapeNode*)body.node).strokeColor;
-        [delegatorID addChild:smoke];*/
+  
     }
     else {
         [body setVelocity:CGVectorMake(0, 0)];

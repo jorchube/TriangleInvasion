@@ -9,6 +9,6 @@
 #import <SpriteKit/SpriteKit.h>
 #import <StoreKit/StoreKit.h>
 
-@interface MainMenu : SKScene <SKPhysicsContactDelegate,SKProductsRequestDelegate,SKPaymentTransactionObserver>
+@interface MainMenu : SKScene <SKPhysicsContactDelegate,SKProductsRequestDelegate,SKPaymentTransactionObserver, UIAccelerometerDelegate>
 
 @end
