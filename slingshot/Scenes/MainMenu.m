@@ -32,6 +32,8 @@
         
         transitioning = false;
         
+        [self runAction:[SKAction repeatActionForever:[SKAction playSoundFileNamed:@"MainMenu.mp3" waitForCompletion:YES] ] withKey:@"music"];
+        
         self.backgroundColor = [SKColor blackColor];
         
         self.anchorPoint = CGPointMake(0.5, -1);
@@ -174,6 +176,7 @@
 -(void) showCredits {
     
     [self removeAdButton];
+    [self removeActionForKey:@"music"];
     
     SKAction *changeView = [SKAction runBlock:^{
         SKTransition *trans = [SKTransition fadeWithDuration:1];
@@ -189,6 +192,8 @@
 -(void) setNewGame {
     
     [self removeAdButton];
+    [self removeActionForKey:@"music"];
+
     
     SKScene *nextScene;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -253,7 +258,7 @@
 -(void)buyRemoveAd {
     
     //For removing the ad without buying it
-    //[self removeAdPurchased];
+    [self removeAdPurchased];
     //
     
     NSSet *productID = [NSSet setWithObjects:@"removeAd", nil];

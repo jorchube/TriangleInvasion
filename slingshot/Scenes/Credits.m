@@ -50,44 +50,57 @@
     backLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
     SKLabelNode *pau = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
     SKLabelNode *jordi = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
-
+    SKLabelNode *kengo = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
+    
     backLabel.fontSize = 18;
     pau.fontSize = 18;
     jordi.fontSize = 18;
+    kengo.fontSize = 18;
     
     
     backLabel.position = CGPointMake(CGRectGetMidX(self.frame)-70,
                                CGRectGetMidY(self.frame));
     pau.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                   CGRectGetMidY(self.frame)-30);
+                                   CGRectGetMidY(self.frame));
     jordi.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                   CGRectGetMidY(self.frame)+40);
+                                   CGRectGetMidY(self.frame)-50);
+    kengo.position = CGPointMake(CGRectGetMidX(self.frame)+70,
+                                 CGRectGetMidY(self.frame)+50);
+
     
     backLabel.text = NSLocalizedString(@"Back", nil);
     pau.text = @"Pau Sastre";
     jordi.text = @"Jordi Chulia";
+    kengo.text = @"白木研伍";
+    
     
     SKPhysicsBody *backLabelPB = [SKPhysicsBody bodyWithRectangleOfSize:pau.frame.size];
-    SKPhysicsBody *newGamePB = [SKPhysicsBody bodyWithRectangleOfSize:pau.frame.size];
-    SKPhysicsBody *creditsPB = [SKPhysicsBody bodyWithRectangleOfSize:jordi.frame.size];
+    SKPhysicsBody *pauPB = [SKPhysicsBody bodyWithRectangleOfSize:pau.frame.size];
+    SKPhysicsBody *jordiPB = [SKPhysicsBody bodyWithRectangleOfSize:jordi.frame.size];
+    SKPhysicsBody *kengoPB = [SKPhysicsBody bodyWithRectangleOfSize:kengo.frame.size];
     
 
     [backLabelPB setDynamic:NO];
     [backLabelPB setAffectedByGravity:NO];
     
-    [newGamePB setDynamic:NO];
-    [newGamePB setAffectedByGravity:NO];
+    [pauPB setDynamic:NO];
+    [pauPB setAffectedByGravity:NO];
     
-    [creditsPB setDynamic:NO];
-    [creditsPB setAffectedByGravity:NO];
+    [jordiPB setDynamic:NO];
+    [jordiPB setAffectedByGravity:NO];
+    
+    [kengoPB setDynamic:NO];
+    [kengoPB setAffectedByGravity:NO];
 
     [backLabel setPhysicsBody:backLabelPB];
-    [pau setPhysicsBody:newGamePB];
-    [jordi setPhysicsBody:creditsPB];
+    [pau setPhysicsBody:pauPB];
+    [kengo setPhysicsBody:kengoPB];
+    [jordi setPhysicsBody:jordiPB];
     
     [self addChild:backLabel];
     [self addChild:pau];
     [self addChild:jordi];
+    [self addChild:kengo];
     
 }
 

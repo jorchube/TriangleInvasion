@@ -17,6 +17,7 @@
 		7C3D2DAA17DCEB2A00B3362C /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D2DA917DCEB2A00B3362C /* Triangle.m */; };
 		7C3D2DB117DCEB6700B3362C /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D2DAF17DCEB6700B3362C /* MainMenu.m */; };
 		7C3D2DB717DCF4EE00B3362C /* Credits.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D2DB617DCF4EE00B3362C /* Credits.m */; };
+		7C404EF617E4CB6A00C3EB33 /* MainMenu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7C404EF517E4CB6A00C3EB33 /* MainMenu.mp3 */; };
 		7C623F7E17E144AE00E2F1E4 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C623F7D17E144AE00E2F1E4 /* GameKit.framework */; };
 		7C623F8217E1454F00E2F1E4 /* GameKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C623F8117E1454F00E2F1E4 /* GameKit.m */; };
 		7C623F8417E1491800E2F1E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C623F8317E1491800E2F1E4 /* StoreKit.framework */; };
@@ -78,6 +79,7 @@
 		7C3D2DAF17DCEB6700B3362C /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenu.m; path = Scenes/MainMenu.m; sourceTree = "<group>"; };
 		7C3D2DB517DCF4EE00B3362C /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Credits.h; path = Scenes/Credits.h; sourceTree = "<group>"; };
 		7C3D2DB617DCF4EE00B3362C /* Credits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Credits.m; path = Scenes/Credits.m; sourceTree = "<group>"; };
+		7C404EF517E4CB6A00C3EB33 /* MainMenu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = MainMenu.mp3; path = Resources/Sounds/MainMenu.mp3; sourceTree = "<group>"; };
 		7C623F7D17E144AE00E2F1E4 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		7C623F8017E1454F00E2F1E4 /* GameKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameKit.h; path = Helpers/GameKit.h; sourceTree = "<group>"; };
 		7C623F8117E1454F00E2F1E4 /* GameKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameKit.m; path = Helpers/GameKit.m; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 		7CDD204317E212340039F9E3 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				7C404EF517E4CB6A00C3EB33 /* MainMenu.mp3 */,
 				7CDD204917E237430039F9E3 /* shoot.mp3 */,
 			);
 			name = Sounds;
@@ -417,6 +420,7 @@
 				7C2AAAF517DE83DF00A9AD29 /* collisionSparks.sks in Resources */,
 				7CE570CB17DF8B1700F90752 /* Localizable.strings in Resources */,
 				7CDD205017E2374F0039F9E3 /* hand.png in Resources */,
+				7C404EF617E4CB6A00C3EB33 /* MainMenu.mp3 in Resources */,
 				7CE570D117DF8BD500F90752 /* Main_iPad.storyboard in Resources */,
 				7C1193E017DFD4F100D4D5C0 /* credits.sks in Resources */,
 				7CDD205217E2374F0039F9E3 /* menuSpark.png in Resources */,
