@@ -7,7 +7,10 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "SceneImplementation.h"
 
-@interface Story : SKScene
+@interface Story : SceneImplementation
+
+
 
 @end

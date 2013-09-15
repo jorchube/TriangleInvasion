@@ -14,7 +14,10 @@
 #import "Triangle.h"
 #import "Deadline.h"
 
-@interface Game : SKScene <SKPhysicsContactDelegate>
+#import "SceneImplementation.h"
+
+
+@interface Game : SceneImplementation <SKPhysicsContactDelegate>
 
 @property SKLabelNode *scoreLabel;
 
@@ -29,5 +32,7 @@
 
 -(void)stopGame;
 -(void)resumeGame;
+
+
 
 @end

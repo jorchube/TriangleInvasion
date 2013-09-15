@@ -10,11 +10,9 @@
 #import "Sling.h"
 #import "Deadline.h"
 #import "MainMenu.h"
-#import <AVFoundation/AVFoundation.h>
 
 @interface Credits() {
     SKLabelNode *backLabel;
-    AVAudioPlayer *creditsPlayer;
 }
 @end
 
@@ -24,6 +22,7 @@
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
+        [self setMusicURL:@"Credits.mp3"];
         [self startMusic];
         
         self.backgroundColor = [SKColor blackColor];
@@ -45,21 +44,6 @@
         
     }
     return self;
-}
-
-
-
--(void)startMusic {
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Credits.mp3", [[NSBundle mainBundle] resourcePath]]];
-	
-	NSError *error;
-	creditsPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-	creditsPlayer.numberOfLoops = -1;
-	
-	if (creditsPlayer == nil)
-		NSLog(@"%@",error);
-	else
-		[creditsPlayer play];
 }
 
 
@@ -165,7 +149,7 @@
 
 -(void)goBack {
     
-    [creditsPlayer stop];
+    [self stopMusic];
     
     SKTransition *trans = [SKTransition fadeWithDuration:1];
     MainMenu *scene =    [MainMenu sceneWithSize:self.view.bounds.size];

@@ -9,7 +9,6 @@
 #import "Game.h"
 #import "MainMenu.h"
 #import "GameKit.h"
-#import <AVFoundation/AVFoundation.h>
 
 @interface Game() {
     @private
@@ -32,7 +31,6 @@
     int maxCombo;
     BOOL gameEnded;
     BOOL gameStoped;
-    AVAudioPlayer *gamePlayer;
 }
 
 @end
@@ -44,6 +42,7 @@
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
+        [self setMusicURL:@"Game.mp3"];
         [self startMusic];
         
         gameEnded = false;
@@ -83,18 +82,6 @@
     return self;
 }
 
--(void)startMusic {
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Game.mp3", [[NSBundle mainBundle] resourcePath]]];
-	
-	NSError *error;
-	gamePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-	gamePlayer.numberOfLoops = -1;
-	
-	if (gamePlayer == nil)
-		NSLog(@"%@",error);
-	else
-		[gamePlayer play];
-}
 
 
 -(void) launchTimer {
@@ -201,11 +188,11 @@
 }
 
 -(void) addScoreLabel {
-	scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
+	scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
 	scoreLabel.text = @"";
-	scoreLabel.fontSize = 12;
-	scoreLabel.position = CGPointMake(CGRectGetMaxX(self.frame)-30,
-                                      CGRectGetMaxY(self.frame)-30);
+	scoreLabel.fontSize = 15;
+	scoreLabel.position = CGPointMake(CGRectGetMaxX(self.frame)-20,
+                                      CGRectGetMaxY(self.frame)-35);
 	
 	[self addChild:scoreLabel];
 }
@@ -361,7 +348,7 @@
 
 -(void)exitGame {
     
-    [gamePlayer stop];
+    [self stopMusic];
     
     self.view.paused = false;
     SKTransition *trans = [SKTransition fadeWithDuration:1];
@@ -444,7 +431,7 @@
 -(void) goMainMenuFromEnd {
     
     
-    [gamePlayer stop];
+    [self stopMusic];
     
     self.view.paused = false;
     

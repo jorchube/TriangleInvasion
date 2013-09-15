@@ -13,7 +13,6 @@
 #import "Deadline.h"
 #import "Story.h"
 #import "ViewController.h"
-#import <StoreKit/StoreKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMotion/CoreMotion.h>
 
@@ -23,22 +22,27 @@
     Sling *sling;
     SKSpriteNode *hand;
     BOOL transitioning;
-    UIButton *removeAdButton;
-    AVAudioPlayer *menuPlayer;
     CMMotionManager *motionManager;
     SKEmitterNode *sparks;
+    float initialAccelerationX,initialAccelerationY;
 }
 @end
 
 @implementation MainMenu
 
+
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
+        
+        [[ViewController getSingleton] showAd];
+        [[ViewController getSingleton] showRemoveAdButton];
         
         
         motionManager = [[CMMotionManager alloc] init];
         motionManager.accelerometerUpdateInterval = .2;
         
+        initialAccelerationX = -100;
+        initialAccelerationY = -100;
         
         [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
                                                  withHandler:^(CMAccelerometerData  *accelerometerData, NSError *error) {
@@ -53,6 +57,7 @@
     
         transitioning = false;
     
+        [self setMusicURL:@"MainMenu.mp3"];
         [self startMusic];
     
         self.backgroundColor = [SKColor blackColor];
@@ -91,25 +96,17 @@
 -(void)outputAccelertionData:(CMAcceleration)acceleration
 {
 
-    sparks.xAcceleration = 30*acceleration.x;
-    sparks.yAcceleration = 30*acceleration.y;
+    if (initialAccelerationX == -100 || initialAccelerationY == -100) {
+        initialAccelerationX = acceleration.x;
+        initialAccelerationY = acceleration.y;
+    }
+    
+    sparks.xAcceleration = 30*(initialAccelerationX-acceleration.x);
+    sparks.yAcceleration = 30*(initialAccelerationY-acceleration.y);
+    sparks.particleBirthRate = 5 + (abs(acceleration.y)+abs(acceleration.x))*30;
     
 }
 
-
-
--(void)startMusic {
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/MainMenu.mp3", [[NSBundle mainBundle] resourcePath]]];
-	
-	NSError *error;
-	menuPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-	menuPlayer.numberOfLoops = -1;
-	
-	if (menuPlayer == nil)
-		NSLog(@"%@",error);
-	else
-		[menuPlayer play];
-}
 
 -(void)showHand {
     hand = [SKSpriteNode spriteNodeWithImageNamed:@"hand.png"];
@@ -142,6 +139,22 @@
     newGame.text = NSLocalizedString(@"New Game", nil) ;
     credits.text = NSLocalizedString(@"Credits", nil) ;
     
+    
+    SKPhysicsBody *newGamePB = [SKPhysicsBody bodyWithRectangleOfSize:newGame.frame.size];
+    SKPhysicsBody *creditsPB = [SKPhysicsBody bodyWithRectangleOfSize:credits.frame.size];
+    
+
+    [newGamePB setDynamic:NO];
+    [newGamePB setAffectedByGravity:NO];
+    
+    [creditsPB setDynamic:NO];
+    [creditsPB setAffectedByGravity:NO];
+    
+    [newGame setPhysicsBody:newGamePB];
+    [credits setPhysicsBody:creditsPB];
+    
+    
+    //initial animation
     newGame.alpha = 0;
     credits.alpha = 0;
     
@@ -156,19 +169,7 @@
     [act setTimingMode:SKActionTimingEaseOut];
     [newGame runAction:act];
     [credits runAction:act];
-    
-    SKPhysicsBody *newGamePB = [SKPhysicsBody bodyWithRectangleOfSize:newGame.frame.size];
-    SKPhysicsBody *creditsPB = [SKPhysicsBody bodyWithRectangleOfSize:credits.frame.size];
-    
 
-    [newGamePB setDynamic:NO];
-    [newGamePB setAffectedByGravity:NO];
-    
-    [creditsPB setDynamic:NO];
-    [creditsPB setAffectedByGravity:NO];
-    
-    [newGame setPhysicsBody:newGamePB];
-    [credits setPhysicsBody:creditsPB];
     
     [self addChild:newGame];
     [self addChild:credits];
@@ -221,8 +222,7 @@
 
 -(void) showCredits {
     
-    [self removeAdButton];
-    [menuPlayer stop];
+    [self stopMusic];
     
     SKAction *changeView = [SKAction runBlock:^{
         SKTransition *trans = [SKTransition fadeWithDuration:1];
@@ -237,8 +237,8 @@
 
 -(void) setNewGame {
     
-    [self removeAdButton];
-    [menuPlayer stop];
+    [[ViewController getSingleton] removeAdButton];
+    [self stopMusic];
 
     
     SKScene *nextScene;
@@ -260,6 +260,8 @@
         [self.view presentScene:nextScene transition:trans];
         
     }];
+    
+    [[ViewController getSingleton] hideAd];
 
     [self runAction:[SKAction sequence:@[[SKAction rotateByAngle:-1 duration:3], changeView]]];
 }
@@ -267,90 +269,5 @@
 
 
 
-#pragma mark removing ad button
-
--(void)removeAdButton {
-    [UIView animateWithDuration:.5 animations:^{
-        removeAdButton.alpha = 0;
-    } completion:^(BOOL finished) {
-        [removeAdButton removeFromSuperview];
-    }];
-}
-
--(void)didMoveToView:(SKView *)view {
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if (![defaults boolForKey:@"removeAd"]) {
-
-        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-        
-        removeAdButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        removeAdButton.frame = CGRectMake(0, 5, self.frame.size.width, 50);
-        [removeAdButton setTitle:NSLocalizedString(@"Remove Ads", nil) forState:UIControlStateNormal];
-        removeAdButton.titleLabel.font = [UIFont systemFontOfSize:18];
-        removeAdButton.alpha = 0;
-        [removeAdButton addTarget:self action:@selector(buyRemoveAd) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.view addSubview:removeAdButton];
-        
-        [UIView animateWithDuration:1 animations:^{
-            removeAdButton.alpha = 1;
-        }];
-
-    }
-}
-
--(void)buyRemoveAd {
-    
-    //For removing the ad without buying it
-    //[self removeAdPurchased];
-    //
-    
-    NSSet *productID = [NSSet setWithObjects:@"removeAd", nil];
-    SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:productID];
-    request.delegate = self;
-    
-}
-
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
-
-    SKProduct *product = [response.products firstObject];
-    SKPayment *payment = [SKPayment paymentWithProduct:product];
-    [[SKPaymentQueue defaultQueue] addPayment:payment];
-    
-}
-
-
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
-    
-
-    
-    for (SKPaymentTransaction * transaction in transactions) {
-        switch (transaction.transactionState)
-        {
-            case SKPaymentTransactionStatePurchased:
-                [self removeAdPurchased];
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                break;
-            case SKPaymentTransactionStateFailed:
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                break;
-            case SKPaymentTransactionStateRestored:
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-            default:
-                break;
-        }
-    };
-}
-
--(void)removeAdPurchased {
-    
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"removeAd"];
-    [self removeAdButton];
-    [[ViewController getSingleton] removeAd];
-    [self removeAdButton];
-
-}
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "SceneImplementation.h"
 
-@interface Credits : SKScene <SKPhysicsContactDelegate>
+@interface Credits : SceneImplementation <SKPhysicsContactDelegate>
 
 @end
