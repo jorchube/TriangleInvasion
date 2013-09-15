@@ -67,9 +67,9 @@
         
         bg_1 = [[SKSpriteNode alloc] initWithImageNamed:@"story-bg-1.png"];
         bg_2 = [[SKSpriteNode alloc] initWithImageNamed:@"story-bg-2.png"];
-        fg_1 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-1.png"];
-        fg_2 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-2.png"];
-        fg_3 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-3.png"];
+        fg_1 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-1-2-noface.png"];
+        fg_2 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-1-2-noface.png"];
+        fg_3 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-3-noface.png"];
         
         double sc = 0.18;
         
