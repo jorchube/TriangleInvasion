@@ -13,7 +13,6 @@
 		7C2AAAE817DE82F700A9AD29 /* Deadline.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2AAAE717DE82F700A9AD29 /* Deadline.m */; };
 		7C2AAAEE17DE833300A9AD29 /* ContactDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2AAAEB17DE833300A9AD29 /* ContactDelegate.m */; };
 		7C2AAAEF17DE833300A9AD29 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C2AAAED17DE833300A9AD29 /* Game.m */; };
-		7C2AAAF517DE83DF00A9AD29 /* collisionSparks.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7C2AAAF117DE83DF00A9AD29 /* collisionSparks.sks */; };
 		7C33558217E5FF2A007F133C /* SceneImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33558117E5FF2A007F133C /* SceneImplementation.m */; };
 		7C33558517E603D2007F133C /* SKAction+Sound.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C33558417E603D2007F133C /* SKAction+Sound.m */; };
 		7C3D2DAA17DCEB2A00B3362C /* Triangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3D2DA917DCEB2A00B3362C /* Triangle.m */; };
@@ -29,6 +28,8 @@
 		7C623F8217E1454F00E2F1E4 /* GameKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C623F8117E1454F00E2F1E4 /* GameKit.m */; };
 		7C623F8417E1491800E2F1E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C623F8317E1491800E2F1E4 /* StoreKit.framework */; };
 		7C623F8617E1CCE400E2F1E4 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C623F8517E1CCE400E2F1E4 /* iAd.framework */; };
+		7C6A96D017E61B4F0093B30B /* Shoot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7C6A96CF17E61B4F0093B30B /* Shoot.mp3 */; };
+		7C6A96D217E61CD90093B30B /* collisionSparks.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7C2AAAF117DE83DF00A9AD29 /* collisionSparks.sks */; };
 		7C9189E617E11CEF007F3CBC /* universe.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7C9189E417E11CEF007F3CBC /* universe.sks */; };
 		7C9189EA17E13AA9007F3CBC /* fipps.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C9189E917E13AA9007F3CBC /* fipps.ttf */; };
 		7CB2513F17DA1DDC00FA592D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB2513E17DA1DDC00FA592D /* Foundation.framework */; };
@@ -45,7 +46,6 @@
 		7CB2516A17DA1DDD00FA592D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB2514217DA1DDD00FA592D /* UIKit.framework */; };
 		7CB2517217DA1DDD00FA592D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7CB2517017DA1DDD00FA592D /* InfoPlist.strings */; };
 		7CB2517417DA1DDD00FA592D /* slingshotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2517317DA1DDD00FA592D /* slingshotTests.m */; };
-		7CDD204A17E237430039F9E3 /* shoot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD204917E237430039F9E3 /* shoot.mp3 */; };
 		7CDD204F17E2374F0039F9E3 /* appicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD204B17E2374F0039F9E3 /* appicon.png */; };
 		7CDD205017E2374F0039F9E3 /* hand.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD204C17E2374F0039F9E3 /* hand.png */; };
 		7CDD205117E2374F0039F9E3 /* line.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CDD204D17E2374F0039F9E3 /* line.png */; };
@@ -54,6 +54,8 @@
 		7CE570D117DF8BD500F90752 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE570CD17DF8BD500F90752 /* Main_iPad.storyboard */; };
 		7CE570D217DF8BD500F90752 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE570CF17DF8BD500F90752 /* Main_iPhone.storyboard */; };
 		7CE570DF17DF929E00F90752 /* menu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7CE570DD17DF929E00F90752 /* menu.sks */; };
+		7CFB362A17E6229A00BCB235 /* Collision.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CFB362917E6229A00BCB235 /* Collision.mp3 */; };
+		7CFB362C17E6231F00BCB235 /* CollisionTriangle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CFB362B17E6231F00BCB235 /* CollisionTriangle.mp3 */; };
 		B518BE3A17E4E19D00637E34 /* story-bg-1.png in Resources */ = {isa = PBXBuildFile; fileRef = B518BE3517E4E19D00637E34 /* story-bg-1.png */; };
 		B518BE3B17E4E19D00637E34 /* story-bg-2.png in Resources */ = {isa = PBXBuildFile; fileRef = B518BE3617E4E19D00637E34 /* story-bg-2.png */; };
 		B518BE3C17E4E19D00637E34 /* story-fg-1.png in Resources */ = {isa = PBXBuildFile; fileRef = B518BE3717E4E19D00637E34 /* story-fg-1.png */; };
@@ -106,6 +108,7 @@
 		7C623F8117E1454F00E2F1E4 /* GameKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameKit.m; path = Helpers/GameKit.m; sourceTree = "<group>"; };
 		7C623F8317E1491800E2F1E4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		7C623F8517E1CCE400E2F1E4 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		7C6A96CF17E61B4F0093B30B /* Shoot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Shoot.mp3; path = Resources/Sounds/Shoot.mp3; sourceTree = "<group>"; };
 		7C74DCC217E3EFCC000499A2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C9189E417E11CEF007F3CBC /* universe.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = universe.sks; path = Resources/universe.sks; sourceTree = "<group>"; };
 		7C9189E917E13AA9007F3CBC /* fipps.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = fipps.ttf; path = fonts/fipps.ttf; sourceTree = "<group>"; };
@@ -130,7 +133,6 @@
 		7CB2517117DA1DDD00FA592D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7CB2517317DA1DDD00FA592D /* slingshotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = slingshotTests.m; sourceTree = "<group>"; };
 		7CB2518117DA2F4E00FA592D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		7CDD204917E237430039F9E3 /* shoot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = shoot.mp3; path = Resources/Sounds/shoot.mp3; sourceTree = "<group>"; };
 		7CDD204B17E2374F0039F9E3 /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = appicon.png; path = Resources/images/appicon.png; sourceTree = "<group>"; };
 		7CDD204C17E2374F0039F9E3 /* hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hand.png; path = Resources/images/hand.png; sourceTree = "<group>"; };
 		7CDD204D17E2374F0039F9E3 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = line.png; path = Resources/images/line.png; sourceTree = "<group>"; };
@@ -141,6 +143,8 @@
 		7CE570D317DF8BEA00F90752 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7CE570D417DF8EEA00F90752 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7CE570DD17DF929E00F90752 /* menu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = menu.sks; path = Resources/menu.sks; sourceTree = "<group>"; };
+		7CFB362917E6229A00BCB235 /* Collision.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Collision.mp3; path = Resources/Sounds/Collision.mp3; sourceTree = "<group>"; };
+		7CFB362B17E6231F00BCB235 /* CollisionTriangle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CollisionTriangle.mp3; path = Resources/Sounds/CollisionTriangle.mp3; sourceTree = "<group>"; };
 		B518BE3517E4E19D00637E34 /* story-bg-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "story-bg-1.png"; path = "Resources/images/story-bg-1.png"; sourceTree = "<group>"; };
 		B518BE3617E4E19D00637E34 /* story-bg-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "story-bg-2.png"; path = "Resources/images/story-bg-2.png"; sourceTree = "<group>"; };
 		B518BE3717E4E19D00637E34 /* story-fg-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "story-fg-1.png"; path = "Resources/images/story-fg-1.png"; sourceTree = "<group>"; };
@@ -342,10 +346,12 @@
 		7CDD204317E212340039F9E3 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				7CFB362B17E6231F00BCB235 /* CollisionTriangle.mp3 */,
+				7CFB362917E6229A00BCB235 /* Collision.mp3 */,
+				7C6A96CF17E61B4F0093B30B /* Shoot.mp3 */,
 				7C404EF917E4E00700C3EB33 /* Game.mp3 */,
 				7C404EF717E4D5F100C3EB33 /* Credits.mp3 */,
 				7C404EF517E4CB6A00C3EB33 /* MainMenu.mp3 */,
-				7CDD204917E237430039F9E3 /* shoot.mp3 */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -460,13 +466,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C2AAAF517DE83DF00A9AD29 /* collisionSparks.sks in Resources */,
+				7C6A96D217E61CD90093B30B /* collisionSparks.sks in Resources */,
 				7CE570CB17DF8B1700F90752 /* Localizable.strings in Resources */,
 				7CDD205017E2374F0039F9E3 /* hand.png in Resources */,
 				7C404EF617E4CB6A00C3EB33 /* MainMenu.mp3 in Resources */,
 				B518BE3E17E4E19D00637E34 /* story-fg-3.png in Resources */,
 				7CE570D117DF8BD500F90752 /* Main_iPad.storyboard in Resources */,
 				7C1193E017DFD4F100D4D5C0 /* credits.sks in Resources */,
+				7CFB362A17E6229A00BCB235 /* Collision.mp3 in Resources */,
+				7C6A96D017E61B4F0093B30B /* Shoot.mp3 in Resources */,
+				7CFB362C17E6231F00BCB235 /* CollisionTriangle.mp3 in Resources */,
 				7CDD205217E2374F0039F9E3 /* menuSpark.png in Resources */,
 				7C9189EA17E13AA9007F3CBC /* fipps.ttf in Resources */,
 				B518BE3D17E4E19D00637E34 /* story-fg-2.png in Resources */,
@@ -478,7 +487,6 @@
 				B518BE3A17E4E19D00637E34 /* story-bg-1.png in Resources */,
 				7CDD205117E2374F0039F9E3 /* line.png in Resources */,
 				B518BE3B17E4E19D00637E34 /* story-bg-2.png in Resources */,
-				7CDD204A17E237430039F9E3 /* shoot.mp3 in Resources */,
 				7C9189E617E11CEF007F3CBC /* universe.sks in Resources */,
 				7C404EF817E4D5F100C3EB33 /* Credits.mp3 in Resources */,
 				7CE570D217DF8BD500F90752 /* Main_iPhone.storyboard in Resources */,

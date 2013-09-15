@@ -9,6 +9,7 @@
 #import "ContactDelegate.h"
 #import "Constants.h"
 #import "Game.h"
+#import "SKAction+Sound.h"
 
 @implementation ContactDelegate
 
@@ -77,6 +78,9 @@
 }
 
 -(void) sling: (SKPhysicsBody*) sling hitSimpleObject: (SKPhysicsBody*) body At: (CGPoint) point {
+    
+    [delegatorID runAction:[SKAction playSoundFileNamedCheckingMusicEnable:@"Collision.mp3" waitForCompletion:NO]];
+    
     [self killSimpleObject:body withTime:timeForObjectToDisappearAfterHit];
     [(Triangle*)body.node setIsAlive:NO];
     
@@ -92,6 +96,9 @@
 }
 
 -(void) collisionBetweenSimpleObjects: (SKPhysicsBody*) bodyA and: (SKPhysicsBody*) bodyB At: (CGPoint) point {
+    
+    [delegatorID runAction:[SKAction playSoundFileNamedCheckingMusicEnable:@"CollisionTriangle.mp3" waitForCompletion:NO]];
+    
     [self killSimpleObject:bodyA withTime:timeForObjectToDisappearAfterHit];
     [self killSimpleObject:bodyB withTime:timeForObjectToDisappearAfterHit];
     
