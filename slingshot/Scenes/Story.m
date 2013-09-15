@@ -7,6 +7,7 @@
 //
 
 #import "Story.h"
+#import "Game.h"
 
 @interface Story() {
     SKSpriteNode *bg_1;
@@ -259,7 +260,21 @@
     
     /* run */
     [self runAction:story completion:^{
-        /* Change to game */
+        
+        SKScene *nextScene;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        nextScene = [Game sceneWithSize:self.view.bounds.size];
+        
+        nextScene.scaleMode = SKSceneScaleModeAspectFill;
+        
+        SKAction *changeView = [SKAction runBlock:^{
+            
+            SKTransition *trans = [SKTransition fadeWithDuration:1];
+            [self.view presentScene:nextScene transition:trans];
+            
+        }];
+        
+        [self runAction:changeView];
     }];
     
 }

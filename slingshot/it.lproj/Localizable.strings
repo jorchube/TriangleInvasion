@@ -19,16 +19,37 @@
 
 "Remove Ads" = "Elimina pubblicità";
 
-"story1" = "-C'era una volta, da qualche parte nella galassia...";
+"story11" = "C'era una volta,
+"story12" = "da qualche parte nella galassia...";
+"story13" = "";
 
-"story2" = "-... un pacifico pianeta, dove ogni abitante era felice. Era il pianeta Punto Grosso.";
+"story21" = "... un pacifico pianeta";
+"story22" = "dove ogni abitante era felice.";
+"story23" = "Era il pianeta Punto Grosso.";
 
-"story3" = "-Pero, un giorno, qualcosa di terribile era accaduto...";
+"story31" = "Pero, un giorno";
+"story32" = "qualcosa di terribile era accaduto...";
+"story33" = "";
 
-"story4" = "-... un esercito di triangoli stava attacando il pianeta Punto Grosso!!! Non c'era speranza...";
+"story41" = "... un esercito di triangoli stava";
+"story42" = "attacando il pianeta Punto Grosso!!!";
+"story43" = "Non c'era speranza...";
 
-"story5" = "-... o si?";
+"story51" = "... o si?";
+"story52" = "";
+"story53" = "";
 
-"story6" = "-Tu, con il tuo essercito difenderete il pianeta il più tempo possibile.";
+"story61" = "Tu, con il tuo essercito difenderete";
+"story62"= "il pianeta il più tempo possibile.";
+"story63"= "";
 
-"story7" = "-Buona fortuna. Sei la nostra ultima speranza.";
+"story71" = "Buona fortuna. Sei la nostra ";
+"story72"= "ultima speranza.";
+"story73"= "";
+
+
+
+
+
+
+
