@@ -124,7 +124,7 @@ static Sling *bonusSlings[8];
 
 -(void) shotSling {
     
-    [self runAction:[SKAction playSoundFileNamedCheckingMusicEnable:@"shoot.mp3" waitForCompletion:NO]];
+    [self runAction:[SKAction playSoundFileNamedCheckingMusicEnable:@"Shoot.mp3" waitForCompletion:NO]];
 	
     Sling *sling = idleSling;
     

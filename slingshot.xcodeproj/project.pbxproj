@@ -54,6 +54,7 @@
 		7CE570D117DF8BD500F90752 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE570CD17DF8BD500F90752 /* Main_iPad.storyboard */; };
 		7CE570D217DF8BD500F90752 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE570CF17DF8BD500F90752 /* Main_iPhone.storyboard */; };
 		7CE570DF17DF929E00F90752 /* menu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7CE570DD17DF929E00F90752 /* menu.sks */; };
+		7CE8D7BA17E66D5B0054CB1B /* Story.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CE8D7B917E66D5B0054CB1B /* Story.mp3 */; };
 		7CFB362A17E6229A00BCB235 /* Collision.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CFB362917E6229A00BCB235 /* Collision.mp3 */; };
 		7CFB362C17E6231F00BCB235 /* CollisionTriangle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CFB362B17E6231F00BCB235 /* CollisionTriangle.mp3 */; };
 		B518BE3A17E4E19D00637E34 /* story-bg-1.png in Resources */ = {isa = PBXBuildFile; fileRef = B518BE3517E4E19D00637E34 /* story-bg-1.png */; };
@@ -152,6 +153,7 @@
 		7CE570D317DF8BEA00F90752 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7CE570D417DF8EEA00F90752 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7CE570DD17DF929E00F90752 /* menu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = menu.sks; path = Resources/menu.sks; sourceTree = "<group>"; };
+		7CE8D7B917E66D5B0054CB1B /* Story.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Story.mp3; path = Resources/Sounds/Story.mp3; sourceTree = "<group>"; };
 		7CFB362917E6229A00BCB235 /* Collision.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Collision.mp3; path = Resources/Sounds/Collision.mp3; sourceTree = "<group>"; };
 		7CFB362B17E6231F00BCB235 /* CollisionTriangle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = CollisionTriangle.mp3; path = Resources/Sounds/CollisionTriangle.mp3; sourceTree = "<group>"; };
 		B518BE3517E4E19D00637E34 /* story-bg-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "story-bg-1.png"; path = "Resources/images/story-bg-1.png"; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 		7CDD204317E212340039F9E3 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				7CE8D7B917E66D5B0054CB1B /* Story.mp3 */,
 				7CFB362B17E6231F00BCB235 /* CollisionTriangle.mp3 */,
 				7CFB362917E6229A00BCB235 /* Collision.mp3 */,
 				7C6A96CF17E61B4F0093B30B /* Shoot.mp3 */,
@@ -507,6 +510,7 @@
 				7CFB362C17E6231F00BCB235 /* CollisionTriangle.mp3 in Resources */,
 				7CDD205217E2374F0039F9E3 /* menuSpark.png in Resources */,
 				B548760217E6451400CB0871 /* story-fg-c.png in Resources */,
+				7CE8D7BA17E66D5B0054CB1B /* Story.mp3 in Resources */,
 				7C9189EA17E13AA9007F3CBC /* fipps.ttf in Resources */,
 				B518BE3D17E4E19D00637E34 /* story-fg-2.png in Resources */,
 				B548760617E6455D00CB0871 /* story-fg-d.png in Resources */,

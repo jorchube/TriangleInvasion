@@ -33,39 +33,13 @@
 
 @implementation Story
 
--(void)startMusic {
-    
-    if (![ViewController getSingleton].musicEnable) {
-        return;
-    }
-    
-    if (storyPlayer) {
-        [storyPlayer play];
-        return;
-    }
-    
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Story.mp3", [[NSBundle mainBundle] resourcePath]]];
-	
-	NSError *error;
-	storyPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-	storyPlayer.numberOfLoops = -1;
-	
-	if (storyPlayer == nil)
-		NSLog(@"%@",error);
-	else
-		[storyPlayer play];
-}
-
--(void)stopMusic {
-    [storyPlayer stop];
-}
-
-
-
-
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+        
+        [self setMusicURL:@"Story.mp3"];
+        [self startMusic];
+        
         self.backgroundColor = [SKColor blackColor];
         
         SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
