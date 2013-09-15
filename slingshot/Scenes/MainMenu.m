@@ -139,6 +139,22 @@ static UIButton *removeAdButton;
     newGame.text = NSLocalizedString(@"New Game", nil) ;
     credits.text = NSLocalizedString(@"Credits", nil) ;
     
+    
+    SKPhysicsBody *newGamePB = [SKPhysicsBody bodyWithRectangleOfSize:newGame.frame.size];
+    SKPhysicsBody *creditsPB = [SKPhysicsBody bodyWithRectangleOfSize:credits.frame.size];
+    
+
+    [newGamePB setDynamic:NO];
+    [newGamePB setAffectedByGravity:NO];
+    
+    [creditsPB setDynamic:NO];
+    [creditsPB setAffectedByGravity:NO];
+    
+    [newGame setPhysicsBody:newGamePB];
+    [credits setPhysicsBody:creditsPB];
+    
+    
+    //initial animation
     newGame.alpha = 0;
     credits.alpha = 0;
     
@@ -153,19 +169,7 @@ static UIButton *removeAdButton;
     [act setTimingMode:SKActionTimingEaseOut];
     [newGame runAction:act];
     [credits runAction:act];
-    
-    SKPhysicsBody *newGamePB = [SKPhysicsBody bodyWithRectangleOfSize:newGame.frame.size];
-    SKPhysicsBody *creditsPB = [SKPhysicsBody bodyWithRectangleOfSize:credits.frame.size];
-    
 
-    [newGamePB setDynamic:NO];
-    [newGamePB setAffectedByGravity:NO];
-    
-    [creditsPB setDynamic:NO];
-    [creditsPB setAffectedByGravity:NO];
-    
-    [newGame setPhysicsBody:newGamePB];
-    [credits setPhysicsBody:creditsPB];
     
     [self addChild:newGame];
     [self addChild:credits];
