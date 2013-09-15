@@ -165,16 +165,16 @@
     
     /* Preparing the actions that compose the scenes */
     
-    #define firstSectionDuration 9.5
+    #define firstSectionDuration 9.25
     #define secondSectionDuration 14.55
-    #define thirdSectionDuration 21
+    #define thirdSectionDuration 21.25
     
     SKAction *scene1Time = [SKAction waitForDuration:(firstSectionDuration-2)/2];
     SKAction *scene2Time = [SKAction waitForDuration:(secondSectionDuration-2)/2];
     SKAction *scene3Time = [SKAction waitForDuration:(thirdSectionDuration-3)/3];
     
     SKAction *show = [SKAction fadeAlphaTo:1 duration:story_showFadeInDuration];
-    SKAction *waitInCut = [SKAction waitForDuration:story_timeForEachCut];
+    //SKAction *waitInCut = [SKAction waitForDuration:story_timeForEachCut];
     SKAction *hide = [SKAction fadeAlphaTo:0 duration:story_showFadeOutDuration];
     //SKAction *waitBetweenCuts = [SKAction waitForDuration:story_timeBetweenCuts];
     //SKAction *moveRight = [SKAction moveByX:20 y:0 duration:story_showFadeInDuration+story_timeForEachCut+story_showFadeOutDuration];
@@ -280,12 +280,12 @@
     
     /* Setting scene events */
     
-    SKAction *textCut = [SKAction sequence:@[
+   /* SKAction *textCut = [SKAction sequence:@[
                                              showText,
                                              waitInCut,
                                              hideText
                                              ]];
-    
+    */
     SKAction *textCutScene1 = [SKAction sequence:@[
                                              showText,
                                              scene1Time,
