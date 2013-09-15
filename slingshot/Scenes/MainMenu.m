@@ -26,6 +26,9 @@
     CMMotionManager *motionManager;
     SKEmitterNode *sparks;
     float initialAccelerationX,initialAccelerationY;
+    
+    //variable for the payment process
+    SKPayment *payment;
 }
 @end
 
@@ -317,30 +320,43 @@ static UIButton *removeAdButton;
     NSSet *productID = [NSSet setWithObjects:@"removeAd", nil];
     SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:productID];
     request.delegate = self;
+    [request start];
     
 }
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
 
     SKProduct *product = [response.products firstObject];
-    SKPayment *payment = [SKPayment paymentWithProduct:product];
-    [[SKPaymentQueue defaultQueue] addPayment:payment];
+    payment = [SKPayment paymentWithProduct:product];
     
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:product.localizedTitle
+                                                      message:product.localizedDescription
+                                                     delegate:self
+                                            cancelButtonTitle:@"OK"
+                                            otherButtonTitles:nil];
+    [message show];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (payment != nil) {
+        [[SKPaymentQueue defaultQueue] addPayment:payment];
+    }
 }
 
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
-    
-
     
     for (SKPaymentTransaction * transaction in transactions) {
         switch (transaction.transactionState)
         {
             case SKPaymentTransactionStatePurchased:
                 [self removeAdPurchased];
+                NSLog(@"Remove Ad bought");
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 break;
             case SKPaymentTransactionStateFailed:
+                NSLog(@"Transaction error: %@", transaction.error.localizedDescription);
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 break;
             case SKPaymentTransactionStateRestored:

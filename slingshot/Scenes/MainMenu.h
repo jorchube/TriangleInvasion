@@ -10,7 +10,7 @@
 #import <StoreKit/StoreKit.h>
 #import "SceneImplementation.h"
 
-@interface MainMenu : SceneImplementation <SKPhysicsContactDelegate,SKProductsRequestDelegate,SKPaymentTransactionObserver, UIAccelerometerDelegate>
+@interface MainMenu : SceneImplementation <SKPhysicsContactDelegate,SKProductsRequestDelegate,SKPaymentTransactionObserver, UIAccelerometerDelegate,UIAlertViewDelegate>
 
 
 @end
