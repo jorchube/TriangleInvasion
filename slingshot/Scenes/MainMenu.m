@@ -224,10 +224,11 @@
     
     [self stopMusic];
     
+    Credits *creditView =    [Credits sceneWithSize:self.view.bounds.size];
+    creditView.scaleMode = SKSceneScaleModeAspectFill;
+    
     SKAction *changeView = [SKAction runBlock:^{
         SKTransition *trans = [SKTransition fadeWithDuration:1];
-        Credits *creditView =    [Credits sceneWithSize:self.view.bounds.size];
-        creditView.scaleMode = SKSceneScaleModeAspectFill;
         
         [self.view presentScene:creditView transition:trans];
     }];
@@ -246,6 +247,7 @@
     
     if ([defaults objectForKey:@"story"]){
         
+        [[ViewController getSingleton] hideVolumeButton];
         nextScene = [Story sceneWithSize:self.view.bounds.size];
         [defaults setObject:[NSNumber numberWithBool:true] forKey:@"story"];
         [defaults synchronize];

@@ -45,6 +45,8 @@
         [self setMusicURL:@"Game.mp3"];
         [self startMusic];
         
+        [[ViewController getSingleton] showVolumeButton];
+        
         gameEnded = false;
         gameStoped = false;
         

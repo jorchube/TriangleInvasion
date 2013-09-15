@@ -28,6 +28,7 @@ static Sling *idleSling;
 static Sling *rightBonusSling;
 static Sling *leftBonusSling;
 static SKShapeNode *hint;
+static SKScene *lastScene;
 static Sling *bonusSlings[8];
 
 
@@ -205,12 +206,13 @@ static Sling *bonusSlings[8];
     idleSling = [[Sling alloc] initWithFrame: scene.frame];
     [scene addChild:idleSling];
     
-    
     if (!hint) {
+        lastScene = scene;
         hint = [[SKShapeNode alloc]init];
         hint.alpha = 0.0;
         [scene addChild:hint];
-    }else if(hint.scene != scene){
+    }else if(lastScene != scene){
+        lastScene = scene;
         [hint removeFromParent];
         [scene addChild:hint];
     }
