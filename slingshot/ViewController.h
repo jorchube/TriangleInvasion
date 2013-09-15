@@ -12,12 +12,16 @@
 
 @interface ViewController : UIViewController
 
+@property (readonly) BOOL musicEnable;
 @property (weak, nonatomic) IBOutlet ADBannerView *adBanner;
+@property (weak, nonatomic) IBOutlet UIButton *volumeButton;
 
 +(ViewController*)getSingleton;
 -(void)hideAd;
 -(void)showAd;
 -(void)pauseGame;
 -(void)resumeGame;
+
+- (IBAction)volumeChange:(id)sender;
 
 @end

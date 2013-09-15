@@ -23,14 +23,15 @@
     Sling *sling;
     SKSpriteNode *hand;
     BOOL transitioning;
-    UIButton *removeAdButton;
-    AVAudioPlayer *menuPlayer;
     CMMotionManager *motionManager;
     SKEmitterNode *sparks;
+    float initialAccelerationX,initialAccelerationY;
 }
 @end
 
 @implementation MainMenu
+
+static UIButton *removeAdButton;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -40,6 +41,8 @@
         motionManager = [[CMMotionManager alloc] init];
         motionManager.accelerometerUpdateInterval = .2;
         
+        initialAccelerationX = -100;
+        initialAccelerationY = -100;
         
         [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
                                                  withHandler:^(CMAccelerometerData  *accelerometerData, NSError *error) {
@@ -54,6 +57,7 @@
     
         transitioning = false;
     
+        [self setMusicURL:@"MainMenu.mp3"];
         [self startMusic];
     
         self.backgroundColor = [SKColor blackColor];
@@ -92,26 +96,17 @@
 -(void)outputAccelertionData:(CMAcceleration)acceleration
 {
 
-    sparks.xAcceleration = 30*acceleration.x;
-    sparks.yAcceleration = 30*acceleration.y;
+    if (initialAccelerationX == -100 || initialAccelerationY == -100) {
+        initialAccelerationX = acceleration.x;
+        initialAccelerationY = acceleration.y;
+    }
+    
+    sparks.xAcceleration = 30*(initialAccelerationX-acceleration.x);
+    sparks.yAcceleration = 30*(initialAccelerationY-acceleration.y);
     sparks.particleBirthRate = 5 + (abs(acceleration.y)+abs(acceleration.x))*30;
     
 }
 
-
-
--(void)startMusic {
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/MainMenu.mp3", [[NSBundle mainBundle] resourcePath]]];
-	
-	NSError *error;
-	menuPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-	menuPlayer.numberOfLoops = -1;
-	
-	if (menuPlayer == nil)
-		NSLog(@"%@",error);
-	else
-		[menuPlayer play];
-}
 
 -(void)showHand {
     hand = [SKSpriteNode spriteNodeWithImageNamed:@"hand.png"];
@@ -223,7 +218,7 @@
 
 -(void) showCredits {
     
-    [menuPlayer stop];
+    [self stopMusic];
     
     SKAction *changeView = [SKAction runBlock:^{
         SKTransition *trans = [SKTransition fadeWithDuration:1];
@@ -233,15 +228,13 @@
         [self.view presentScene:creditView transition:trans];
     }];
     
-    [[ViewController getSingleton] hideAd];
-    
     [self runAction:[SKAction sequence:@[[SKAction rotateByAngle:1 duration:3], changeView]]];
 }
 
 -(void) setNewGame {
     
     [self removeAdButton];
-    [menuPlayer stop];
+    [self stopMusic];
 
     
     SKScene *nextScene;
@@ -278,7 +271,7 @@
     [UIView animateWithDuration:.5 animations:^{
         removeAdButton.alpha = 0;
     } completion:^(BOOL finished) {
-        [removeAdButton removeFromSuperview];
+        [removeAdButton setHidden:YES];
     }];
 }
 
@@ -290,15 +283,20 @@
 
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         
-        removeAdButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        removeAdButton.frame = CGRectMake(0, 50, self.frame.size.width, 50);
-        [removeAdButton setTitle:NSLocalizedString(@"Remove Ads", nil) forState:UIControlStateNormal];
-        removeAdButton.titleLabel.font = [UIFont systemFontOfSize:18];
-        removeAdButton.alpha = 0;
-        [removeAdButton addTarget:self action:@selector(buyRemoveAd) forControlEvents:UIControlEventTouchUpInside];
+        if (removeAdButton == nil){
         
-        [self.view addSubview:removeAdButton];
+            removeAdButton = [UIButton buttonWithType:UIButtonTypeSystem];
+            removeAdButton.frame = CGRectMake(0, 50, self.frame.size.width, 50);
+            [removeAdButton setTitle:NSLocalizedString(@"Remove Ads", nil) forState:UIControlStateNormal];
+            removeAdButton.titleLabel.font = [UIFont systemFontOfSize:18];
+            removeAdButton.alpha = 0;
+            [removeAdButton addTarget:self action:@selector(buyRemoveAd) forControlEvents:UIControlEventTouchUpInside];
+            
+            [self.view addSubview:removeAdButton];
+            
+        }
         
+        [removeAdButton setHidden:NO];
         [UIView animateWithDuration:1 animations:^{
             removeAdButton.alpha = 1;
         }];

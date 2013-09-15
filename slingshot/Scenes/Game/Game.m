@@ -9,7 +9,6 @@
 #import "Game.h"
 #import "MainMenu.h"
 #import "GameKit.h"
-#import <AVFoundation/AVFoundation.h>
 
 @interface Game() {
     @private
@@ -32,7 +31,6 @@
     int maxCombo;
     BOOL gameEnded;
     BOOL gameStoped;
-    AVAudioPlayer *gamePlayer;
 }
 
 @end
@@ -44,6 +42,7 @@
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
+        [self setMusicURL:@"Game.mp3"];
         [self startMusic];
         
         gameEnded = false;
@@ -83,18 +82,6 @@
     return self;
 }
 
--(void)startMusic {
-    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Game.mp3", [[NSBundle mainBundle] resourcePath]]];
-	
-	NSError *error;
-	gamePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-	gamePlayer.numberOfLoops = -1;
-	
-	if (gamePlayer == nil)
-		NSLog(@"%@",error);
-	else
-		[gamePlayer play];
-}
 
 
 -(void) launchTimer {
@@ -361,7 +348,7 @@
 
 -(void)exitGame {
     
-    [gamePlayer stop];
+    [self stopMusic];
     
     self.view.paused = false;
     SKTransition *trans = [SKTransition fadeWithDuration:1];
@@ -444,7 +431,7 @@
 -(void) goMainMenuFromEnd {
     
     
-    [gamePlayer stop];
+    [self stopMusic];
     
     self.view.paused = false;
     

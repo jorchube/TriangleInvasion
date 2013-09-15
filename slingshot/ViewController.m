@@ -10,6 +10,7 @@
 #import "MainMenu.h"
 #import "GameKit.h"
 #import "Game.h"
+#import "SceneImplementation.h"
 
 @interface ViewController() {
     SKView *mainView;
@@ -28,6 +29,8 @@ static ViewController *viewController;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _musicEnable = true;
     
     viewController = self;
 
@@ -64,6 +67,18 @@ static ViewController *viewController;
     }
 }
 
+- (IBAction)volumeChange:(id)sender {
+    
+    _volumeButton.selected = !_volumeButton.selected;
+    _musicEnable = !_volumeButton.selected;
+    
+    if (_volumeButton.selected)
+        [(SceneImplementation*)mainView.scene stopMusic];
+    else
+        [(SceneImplementation*)mainView.scene startMusic];
+    
+}
+
 
 -(void)checkAd {
     
@@ -87,6 +102,11 @@ static ViewController *viewController;
     [UIView animateWithDuration:1 animations:^{
         _adBanner.alpha = 1;
     }];
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
 }
 
 - (BOOL)shouldAutorotate

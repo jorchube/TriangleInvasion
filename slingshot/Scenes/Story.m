@@ -8,6 +8,7 @@
 
 #import "Story.h"
 #import "Game.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface Story() {
     SKSpriteNode *bg_1;
@@ -21,11 +22,43 @@
     SKAction* scene1;
     SKAction* scene2;
     SKAction* scene3;
+    
+    AVAudioPlayer *storyPlayer;
 }
 
 @end
 
 @implementation Story
+
+-(void)startMusic {
+    
+    if (![ViewController getSingleton].musicEnable) {
+        return;
+    }
+    
+    if (storyPlayer) {
+        [storyPlayer play];
+        return;
+    }
+    
+    NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Story.mp3", [[NSBundle mainBundle] resourcePath]]];
+	
+	NSError *error;
+	storyPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	storyPlayer.numberOfLoops = -1;
+	
+	if (storyPlayer == nil)
+		NSLog(@"%@",error);
+	else
+		[storyPlayer play];
+}
+
+-(void)stopMusic {
+    [storyPlayer stop];
+}
+
+
+
 
 
 -(id)initWithSize:(CGSize)size {
