@@ -11,12 +11,14 @@
 
 
 @interface SceneImplementation() {
-    AVAudioPlayer *audioPlayer;
+
     NSString *musicURL;
 }
 @end
 
 @implementation SceneImplementation
+
+static AVAudioPlayer *audioPlayer;
 
 -(void)setMusicURL:(NSString*)url {
     musicURL = url;
@@ -29,8 +31,7 @@
     }
     
     if (audioPlayer) {
-        [audioPlayer play];
-        return;
+        [audioPlayer stop];
     }
     
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath],musicURL]];
