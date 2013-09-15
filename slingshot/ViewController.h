@@ -28,4 +28,7 @@
 -(void)removeAdButton;
 -(void)showRemoveAdButton;
 
+-(void)hideVolumeButton;
+-(void)showVolumeButton;
+
 @end

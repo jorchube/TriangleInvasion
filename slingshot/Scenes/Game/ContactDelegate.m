@@ -145,6 +145,8 @@
         sparks.targetNode = delegatorID;
         sparks.particleColor = ((SKShapeNode*)body.node).strokeColor;
         [delegatorID addChild:sparks];
+        
+        [delegatorID runAction:[SKAction playSoundFileNamedCheckingMusicEnable:@"CollisionTriangle.mp3" waitForCompletion:NO]];
   
     }
     else {

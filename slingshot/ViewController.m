@@ -237,5 +237,13 @@ static ViewController *viewController;
 }
 
 
+-(void)hideVolumeButton {
+    _volumeButton.hidden = true;
+}
+-(void)showVolumeButton {
+    _volumeButton.hidden = false;
+}
+
+
 
 @end
