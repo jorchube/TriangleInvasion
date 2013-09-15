@@ -286,7 +286,7 @@ static UIButton *removeAdButton;
         if (removeAdButton == nil){
         
             removeAdButton = [UIButton buttonWithType:UIButtonTypeSystem];
-            removeAdButton.frame = CGRectMake(0, 50, self.frame.size.width, 50);
+            removeAdButton.frame = CGRectMake(0, 65, self.frame.size.width, 50);
             [removeAdButton setTitle:NSLocalizedString(@"Remove Ads", nil) forState:UIControlStateNormal];
             removeAdButton.titleLabel.font = [UIFont systemFontOfSize:18];
             removeAdButton.alpha = 0;
