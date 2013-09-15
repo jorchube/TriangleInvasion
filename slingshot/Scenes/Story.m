@@ -38,7 +38,6 @@
     if (self = [super initWithSize:size]) {
         
         [self setMusicURL:@"Story.mp3"];
-        [self startMusic];
         
         self.backgroundColor = [SKColor blackColor];
         
@@ -151,6 +150,7 @@
         [self addChild:fg_5];
         [self addChild:fg_you];
         
+        [self startMusic];
         [self showSequence];
     }
     return self;
@@ -164,6 +164,14 @@
 -(void) showSequence {
     
     /* Preparing the actions that compose the scenes */
+    
+    #define firstSectionDuration 9.5
+    #define secondSectionDuration 14.55
+    #define thirdSectionDuration 21
+    
+    SKAction *scene1Time = [SKAction waitForDuration:(firstSectionDuration-2)/2];
+    SKAction *scene2Time = [SKAction waitForDuration:(secondSectionDuration-2)/2];
+    SKAction *scene3Time = [SKAction waitForDuration:(thirdSectionDuration-3)/3];
     
     SKAction *show = [SKAction fadeAlphaTo:1 duration:story_showFadeInDuration];
     SKAction *waitInCut = [SKAction waitForDuration:story_timeForEachCut];
@@ -278,6 +286,24 @@
                                              hideText
                                              ]];
     
+    SKAction *textCutScene1 = [SKAction sequence:@[
+                                             showText,
+                                             scene1Time,
+                                             hideText
+                                             ]];
+    
+    SKAction *textCutScene2 = [SKAction sequence:@[
+                                             showText,
+                                             scene2Time,
+                                             hideText
+                                             ]];
+    
+    SKAction *textCutScene3 = [SKAction sequence:@[
+                                             showText,
+                                             scene3Time,
+                                             hideText
+                                             ]];
+    
     SKAction *scene1In = [SKAction runBlock:^{
         [bg_1 runAction:show];
         [fg_1 runAction:show];
@@ -342,27 +368,27 @@
     
     SKAction *story = [SKAction sequence:@[
                                            setText1,
-                                           textCut,
+                                           textCutScene1,
                                            setText2,
                                            scene1In,
                                            everybodyJumps,
-                                           waitInCut,
+                                           scene1Time,
                                            scene1Out,
                                            setText3,
-                                           textCut,
+                                           textCutScene2,
                                            setText4,
                                            scene2In,
                                            everybodyShakes,
-                                           waitInCut,
+                                           scene2Time,
                                            scene2Out,
                                            setText5,
-                                           textCut,
+                                           textCutScene3,
                                            setText6,
                                            scene3In,
-                                           waitInCut,
+                                           scene3Time,
                                            scene3Out,
                                            setText7,
-                                           textCut
+                                           textCutScene3
                                            ]];
     
     /* run */
