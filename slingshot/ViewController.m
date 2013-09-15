@@ -75,12 +75,17 @@ static ViewController *viewController;
     }
 }
 
--(void)removeAd {
+-(void)hideAd {
     [UIView animateWithDuration:1 animations:^{
         _adBanner.alpha = 0;
     } completion:^(BOOL finished) {
-        [_adBanner removeFromSuperview];
-        _adBanner = nil;
+        [self checkAd];
+    }];
+}
+
+-(void)showAd {
+    [UIView animateWithDuration:1 animations:^{
+        _adBanner.alpha = 1;
     }];
 }
 

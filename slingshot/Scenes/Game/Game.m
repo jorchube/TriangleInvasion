@@ -201,11 +201,11 @@
 }
 
 -(void) addScoreLabel {
-	scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica"];
+	scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
 	scoreLabel.text = @"";
-	scoreLabel.fontSize = 12;
-	scoreLabel.position = CGPointMake(CGRectGetMaxX(self.frame)-30,
-                                      CGRectGetMaxY(self.frame)-30);
+	scoreLabel.fontSize = 15;
+	scoreLabel.position = CGPointMake(CGRectGetMaxX(self.frame)-20,
+                                      CGRectGetMaxY(self.frame)-35);
 	
 	[self addChild:scoreLabel];
 }

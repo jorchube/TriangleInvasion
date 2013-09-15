@@ -35,6 +35,7 @@
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         
+        [[ViewController getSingleton] showAd];
         
         motionManager = [[CMMotionManager alloc] init];
         motionManager.accelerometerUpdateInterval = .2;
@@ -93,6 +94,7 @@
 
     sparks.xAcceleration = 30*acceleration.x;
     sparks.yAcceleration = 30*acceleration.y;
+    sparks.particleBirthRate = 5 + (abs(acceleration.y)+abs(acceleration.x))*30;
     
 }
 
@@ -221,7 +223,6 @@
 
 -(void) showCredits {
     
-    [self removeAdButton];
     [menuPlayer stop];
     
     SKAction *changeView = [SKAction runBlock:^{
@@ -231,6 +232,8 @@
         
         [self.view presentScene:creditView transition:trans];
     }];
+    
+    [[ViewController getSingleton] hideAd];
     
     [self runAction:[SKAction sequence:@[[SKAction rotateByAngle:1 duration:3], changeView]]];
 }
@@ -260,6 +263,8 @@
         [self.view presentScene:nextScene transition:trans];
         
     }];
+    
+    [[ViewController getSingleton] hideAd];
 
     [self runAction:[SKAction sequence:@[[SKAction rotateByAngle:-1 duration:3], changeView]]];
 }
@@ -267,7 +272,7 @@
 
 
 
-#pragma mark removing ad button
+#pragma mark add button stuff
 
 -(void)removeAdButton {
     [UIView animateWithDuration:.5 animations:^{
@@ -286,7 +291,7 @@
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         
         removeAdButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        removeAdButton.frame = CGRectMake(0, 5, self.frame.size.width, 50);
+        removeAdButton.frame = CGRectMake(0, 50, self.frame.size.width, 50);
         [removeAdButton setTitle:NSLocalizedString(@"Remove Ads", nil) forState:UIControlStateNormal];
         removeAdButton.titleLabel.font = [UIFont systemFontOfSize:18];
         removeAdButton.alpha = 0;
@@ -347,8 +352,8 @@
 -(void)removeAdPurchased {
     
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"removeAd"];
-    [self removeAdButton];
-    [[ViewController getSingleton] removeAd];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[ViewController getSingleton] hideAd];
     [self removeAdButton];
 
 }

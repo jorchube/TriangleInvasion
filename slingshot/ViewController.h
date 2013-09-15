@@ -15,7 +15,8 @@
 @property (weak, nonatomic) IBOutlet ADBannerView *adBanner;
 
 +(ViewController*)getSingleton;
--(void)removeAd;
+-(void)hideAd;
+-(void)showAd;
 -(void)pauseGame;
 -(void)resumeGame;
 

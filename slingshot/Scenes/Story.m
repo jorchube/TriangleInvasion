@@ -261,20 +261,15 @@
     /* run */
     [self runAction:story completion:^{
         
-        SKScene *nextScene;
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        nextScene = [Game sceneWithSize:self.view.bounds.size];
-        
+        SKScene *nextScene = [Game sceneWithSize:self.view.bounds.size];
         nextScene.scaleMode = SKSceneScaleModeAspectFill;
         
-        SKAction *changeView = [SKAction runBlock:^{
+        [self runAction:[SKAction runBlock:^{
             
             SKTransition *trans = [SKTransition fadeWithDuration:1];
             [self.view presentScene:nextScene transition:trans];
             
-        }];
-        
-        [self runAction:changeView];
+        }]];
     }];
     
 }
