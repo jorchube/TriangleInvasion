@@ -7,10 +7,9 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import <StoreKit/StoreKit.h>
 #import "SceneImplementation.h"
 
-@interface MainMenu : SceneImplementation <SKPhysicsContactDelegate,SKProductsRequestDelegate,SKPaymentTransactionObserver, UIAccelerometerDelegate,UIAlertViewDelegate>
+@interface MainMenu : SceneImplementation <SKPhysicsContactDelegate, UIAccelerometerDelegate>
 
 
 @end

@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 #import <iAd/iAd.h>
+#import <StoreKit/StoreKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <SKProductsRequestDelegate,SKPaymentTransactionObserver,UIAlertViewDelegate>
 
 @property (readonly) BOOL musicEnable;
 @property (weak, nonatomic) IBOutlet ADBannerView *adBanner;
@@ -23,5 +24,8 @@
 -(void)resumeGame;
 
 - (IBAction)volumeChange:(id)sender;
+
+-(void)removeAdButton;
+-(void)showRemoveAdButton;
 
 @end

@@ -13,7 +13,6 @@
 #import "Deadline.h"
 #import "Story.h"
 #import "ViewController.h"
-#import <StoreKit/StoreKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMotion/CoreMotion.h>
 
@@ -26,20 +25,18 @@
     CMMotionManager *motionManager;
     SKEmitterNode *sparks;
     float initialAccelerationX,initialAccelerationY;
-    
-    //variable for the payment process
-    SKPayment *payment;
 }
 @end
 
 @implementation MainMenu
 
-static UIButton *removeAdButton;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         
         [[ViewController getSingleton] showAd];
+        [[ViewController getSingleton] showRemoveAdButton];
+        
         
         motionManager = [[CMMotionManager alloc] init];
         motionManager.accelerometerUpdateInterval = .2;
@@ -240,7 +237,7 @@ static UIButton *removeAdButton;
 
 -(void) setNewGame {
     
-    [self removeAdButton];
+    [[ViewController getSingleton] removeAdButton];
     [self stopMusic];
 
     
@@ -272,108 +269,5 @@ static UIButton *removeAdButton;
 
 
 
-#pragma mark add button stuff
-
--(void)removeAdButton {
-    [UIView animateWithDuration:.5 animations:^{
-        removeAdButton.alpha = 0;
-    } completion:^(BOOL finished) {
-        [removeAdButton setHidden:YES];
-    }];
-}
-
--(void)didMoveToView:(SKView *)view {
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if (![defaults boolForKey:@"removeAd"]) {
-
-        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-        
-        if (removeAdButton == nil){
-        
-            removeAdButton = [UIButton buttonWithType:UIButtonTypeSystem];
-            removeAdButton.frame = CGRectMake(0, 65, self.frame.size.width, 50);
-            [removeAdButton setTitle:NSLocalizedString(@"Remove Ads", nil) forState:UIControlStateNormal];
-            removeAdButton.titleLabel.font = [UIFont systemFontOfSize:18];
-            removeAdButton.alpha = 0;
-            [removeAdButton addTarget:self action:@selector(buyRemoveAd) forControlEvents:UIControlEventTouchUpInside];
-            
-            [self.view addSubview:removeAdButton];
-            
-        }
-        
-        [removeAdButton setHidden:NO];
-        [UIView animateWithDuration:1 animations:^{
-            removeAdButton.alpha = 1;
-        }];
-
-    }
-}
-
--(void)buyRemoveAd {
-    
-    //For removing the ad without buying it
-    //[self removeAdPurchased];
-    //
-    
-    NSSet *productID = [NSSet setWithObjects:@"removeAd", nil];
-    SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:productID];
-    request.delegate = self;
-    [request start];
-    
-}
-
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
-
-    SKProduct *product = [response.products firstObject];
-    payment = [SKPayment paymentWithProduct:product];
-    
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:product.localizedTitle
-                                                      message:product.localizedDescription
-                                                     delegate:self
-                                            cancelButtonTitle:@"OK"
-                                            otherButtonTitles:nil];
-    [message show];
-    
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (payment != nil) {
-        [[SKPaymentQueue defaultQueue] addPayment:payment];
-    }
-}
-
-
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions {
-    
-    for (SKPaymentTransaction * transaction in transactions) {
-        switch (transaction.transactionState)
-        {
-            case SKPaymentTransactionStatePurchased:
-                [self removeAdPurchased];
-                NSLog(@"Remove Ad bought");
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                break;
-            case SKPaymentTransactionStateFailed:
-                NSLog(@"Transaction error: %@", transaction.error.localizedDescription);
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-                break;
-            case SKPaymentTransactionStateRestored:
-                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-            default:
-                break;
-        }
-    };
-}
-
--(void)removeAdPurchased {
-    
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"removeAd"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [[ViewController getSingleton] hideAd];
-    [self removeAdButton];
-
-}
 
 @end
