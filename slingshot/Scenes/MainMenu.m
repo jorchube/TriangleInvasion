@@ -245,7 +245,7 @@
     SKScene *nextScene;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if ([defaults objectForKey:@"story"]){
+    if (![defaults objectForKey:@"story"]){
         
         [[ViewController getSingleton] hideVolumeButton];
         nextScene = [Story sceneWithSize:self.view.bounds.size];
