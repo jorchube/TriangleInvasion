@@ -134,7 +134,7 @@ static SKAction *shoot;
 
 -(void) shotSling {
     
-    [self runAction:shotSound];
+    [self runAction:shoot];
 	
     Sling *sling = idleSling;
     

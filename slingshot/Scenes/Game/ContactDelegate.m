@@ -101,7 +101,7 @@
     
     [sparks runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
     
-    NSLog(@"child count %d", [[delegatorID children]count]);
+    //NSLog(@"child count %d", [[delegatorID children]count]);
     [delegatorID addChild:sparks];
     [delegatorID increaseComboCounter];
     [delegatorID updateScore:score_slingHitsTriangle];
