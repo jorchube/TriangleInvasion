@@ -28,8 +28,8 @@
 		7C623F8217E1454F00E2F1E4 /* GameKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C623F8117E1454F00E2F1E4 /* GameKit.m */; };
 		7C623F8417E1491800E2F1E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C623F8317E1491800E2F1E4 /* StoreKit.framework */; };
 		7C623F8617E1CCE400E2F1E4 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C623F8517E1CCE400E2F1E4 /* iAd.framework */; };
-		7C6A96D017E61B4F0093B30B /* Shoot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7C6A96CF17E61B4F0093B30B /* Shoot.mp3 */; };
 		7C6A96D217E61CD90093B30B /* collisionSparks.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7C2AAAF117DE83DF00A9AD29 /* collisionSparks.sks */; };
+		7C883DCC17E75BBD0010C95C /* Shoot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7C883DCB17E75BBD0010C95C /* Shoot.mp3 */; };
 		7C9189E617E11CEF007F3CBC /* universe.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7C9189E417E11CEF007F3CBC /* universe.sks */; };
 		7C9189EA17E13AA9007F3CBC /* fipps.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C9189E917E13AA9007F3CBC /* fipps.ttf */; };
 		7CB2513F17DA1DDC00FA592D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB2513E17DA1DDC00FA592D /* Foundation.framework */; };
@@ -120,8 +120,8 @@
 		7C623F8117E1454F00E2F1E4 /* GameKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameKit.m; path = Helpers/GameKit.m; sourceTree = "<group>"; };
 		7C623F8317E1491800E2F1E4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		7C623F8517E1CCE400E2F1E4 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
-		7C6A96CF17E61B4F0093B30B /* Shoot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Shoot.mp3; path = Resources/Sounds/Shoot.mp3; sourceTree = "<group>"; };
 		7C74DCC217E3EFCC000499A2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7C883DCB17E75BBD0010C95C /* Shoot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Shoot.mp3; path = Resources/Sounds/Shoot.mp3; sourceTree = "<group>"; };
 		7C9189E417E11CEF007F3CBC /* universe.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = universe.sks; path = Resources/universe.sks; sourceTree = "<group>"; };
 		7C9189E917E13AA9007F3CBC /* fipps.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = fipps.ttf; path = fonts/fipps.ttf; sourceTree = "<group>"; };
 		7CB0FD8F17E5FC8900785934 /* SceneImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneImplementation.h; path = Helpers/SceneImplementation.h; sourceTree = "<group>"; };
@@ -370,10 +370,10 @@
 		7CDD204317E212340039F9E3 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				7C883DCB17E75BBD0010C95C /* Shoot.mp3 */,
 				7CE8D7B917E66D5B0054CB1B /* Story.mp3 */,
 				7CFB362B17E6231F00BCB235 /* CollisionTriangle.mp3 */,
 				7CFB362917E6229A00BCB235 /* Collision.mp3 */,
-				7C6A96CF17E61B4F0093B30B /* Shoot.mp3 */,
 				7C404EF917E4E00700C3EB33 /* Game.mp3 */,
 				7C404EF717E4D5F100C3EB33 /* Credits.mp3 */,
 				7C404EF517E4CB6A00C3EB33 /* MainMenu.mp3 */,
@@ -512,7 +512,6 @@
 				7CE570D117DF8BD500F90752 /* Main_iPad.storyboard in Resources */,
 				7C1193E017DFD4F100D4D5C0 /* credits.sks in Resources */,
 				7CFB362A17E6229A00BCB235 /* Collision.mp3 in Resources */,
-				7C6A96D017E61B4F0093B30B /* Shoot.mp3 in Resources */,
 				7CFB362C17E6231F00BCB235 /* CollisionTriangle.mp3 in Resources */,
 				7CDD205217E2374F0039F9E3 /* menuSpark.png in Resources */,
 				B548760217E6451400CB0871 /* story-fg-c.png in Resources */,
@@ -537,6 +536,7 @@
 				7C9189E617E11CEF007F3CBC /* universe.sks in Resources */,
 				B5BFA21317E741640049FA29 /* volumeON@2x.png in Resources */,
 				7C404EF817E4D5F100C3EB33 /* Credits.mp3 in Resources */,
+				7C883DCC17E75BBD0010C95C /* Shoot.mp3 in Resources */,
 				7CE570D217DF8BD500F90752 /* Main_iPhone.storyboard in Resources */,
 				7C404EFA17E4E00800C3EB33 /* Game.mp3 in Resources */,
 				7CB2514B17DA1DDD00FA592D /* InfoPlist.strings in Resources */,
@@ -720,8 +720,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jordi Chulia (9RL5HTHXQS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jordi Chulia (9RL5HTHXQS)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "slingshot/slingshot-Prefix.pch";
 				INFOPLIST_FILE = "slingshot/slingshot-Info.plist";
@@ -737,8 +737,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jordi Chulia (9RL5HTHXQS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jordi Chulia (9RL5HTHXQS)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "slingshot/slingshot-Prefix.pch";
 				INFOPLIST_FILE = "slingshot/slingshot-Info.plist";

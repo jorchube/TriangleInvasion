@@ -30,6 +30,7 @@ static Sling *leftBonusSling;
 static SKShapeNode *hint;
 static __weak SKScene *lastScene;
 static Sling *bonusSlings[8];
+static SKAction *shoot;
 
 
 -(id) initWithFrame: (CGRect) frame{
@@ -63,6 +64,11 @@ static Sling *bonusSlings[8];
 		
 		[self setPhysicsBody:pb];
         self.position = slingshotPosition;
+        
+        if (!shoot) {
+            shoot = [SKAction playSoundFileNamedCheckingMusicEnable:@"Shoot.mp3" waitForCompletion:NO];
+        }
+        
 	}
 	return self;
 }
@@ -125,7 +131,7 @@ static Sling *bonusSlings[8];
 
 -(void) shotSling {
     
-    [self runAction:[SKAction playSoundFileNamedCheckingMusicEnable:@"Shoot.mp3" waitForCompletion:NO]];
+    [self runAction:shoot];
 	
     Sling *sling = idleSling;
     
