@@ -13,12 +13,20 @@
 @interface Story() {
     SKSpriteNode *bg_1;
     SKSpriteNode *bg_2;
-    SKSpriteNode *fg_1;
+    /*SKSpriteNode *fg_1;
     SKSpriteNode *fg_2;
     SKSpriteNode *fg_3;
     SKSpriteNode *fg_4;
     SKSpriteNode *fg_5;
-    SKSpriteNode *fg_you;
+    SKSpriteNode *fg_you;*/
+    
+    SKShapeNode *fg_1;
+    SKShapeNode *fg_2;
+    SKShapeNode *fg_3;
+    SKShapeNode *fg_4;
+    SKShapeNode *fg_5;
+    SKShapeNode *fg_you;
+    
     SKLabelNode *textLabel1;
     SKLabelNode *textLabel2;
     SKLabelNode *textLabel3;
@@ -75,6 +83,28 @@
         textLabel3.position = CGPointMake(160,360);
         textLabel3.zPosition = 30;
         
+        fg_1 = [[SKShapeNode alloc]init];
+        fg_2 = [[SKShapeNode alloc]init];
+        fg_3 = [[SKShapeNode alloc]init];
+        fg_4 = [[SKShapeNode alloc]init];
+        fg_5 = [[SKShapeNode alloc]init];
+        fg_you = [[SKShapeNode alloc]init];
+        
+        
+        fg_1.path = CGPathCreateWithEllipseInRect(CGRectMake(0, 0, 200, 200), nil);
+        fg_2.path = CGPathCreateWithEllipseInRect(CGRectMake(0, 0, 200, 200), nil);
+        fg_3.path = CGPathCreateWithEllipseInRect(CGRectMake(0, 0, 200, 200), nil);
+        fg_4.path = CGPathCreateWithEllipseInRect(CGRectMake(0, 0, 200, 200), nil);
+        fg_5.path = CGPathCreateWithEllipseInRect(CGRectMake(0, 0, 200, 200), nil);
+        fg_you.path = CGPathCreateWithEllipseInRect(CGRectMake(0, 0, 200, 200), nil);
+        
+        fg_1.fillColor = [SKColor whiteColor];
+        fg_2.fillColor = [SKColor whiteColor];
+        fg_3.fillColor = [SKColor whiteColor];
+        fg_4.fillColor = [SKColor whiteColor];
+        fg_5.fillColor = [SKColor whiteColor];
+        fg_you.fillColor = [SKColor whiteColor];
+        
         /*
         bg_1 = [[SKSpriteNode alloc] initWithImageNamed:@"story-bg-1.png"];
         bg_2 = [[SKSpriteNode alloc] initWithImageNamed:@"story-bg-2.png"];
@@ -83,22 +113,22 @@
         fg_3 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-3-noface.png"];
         */
         
-        bg_1 = [[SKSpriteNode alloc] initWithImageNamed:@"story-bg-noballs.png"];
-        bg_2 = [[SKSpriteNode alloc] initWithImageNamed:@"story-bg-2-noballs.png"];
-        fg_1 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-a.png"];
+        bg_1 = [[SKSpriteNode alloc] initWithImageNamed:@"story-bg-noblur.png"];
+        bg_2 = [[SKSpriteNode alloc] initWithImageNamed:@"story-bg-2-noblur.png"];
+        /*fg_1 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-a.png"];
         fg_2 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-b.png"];
         fg_3 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-c.png"];
         fg_4 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-d.png"];
         fg_5 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-e.png"];
         fg_you = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-3-noface.png"];
-        
+        */
         double sc = 0.18;
         
         [bg_1 setXScale:sc];
         [bg_1 setYScale:sc];
         [bg_2 setXScale:sc];
         [bg_2 setYScale:sc];
-        [fg_1 setXScale:sc];
+        /*[fg_1 setXScale:sc];
         [fg_1 setYScale:sc];
         [fg_2 setXScale:sc];
         [fg_2 setYScale:sc];
@@ -109,16 +139,39 @@
         [fg_5 setXScale:sc];
         [fg_5 setYScale:sc];
         [fg_you setXScale:sc];
-        [fg_you setYScale:sc];
+        [fg_you setYScale:sc];*/
+        
+        [fg_1 setXScale:0.5];
+        [fg_1 setYScale:0.5];
+        [fg_2 setXScale:0.2];
+        [fg_2 setYScale:0.2];
+        [fg_3 setXScale:0.4];
+        [fg_3 setYScale:0.4];
+        [fg_4 setXScale:0.3];
+        [fg_4 setYScale:0.3];
+        [fg_5 setXScale:0.4];
+        [fg_5 setYScale:0.4];
+        [fg_you setXScale:0.75];
+        [fg_you setYScale:0.75];
+        
         
         [self putOnPosition:bg_1];
         [self putOnPosition:bg_2];
-        [self putOnPosition:fg_1];
+        /*[self putOnPosition:fg_1];
         [self putOnPosition:fg_2];
         [self putOnPosition:fg_3];
         [self putOnPosition:fg_4];
         [self putOnPosition:fg_5];
-        [self putOnPosition:fg_you];
+        [self putOnPosition:fg_you];*/
+        
+        fg_1.position = CGPointMake(10, 40);
+        fg_2.position = CGPointMake(100, 60);
+        fg_3.position = CGPointMake(140, 50);
+        fg_4.position = CGPointMake(200, 50);
+        fg_5.position = CGPointMake(220, 40);
+        fg_you.position = CGPointMake(CGRectGetMidX(self.frame)-fg_you.frame.size.width/2,
+                                      25);
+        
         
         bg_1.alpha = 0;
         bg_2.alpha = 0;
@@ -156,7 +209,7 @@
     return self;
 }
 
--(void) putOnPosition: (SKSpriteNode*) node {
+-(void) putOnPosition: (SKNode*) node {
     node.position = CGPointMake(node.position.x+150,
                                 node.position.y+150);
 }
@@ -194,7 +247,7 @@
                                           jumpDown
                                           ]];
     
-    SKAction *jump = [SKAction repeatAction:jumpMoves count:story_timeForEachCut/jumpTime];
+    SKAction *jump = [SKAction repeatAction:jumpMoves count:(story_timeForEachCut-2)/jumpTime];
     
 #define miniMoveTime 0.05
     SKAction *shake = [SKAction sequence:@[
@@ -205,13 +258,38 @@
                                            [SKAction moveByX:-2 y:2 duration:miniMoveTime],
                                            [SKAction moveByX:1 y:-3 duration:miniMoveTime],
                                            ]];
-    SKAction *fear = [SKAction repeatAction:shake count:story_timeForEachCut/miniMoveTime];
+    SKAction *fear = [SKAction repeatAction:shake count:(story_timeForEachCut-4.5)/miniMoveTime];
     SKAction *shakingOffset = [SKAction waitForDuration:0.2 withRange:0.4];
     
     SKAction *soScaryYouShake = [SKAction sequence:@[
                                                      shakingOffset,
                                                      fear
                                                      ]];
+    
+    SKAction *armyShow = [SKAction sequence:@[
+                                              [SKAction waitForDuration:2 withRange:3],
+                                              show,
+                                              ]];
+    
+    SKAction *uniformizeArmy = [SKAction runBlock:^{
+        #define scale 0.25
+        fg_1.xScale = scale;
+        fg_1.yScale = scale;
+        fg_2.xScale = scale;
+        fg_2.yScale = scale;
+        fg_3.xScale = scale;
+        fg_3.yScale = scale;
+        fg_4.xScale = scale;
+        fg_4.yScale = scale;
+        fg_5.xScale = scale;
+        fg_5.yScale = scale;
+        #define yAxis 150
+        fg_1.position = CGPointMake((CGRectGetMaxX(self.frame)/6)*1-(100*scale),yAxis);
+        fg_2.position = CGPointMake((CGRectGetMaxX(self.frame)/6)*2-(100*scale),yAxis);
+        fg_3.position = CGPointMake((CGRectGetMaxX(self.frame)/6)*3-(100*scale),yAxis);
+        fg_4.position = CGPointMake((CGRectGetMaxX(self.frame)/6)*4-(100*scale),yAxis);
+        fg_5.position = CGPointMake((CGRectGetMaxX(self.frame)/6)*5-(100*scale),yAxis);
+    }];
     
     //This is the one to use in the story
     SKAction *everybodyJumps = [SKAction runBlock:^{
@@ -351,14 +429,39 @@
         [textLabel3 runAction:hide];
     }];
     SKAction *scene3In = [SKAction runBlock:^{
+        [self runAction:uniformizeArmy];
         [fg_you runAction:show];
         [fg_you runAction:moveUp];
+        
+        [fg_1 runAction:moveUp];
+        [fg_2 runAction:moveUp];
+        [fg_3 runAction:moveUp];
+        [fg_4 runAction:moveUp];
+        [fg_5 runAction:moveUp];
+        
+        /*[fg_1 runAction:show];
+        [fg_2 runAction:show];
+        [fg_3 runAction:show];
+        [fg_4 runAction:show];
+        [fg_5 runAction:show];*/
+        
+        [fg_1 runAction:armyShow];
+        [fg_2 runAction:armyShow];
+        [fg_3 runAction:armyShow];
+        [fg_4 runAction:armyShow];
+        [fg_5 runAction:armyShow];
+        
         [textLabel1 runAction:show];
         [textLabel2 runAction:show];
         [textLabel3 runAction:show];
     }];
     SKAction *scene3Out = [SKAction runBlock:^{
-        [fg_you runAction:hide];
+        /*[fg_you runAction:hide];
+        [fg_1 runAction:hide];
+        [fg_2 runAction:hide];
+        [fg_3 runAction:hide];
+        [fg_4 runAction:hide];
+        [fg_5 runAction:hide];*/
         [textLabel1 runAction:hide];
         [textLabel2 runAction:hide];
         [textLabel3 runAction:hide];

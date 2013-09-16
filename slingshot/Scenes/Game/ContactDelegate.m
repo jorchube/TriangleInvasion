@@ -11,6 +11,13 @@
 #import "Game.h"
 #import "SKAction+Sound.h"
 
+@interface ContactDelegate() {
+    SKAction * collisionSound;
+    SKAction * collisionTrianglesSound;
+}
+
+@end
+
 @implementation ContactDelegate
 
 @synthesize physicsWorld;
@@ -29,6 +36,8 @@
 	if (self) {
 		self.physicsWorld = pWorld;
         self.delegatorID = delID;
+        collisionSound = [SKAction playSoundFileNamedCheckingMusicEnable:@"Collision.mp3" waitForCompletion:NO];
+        collisionTrianglesSound = [SKAction playSoundFileNamedCheckingMusicEnable:@"CollisionTriangle.mp3" waitForCompletion:NO];
 	}
 	return self;
 }
@@ -79,7 +88,7 @@
 
 -(void) sling: (SKPhysicsBody*) sling hitSimpleObject: (SKPhysicsBody*) body At: (CGPoint) point {
     
-    [delegatorID runAction:[SKAction playSoundFileNamedCheckingMusicEnable:@"Collision.mp3" waitForCompletion:NO]];
+    [delegatorID runAction:collisionSound];
     
     [self killSimpleObject:body withTime:timeForObjectToDisappearAfterHit];
     [(Triangle*)body.node setIsAlive:NO];
@@ -92,6 +101,7 @@
     
     [sparks runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
     
+    NSLog(@"child count %d", [[delegatorID children]count]);
     [delegatorID addChild:sparks];
     [delegatorID increaseComboCounter];
     [delegatorID updateScore:score_slingHitsTriangle];
@@ -99,7 +109,7 @@
 
 -(void) collisionBetweenSimpleObjects: (SKPhysicsBody*) bodyA and: (SKPhysicsBody*) bodyB At: (CGPoint) point {
     
-    [delegatorID runAction:[SKAction playSoundFileNamedCheckingMusicEnable:@"CollisionTriangle.mp3" waitForCompletion:NO]];
+    [delegatorID runAction:collisionTrianglesSound];
     
     [self killSimpleObject:bodyA withTime:timeForObjectToDisappearAfterHit];
     [self killSimpleObject:bodyB withTime:timeForObjectToDisappearAfterHit];
@@ -153,7 +163,7 @@
         
         [delegatorID addChild:sparks];
         
-        [delegatorID runAction:[SKAction playSoundFileNamedCheckingMusicEnable:@"CollisionTriangle.mp3" waitForCompletion:NO]];
+        [delegatorID runAction:collisionTrianglesSound];
   
     }
     else {

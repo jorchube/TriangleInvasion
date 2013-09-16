@@ -17,6 +17,7 @@
     CGPoint touchEndPos;
     Boolean touchMoved;
     CGPoint slingshotPosition;
+    SKAction *shotSound;
 }
 @end
 
@@ -44,6 +45,8 @@ static Sling *bonusSlings[8];
 		self.strokeColor = [SKColor whiteColor];
 		self.fillColor = [SKColor whiteColor];
 		[self setPowerup:pow_none];
+        
+        shotSound = [SKAction playSoundFileNamedCheckingMusicEnable:@"Shoot.mp3" waitForCompletion:NO];
 		
 		self.path = CGPathCreateWithEllipseInRect(CGRectMake(0.0,
                                                              0.0,
@@ -125,7 +128,7 @@ static Sling *bonusSlings[8];
 
 -(void) shotSling {
     
-    [self runAction:[SKAction playSoundFileNamedCheckingMusicEnable:@"Shoot.mp3" waitForCompletion:NO]];
+    [self runAction:shotSound];
 	
     Sling *sling = idleSling;
     
