@@ -70,6 +70,8 @@
 		B548760617E6455D00CB0871 /* story-fg-d.png in Resources */ = {isa = PBXBuildFile; fileRef = B548760517E6455D00CB0871 /* story-fg-d.png */; };
 		B548760817E6547B00CB0871 /* story-bg-2-noballs.png in Resources */ = {isa = PBXBuildFile; fileRef = B548760717E6547B00CB0871 /* story-bg-2-noballs.png */; };
 		B574949217E13089004C82D7 /* deadlineSparks.sks in Resources */ = {isa = PBXBuildFile; fileRef = B574949117E13089004C82D7 /* deadlineSparks.sks */; };
+		B5BFA21217E741640049FA29 /* volumeOFF@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5BFA21017E741640049FA29 /* volumeOFF@2x.png */; };
+		B5BFA21317E741640049FA29 /* volumeON@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5BFA21117E741640049FA29 /* volumeON@2x.png */; };
 		B5F092B217E52277009FE14C /* story-fg-1-2-noface.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F092B017E52276009FE14C /* story-fg-1-2-noface.png */; };
 		B5F092B317E52277009FE14C /* story-fg-3-noface.png in Resources */ = {isa = PBXBuildFile; fileRef = B5F092B117E52277009FE14C /* story-fg-3-noface.png */; };
 /* End PBXBuildFile section */
@@ -169,6 +171,8 @@
 		B548760517E6455D00CB0871 /* story-fg-d.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "story-fg-d.png"; path = "Resources/images/story-fg-d.png"; sourceTree = "<group>"; };
 		B548760717E6547B00CB0871 /* story-bg-2-noballs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "story-bg-2-noballs.png"; path = "Resources/images/story-bg-2-noballs.png"; sourceTree = "<group>"; };
 		B574949117E13089004C82D7 /* deadlineSparks.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = deadlineSparks.sks; path = Resources/deadlineSparks.sks; sourceTree = "<group>"; };
+		B5BFA21017E741640049FA29 /* volumeOFF@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "volumeOFF@2x.png"; path = "Resources/images/volumeOFF@2x.png"; sourceTree = "<group>"; };
+		B5BFA21117E741640049FA29 /* volumeON@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "volumeON@2x.png"; path = "Resources/images/volumeON@2x.png"; sourceTree = "<group>"; };
 		B5D6348917E1380A0065FF8D /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5D6348A17E1388A0065FF8D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B5F092B017E52276009FE14C /* story-fg-1-2-noface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "story-fg-1-2-noface.png"; path = "Resources/images/story-fg-1-2-noface.png"; sourceTree = "<group>"; };
@@ -382,6 +386,8 @@
 			children = (
 				7C404EFE17E5FA1700C3EB33 /* volumeOFF.png */,
 				7C404EFF17E5FA1700C3EB33 /* volumeON.png */,
+				B5BFA21017E741640049FA29 /* volumeOFF@2x.png */,
+				B5BFA21117E741640049FA29 /* volumeON@2x.png */,
 				B54875F917E6451400CB0871 /* story-bg-noballs.png */,
 				B548760717E6547B00CB0871 /* story-bg-2-noballs.png */,
 				B54875FA17E6451400CB0871 /* story-fg-a.png */,
@@ -514,6 +520,7 @@
 				7C9189EA17E13AA9007F3CBC /* fipps.ttf in Resources */,
 				B518BE3D17E4E19D00637E34 /* story-fg-2.png in Resources */,
 				B548760617E6455D00CB0871 /* story-fg-d.png in Resources */,
+				B5BFA21217E741640049FA29 /* volumeOFF@2x.png in Resources */,
 				B54875FF17E6451400CB0871 /* story-bg-noballs.png in Resources */,
 				B548760417E6451400CB0871 /* story-fg-e.png in Resources */,
 				B574949217E13089004C82D7 /* deadlineSparks.sks in Resources */,
@@ -528,6 +535,7 @@
 				7CDD205117E2374F0039F9E3 /* line.png in Resources */,
 				B518BE3B17E4E19D00637E34 /* story-bg-2.png in Resources */,
 				7C9189E617E11CEF007F3CBC /* universe.sks in Resources */,
+				B5BFA21317E741640049FA29 /* volumeON@2x.png in Resources */,
 				7C404EF817E4D5F100C3EB33 /* Credits.mp3 in Resources */,
 				7CE570D217DF8BD500F90752 /* Main_iPhone.storyboard in Resources */,
 				7C404EFA17E4E00800C3EB33 /* Game.mp3 in Resources */,
