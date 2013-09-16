@@ -90,6 +90,8 @@
     sparks.targetNode = delegatorID;
     sparks.particleColor = ((SKShapeNode*)body.node).strokeColor;
     
+    [sparks runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
+    
     [delegatorID addChild:sparks];
     [delegatorID increaseComboCounter];
     [delegatorID updateScore:score_slingHitsTriangle];
@@ -111,6 +113,7 @@
     sparksA.numParticlesToEmit = 5;
     sparksA.targetNode = delegatorID;
     sparksA.particleColor = ((SKShapeNode*)bodyA.node).strokeColor;
+    [sparksA runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
     
     SKEmitterNode *sparksB = [NSKeyedUnarchiver unarchiveObjectWithFile:
                               [[NSBundle mainBundle] pathForResource:@"collisionSparks" ofType:@"sks"]];
@@ -118,6 +121,7 @@
     sparksB.numParticlesToEmit = 5;
     sparksB.targetNode = delegatorID;
     sparksB.particleColor = ((SKShapeNode*)bodyB.node).strokeColor;
+    [sparksB runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
     
     [delegatorID addChild:sparksA];
     [delegatorID addChild:sparksB];
@@ -141,9 +145,12 @@
         
         SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
                                 [[NSBundle mainBundle] pathForResource:@"deadlineSparks" ofType:@"sks"]];
+        
         sparks.position = point;
         sparks.targetNode = delegatorID;
         sparks.particleColor = ((SKShapeNode*)body.node).strokeColor;
+        [sparks runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
+        
         [delegatorID addChild:sparks];
         
         [delegatorID runAction:[SKAction playSoundFileNamedCheckingMusicEnable:@"CollisionTriangle.mp3" waitForCompletion:NO]];

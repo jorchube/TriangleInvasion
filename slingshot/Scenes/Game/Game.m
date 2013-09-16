@@ -211,6 +211,7 @@
     idleSling = [[Sling alloc] init];
 	idleSling.position = pos;
 	[self addChild:idleSling];
+    //NSLog(@"children count: %d", [[self children] count]);
 }
 
 
@@ -229,6 +230,7 @@
 	
 	object.position = CGPointMake(Xpos, Ypos);
 	[self addChild:object];
+    //NSLog(@"children count: %d", [[self children] count]);
 }
 
 #pragma mark touch detection

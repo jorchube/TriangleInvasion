@@ -28,7 +28,7 @@ static Sling *idleSling;
 static Sling *rightBonusSling;
 static Sling *leftBonusSling;
 static SKShapeNode *hint;
-static SKScene *lastScene;
+static __weak SKScene *lastScene;
 static Sling *bonusSlings[8];
 
 
