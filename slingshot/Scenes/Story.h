@@ -11,6 +11,6 @@
 
 @interface Story : SceneImplementation
 
-
+-(id)initWithSize:(CGSize)size nextScene:(int) nextScene;
 
 @end

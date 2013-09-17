@@ -8,6 +8,7 @@
 
 #import "Story.h"
 #import "Game.h"
+#import "MainMenu.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface Story() {
@@ -35,6 +36,7 @@
     SKAction* scene3;
     
     AVAudioPlayer *storyPlayer;
+    int nextSceneToShow;
 }
 
 @end
@@ -42,7 +44,7 @@
 @implementation Story
 
 
--(id)initWithSize:(CGSize)size {
+-(id)initWithSize:(CGSize)size nextScene:(int)next {
     if (self = [super initWithSize:size]) {
         
         [self setMusicURL:@"Story.mp3"];
@@ -56,7 +58,7 @@
         [sparks advanceSimulationTime:100];
         [self addChild:sparks];
         
-        
+        nextSceneToShow = next;
         
         //SKShapeNode *planet = [SKShapeNode ]
         
@@ -495,18 +497,49 @@
                                            ]];
     
     /* run */
-    [self runAction:story completion:^{
-        
-        SKScene *nextScene = [Game sceneWithSize:self.view.bounds.size];
-        nextScene.scaleMode = SKSceneScaleModeAspectFill;
-        
-        [self runAction:[SKAction runBlock:^{
+    if (nextSceneToShow == next_game){
+        [self runAction:story completion:^{
             
-            SKTransition *trans = [SKTransition fadeWithDuration:1];
-            [self.view presentScene:nextScene transition:trans];
+            SKScene *nextScene = [Game sceneWithSize:self.view.bounds.size];
+            nextScene.scaleMode = SKSceneScaleModeAspectFill;
             
-        }]];
-    }];
+            [self runAction:[SKAction runBlock:^{
+                
+                SKTransition *trans = [SKTransition fadeWithDuration:1];
+                [self.view presentScene:nextScene transition:trans];
+                
+            }]];
+        }];
+    }
+    
+    else if( nextSceneToShow == next_mainmenu){
+        [self runAction:story completion:^{
+            
+            SKScene *nextScene = [MainMenu sceneWithSize:self.view.bounds.size];
+            nextScene.scaleMode = SKSceneScaleModeAspectFill;
+            
+            [self runAction:[SKAction runBlock:^{
+                
+                SKTransition *trans = [SKTransition fadeWithDuration:1];
+                [self.view presentScene:nextScene transition:trans];
+                
+            }]];
+        }];
+    }
+    else { /* default if no valid next */
+        [self runAction:story completion:^{
+            
+            SKScene *nextScene = [MainMenu sceneWithSize:self.view.bounds.size];
+            nextScene.scaleMode = SKSceneScaleModeAspectFill;
+            
+            [self runAction:[SKAction runBlock:^{
+                
+                SKTransition *trans = [SKTransition fadeWithDuration:1];
+                [self.view presentScene:nextScene transition:trans];
+                
+            }]];
+        }];
+    }
     
 }
 
