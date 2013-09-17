@@ -440,6 +440,7 @@
 -(void) goMainMenuFromEnd {
     
     
+    [[ViewController getSingleton] hideVolumeButton];
     [self stopMusic];
     
     self.view.paused = false;

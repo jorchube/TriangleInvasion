@@ -25,6 +25,8 @@
         [self setMusicURL:@"Credits.mp3"];
         [self startMusic];
         
+        [[ViewController getSingleton] showVolumeButton];
+        
         self.backgroundColor = [SKColor blackColor];
         
         [self addLabels];
@@ -150,13 +152,13 @@
 -(void)goBack {
     
     [self stopMusic];
+    [[ViewController getSingleton] hideVolumeButton];
     
     SKTransition *trans = [SKTransition fadeWithDuration:1];
     MainMenu *scene =    [MainMenu sceneWithSize:self.view.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     [self.view presentScene:scene transition:trans];
-
     
 }
 

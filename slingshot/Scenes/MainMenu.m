@@ -22,37 +22,19 @@
     Sling *sling;
     SKSpriteNode *hand;
     BOOL transitioning;
-    CMMotionManager *motionManager;
     SKEmitterNode *sparks;
-    float initialAccelerationX,initialAccelerationY;
+    UIButton *playButton;
 }
 @end
 
 @implementation MainMenu
 
-
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         
+        [[ViewController getSingleton] showVolumeButton];
         [[ViewController getSingleton] showAd];
         [[ViewController getSingleton] showRemoveAdButton];
-        
-        
-        motionManager = [[CMMotionManager alloc] init];
-        motionManager.accelerometerUpdateInterval = .2;
-        
-        initialAccelerationX = -100;
-        initialAccelerationY = -100;
-        
-        [motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue]
-                                                 withHandler:^(CMAccelerometerData  *accelerometerData, NSError *error) {
-                                                     [self outputAccelertionData:accelerometerData.acceleration];
-                                                     if(error){
-                                                         
-                                                         NSLog(@"%@", error);
-                                                     }
-                                                 }];
-    
     
     
         transitioning = false;
@@ -89,22 +71,6 @@
         
     }
     return self;
-}
-
-
-
--(void)outputAccelertionData:(CMAcceleration)acceleration
-{
-
-    if (initialAccelerationX == -100 || initialAccelerationY == -100) {
-        initialAccelerationX = acceleration.x;
-        initialAccelerationY = acceleration.y;
-    }
-    
-    sparks.xAcceleration = 30*(initialAccelerationX-acceleration.x);
-    sparks.yAcceleration = 30*(initialAccelerationY-acceleration.y);
-    sparks.particleBirthRate = 5 + (abs(acceleration.y)+abs(acceleration.x))*30;
-    
 }
 
 
@@ -222,7 +188,10 @@
 
 -(void) showCredits {
     
+    [playButton removeFromSuperview];
     [self stopMusic];
+    
+    [[ViewController getSingleton] hideVolumeButton];
     
     Credits *creditView =    [Credits sceneWithSize:self.view.bounds.size];
     creditView.scaleMode = SKSceneScaleModeAspectFill;
@@ -238,8 +207,11 @@
 
 -(void) setNewGame {
     
+    [playButton removeFromSuperview];
     [[ViewController getSingleton] removeAdButton];
     [self stopMusic];
+    
+    [[ViewController getSingleton] hideVolumeButton];
 
     
     SKScene *nextScene;
@@ -247,7 +219,6 @@
     
     if (![defaults objectForKey:@"story"]){
         
-        [[ViewController getSingleton] hideVolumeButton];
         nextScene = [Story sceneWithSize:self.view.bounds.size];
         [defaults setObject:[NSNumber numberWithBool:true] forKey:@"story"];
         [defaults synchronize];
@@ -268,6 +239,37 @@
     [self runAction:[SKAction sequence:@[[SKAction rotateByAngle:-1 duration:3], changeView]]];
 }
 
+
+
+
+-(void)didMoveToView:(SKView *)view {
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults objectForKey:@"story"]){
+    
+        UIImage *image = [UIImage imageNamed:@"play.png"];
+        
+        playButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        playButton.frame = CGRectMake(0, 0, 300, 50);
+        playButton.center = CGPointMake(CGRectGetMidX(self.view.frame),CGRectGetMaxY(self.view.frame)-25);
+        [playButton setImage:image forState:UIControlStateNormal];
+        [playButton setTitle:NSLocalizedString(@"Watch story", nil) forState:UIControlStateNormal];
+        [playButton setTitleColor:[SKColor whiteColor] forState:UIControlStateNormal];
+        playButton.titleLabel.font = [UIFont systemFontOfSize:18];
+        [playButton addTarget:self action:@selector(playStory) forControlEvents:UIControlEventTouchUpInside];
+
+        [self.view addSubview:playButton];
+        
+    }
+}
+
+-(void)playStory {
+    
+    [playButton removeFromSuperview];
+    
+    
+}
 
 
 
