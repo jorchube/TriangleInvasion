@@ -69,14 +69,14 @@
         
         if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
             /* For iPad */
-            fontsize = 24;
+            fontsize = 20;
             sc = 0.36;
             textVPadding = 40;
             textVPos = 800;
         }
         else {
             /* For iPhone */
-            fontsize = 16;
+            fontsize = 12;
             sc = 0.18;
             textVPadding = 20;
             textVPos = 400;
@@ -86,26 +86,26 @@
         CGPoint secondLine = CGPointMake(CGRectGetMidX(self.frame), textVPos-textVPadding);
         CGPoint thirdLine = CGPointMake(CGRectGetMidX(self.frame), textVPos-(textVPadding*2));
         
-        textLabel1 = [[SKLabelNode alloc] init];
+        textLabel1 = [[SKLabelNode alloc] initWithFontNamed:@"Star Jedi"];
         textLabel1.alpha = 0;
         textLabel1.fontSize = fontsize;
-        textLabel1.fontName = @"star";
+        //textLabel1.fontName = @"star";
         textLabel1.fontColor = [SKColor whiteColor];
         textLabel1.position = firstLine;
         textLabel1.zPosition = 30;
         
-        textLabel2 = [[SKLabelNode alloc] init];
+        textLabel2 = [[SKLabelNode alloc] initWithFontNamed:@"Star Jedi"];
         textLabel2.alpha = 0;
         textLabel2.fontSize = fontsize;
-        textLabel2.fontName = @"star";
+        //textLabel2.fontName = @"star";
         textLabel2.fontColor = [SKColor whiteColor];
         textLabel2.position = secondLine;
         textLabel2.zPosition = 30;
         
-        textLabel3 = [[SKLabelNode alloc] init];
+        textLabel3 = [[SKLabelNode alloc] initWithFontNamed:@"Star Jedi"];
         textLabel3.alpha = 0;
         textLabel3.fontSize = fontsize;
-        textLabel3.fontName = @"star";
+        //textLabel3.fontName = @"star";
         textLabel3.fontColor = [SKColor whiteColor];
         textLabel3.position = thirdLine;
         textLabel3.zPosition = 30;
