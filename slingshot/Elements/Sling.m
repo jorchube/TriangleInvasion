@@ -17,7 +17,6 @@
     CGPoint touchEndPos;
     Boolean touchMoved;
     CGPoint slingshotPosition;
-    SKAction *shotSound;
 }
 @end
 
@@ -31,7 +30,7 @@ static Sling *leftBonusSling;
 static SKShapeNode *hint;
 static __weak SKScene *lastScene;
 static Sling *bonusSlings[8];
-static SKAction *shoot;
+static SKAction *shootSound;
 
 
 -(id) initWithFrame: (CGRect) frame{
@@ -47,9 +46,7 @@ static SKAction *shoot;
 		self.fillColor = [SKColor whiteColor];
 		[self setPowerup:pow_none];
         
-        shotSound = [SKAction playSoundFileNamedCheckingMusicEnable:@"Shoot.mp3" waitForCompletion:NO];
-		
-		self.path = CGPathCreateWithEllipseInRect(CGRectMake(0.0,
+        self.path = CGPathCreateWithEllipseInRect(CGRectMake(0.0,
                                                              0.0,
                                                              slingshotHeight,
                                                              slingshotWidth),
@@ -68,8 +65,8 @@ static SKAction *shoot;
 		[self setPhysicsBody:pb];
         self.position = slingshotPosition;
         
-        if (!shoot) {
-            shoot = [SKAction playSoundFileNamedCheckingMusicEnable:@"Shoot.mp3" waitForCompletion:NO];
+        if (!shootSound) {
+            shootSound = [SKAction playSoundFileNamed:@"Shoot.mp3" waitForCompletion:NO];
         }
         
 	}
@@ -134,7 +131,7 @@ static SKAction *shoot;
 
 -(void) shotSling {
     
-    [self runAction:shoot];
+    [self runAction:[shootSound runActionChekingAudio]];
 	
     Sling *sling = idleSling;
     

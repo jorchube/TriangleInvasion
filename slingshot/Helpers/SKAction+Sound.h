@@ -11,6 +11,6 @@
 
 @interface SKAction (SKAction_Sound)
 
-+ (SKAction *)playSoundFileNamedCheckingMusicEnable:(NSString *)soundFile waitForCompletion:(BOOL)wait;
+- (SKAction*)runActionChekingAudio;
 
 @end
