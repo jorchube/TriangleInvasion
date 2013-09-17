@@ -89,6 +89,7 @@
         textLabel1 = [[SKLabelNode alloc] init];
         textLabel1.alpha = 0;
         textLabel1.fontSize = fontsize;
+        textLabel1.fontName = @"star";
         textLabel1.fontColor = [SKColor whiteColor];
         textLabel1.position = firstLine;
         textLabel1.zPosition = 30;
@@ -96,6 +97,7 @@
         textLabel2 = [[SKLabelNode alloc] init];
         textLabel2.alpha = 0;
         textLabel2.fontSize = fontsize;
+        textLabel2.fontName = @"star";
         textLabel2.fontColor = [SKColor whiteColor];
         textLabel2.position = secondLine;
         textLabel2.zPosition = 30;
@@ -103,6 +105,7 @@
         textLabel3 = [[SKLabelNode alloc] init];
         textLabel3.alpha = 0;
         textLabel3.fontSize = fontsize;
+        textLabel3.fontName = @"star";
         textLabel3.fontColor = [SKColor whiteColor];
         textLabel3.position = thirdLine;
         textLabel3.zPosition = 30;
