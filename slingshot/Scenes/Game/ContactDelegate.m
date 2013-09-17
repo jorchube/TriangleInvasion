@@ -36,8 +36,8 @@
 	if (self) {
 		self.physicsWorld = pWorld;
         self.delegatorID = delID;
-        collisionSound = [SKAction playSoundFileNamedCheckingMusicEnable:@"Collision.mp3" waitForCompletion:NO];
-        collisionTrianglesSound = [SKAction playSoundFileNamedCheckingMusicEnable:@"CollisionTriangle.mp3" waitForCompletion:NO];
+        collisionSound = [SKAction playSoundFileNamed:@"Collision.mp3" waitForCompletion:NO];
+        collisionTrianglesSound = [SKAction playSoundFileNamed:@"CollisionTriangle.mp3" waitForCompletion:NO];
 	}
 	return self;
 }
@@ -88,7 +88,7 @@
 
 -(void) sling: (SKPhysicsBody*) sling hitSimpleObject: (SKPhysicsBody*) body At: (CGPoint) point {
     
-    [delegatorID runAction:collisionSound];
+    [delegatorID runAction:[collisionSound runActionChekingAudio]];
     
     [self killSimpleObject:body withTime:timeForObjectToDisappearAfterHit];
     [(Triangle*)body.node setIsAlive:NO];
@@ -109,7 +109,7 @@
 
 -(void) collisionBetweenSimpleObjects: (SKPhysicsBody*) bodyA and: (SKPhysicsBody*) bodyB At: (CGPoint) point {
     
-    [delegatorID runAction:collisionTrianglesSound];
+    [delegatorID runAction:[collisionTrianglesSound runActionChekingAudio]];
     
     [self killSimpleObject:bodyA withTime:timeForObjectToDisappearAfterHit];
     [self killSimpleObject:bodyB withTime:timeForObjectToDisappearAfterHit];
@@ -163,7 +163,7 @@
         
         [delegatorID addChild:sparks];
         
-        [delegatorID runAction:collisionTrianglesSound];
+        [delegatorID runAction:[collisionTrianglesSound runActionChekingAudio]];
   
     }
     else {

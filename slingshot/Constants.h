@@ -21,7 +21,7 @@
 
 #define intervalForIncreasingTriangleCreationRate 10
 #define minIntervalCreationRate 0.3
-#define ratioScoreSpeed 0.05
+#define ratioScoreSpeed 0.01
 #define intervalDecrementForCreationRate 0.1
 #define deadlineLifeDecreaseForAnImpact 0.4
 

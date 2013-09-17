@@ -11,13 +11,13 @@
 
 @implementation SKAction (SKAction_Sound)
 
-+ (SKAction *)playSoundFileNamedCheckingMusicEnable:(NSString *)soundFile waitForCompletion:(BOOL)wait{
+- (SKAction*)runActionChekingAudio{
     
     if (![ViewController getSingleton].musicEnable) {
         return nil;
     }
 
-    return [SKAction playSoundFileNamed:soundFile waitForCompletion:wait];
+    return self;
     
 }
 
