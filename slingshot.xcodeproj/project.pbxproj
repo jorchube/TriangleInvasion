@@ -369,6 +369,7 @@
 			children = (
 				7C404EFE17E5FA1700C3EB33 /* volumeOFF.png */,
 				7C404EFF17E5FA1700C3EB33 /* volumeON.png */,
+				B52077FD17E86EE500C81451 /* bg_triangles.png */,
 				7C2B7C1017E8512A00D72C94 /* play.png */,
 				7C2B7C1117E8512A00D72C94 /* play@2x.png */,
 				B5C98DD817E75F4C00BC2E66 /* story-bg-2-noblur.png */,
@@ -475,6 +476,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B52077FE17E86EE500C81451 /* bg_triangles.png in Resources */,
 				7C6A96D217E61CD90093B30B /* collisionSparks.sks in Resources */,
 				7CE570CB17DF8B1700F90752 /* Localizable.strings in Resources */,
 				7CDD205017E2374F0039F9E3 /* hand.png in Resources */,

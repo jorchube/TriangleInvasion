@@ -248,7 +248,7 @@
     
         UIImage *image = [UIImage imageNamed:@"play.png"];
         
-        playButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        playButton = [UIButton buttonWithType:UIButtonTypeCustom];
         playButton.frame = CGRectMake(0, 0, 300, 50);
         playButton.center = CGPointMake(CGRectGetMidX(self.view.frame),CGRectGetMaxY(self.view.frame)-25);
         [playButton setImage:image forState:UIControlStateNormal];

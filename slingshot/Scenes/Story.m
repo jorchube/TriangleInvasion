@@ -12,7 +12,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface Story() {
-    SKSpriteNode *bg_1;
+    SKShapeNode *bg_1;
     SKSpriteNode *bg_2;
     /*SKSpriteNode *fg_1;
     SKSpriteNode *fg_2;
@@ -62,27 +62,49 @@
         
         //SKShapeNode *planet = [SKShapeNode ]
         
-        int fontsize = 16;
+        int fontsize;
+        double sc;
+        int textVPadding;
+        int textVPos;
+        
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+            /* For iPad */
+            fontsize = 24;
+            sc = 0.36;
+            textVPadding = 40;
+            textVPos = 800;
+        }
+        else {
+            /* For iPhone */
+            fontsize = 16;
+            sc = 0.18;
+            textVPadding = 20;
+            textVPos = 400;
+        }
+        
+        CGPoint firstLine = CGPointMake(CGRectGetMidX(self.frame), textVPos);
+        CGPoint secondLine = CGPointMake(CGRectGetMidX(self.frame), textVPos-textVPadding);
+        CGPoint thirdLine = CGPointMake(CGRectGetMidX(self.frame), textVPos-(textVPadding*2));
         
         textLabel1 = [[SKLabelNode alloc] init];
         textLabel1.alpha = 0;
         textLabel1.fontSize = fontsize;
         textLabel1.fontColor = [SKColor whiteColor];
-        textLabel1.position = CGPointMake(160,400);
+        textLabel1.position = firstLine;
         textLabel1.zPosition = 30;
         
         textLabel2 = [[SKLabelNode alloc] init];
         textLabel2.alpha = 0;
         textLabel2.fontSize = fontsize;
         textLabel2.fontColor = [SKColor whiteColor];
-        textLabel2.position = CGPointMake(160,380);
+        textLabel2.position = secondLine;
         textLabel2.zPosition = 30;
         
         textLabel3 = [[SKLabelNode alloc] init];
         textLabel3.alpha = 0;
         textLabel3.fontSize = fontsize;
         textLabel3.fontColor = [SKColor whiteColor];
-        textLabel3.position = CGPointMake(160,360);
+        textLabel3.position = thirdLine;
         textLabel3.zPosition = 30;
         
         fg_1 = [[SKShapeNode alloc]init];
@@ -115,8 +137,8 @@
         fg_3 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-3-noface.png"];
         */
         
-        bg_1 = [[SKSpriteNode alloc] initWithImageNamed:@"story-bg-noblur.png"];
-        bg_2 = [[SKSpriteNode alloc] initWithImageNamed:@"story-bg-2-noblur.png"];
+        bg_1 = [[Deadline alloc]initWithFrame:self.frame];
+        bg_2 = [[SKSpriteNode alloc] initWithImageNamed:@"bg_triangles.png"];
         /*fg_1 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-a.png"];
         fg_2 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-b.png"];
         fg_3 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-c.png"];
@@ -124,10 +146,9 @@
         fg_5 = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-e.png"];
         fg_you = [[SKSpriteNode alloc] initWithImageNamed:@"story-fg-3-noface.png"];
         */
-        double sc = 0.18;
         
-        [bg_1 setXScale:sc];
-        [bg_1 setYScale:sc];
+        /*[bg_1 setXScale:sc];
+        [bg_1 setYScale:sc];*/
         [bg_2 setXScale:sc];
         [bg_2 setYScale:sc];
         /*[fg_1 setXScale:sc];
@@ -157,7 +178,7 @@
         [fg_you setYScale:0.75];
         
         
-        [self putOnPosition:bg_1];
+        //[self putOnPosition:bg_1];
         [self putOnPosition:bg_2];
         /*[self putOnPosition:fg_1];
         [self putOnPosition:fg_2];
@@ -166,11 +187,20 @@
         [self putOnPosition:fg_5];
         [self putOnPosition:fg_you];*/
         
-        fg_1.position = CGPointMake(10, 40);
+        /*fg_1.position = CGPointMake(10, 40);
         fg_2.position = CGPointMake(100, 60);
         fg_3.position = CGPointMake(140, 50);
         fg_4.position = CGPointMake(200, 50);
-        fg_5.position = CGPointMake(220, 40);
+        fg_5.position = CGPointMake(220, 40);*/
+        
+        #define initYAxis 30
+        #define initScale 0.4
+        fg_1.position = CGPointMake((CGRectGetMaxX(self.frame)/6)*1-(100*initScale),initYAxis);
+        fg_2.position = CGPointMake((CGRectGetMaxX(self.frame)/6)*2-(100*initScale),initYAxis);
+        fg_3.position = CGPointMake((CGRectGetMaxX(self.frame)/6)*3-(100*initScale),initYAxis);
+        fg_4.position = CGPointMake((CGRectGetMaxX(self.frame)/6)*4-(100*initScale),initYAxis);
+        fg_5.position = CGPointMake((CGRectGetMaxX(self.frame)/6)*5-(100*initScale),initYAxis);
+        
         fg_you.position = CGPointMake(CGRectGetMidX(self.frame)-fg_you.frame.size.width/2,
                                       25);
         
@@ -212,8 +242,8 @@
 }
 
 -(void) putOnPosition: (SKNode*) node {
-    node.position = CGPointMake(node.position.x+150,
-                                node.position.y+150);
+    node.position = CGPointMake(CGRectGetMidX(self.frame),
+                                200);
 }
 
 -(void) showSequence {
@@ -408,6 +438,7 @@
         [textLabel3 runAction:hide];
     }];
     SKAction *scene2In = [SKAction runBlock:^{
+        [bg_1 runAction:show];
         [bg_2 runAction:show];
         [fg_1 runAction:show];
         [fg_2 runAction:show];
@@ -420,6 +451,7 @@
         [textLabel3 runAction:show];
     }];
     SKAction *scene2Out = [SKAction runBlock:^{
+        [bg_1 runAction:hide];
         [bg_2 runAction:hide];
         [fg_1 runAction:hide];
         [fg_2 runAction:hide];
