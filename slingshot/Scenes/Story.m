@@ -72,19 +72,19 @@
             fontsize = 20;
             sc = 0.36;
             textVPadding = 40;
-            textVPos = 800;
+            textVPos = 200;
         }
         else {
             /* For iPhone */
             fontsize = 12;
             sc = 0.18;
             textVPadding = 20;
-            textVPos = 400;
+            textVPos = 100;
         }
         
-        CGPoint firstLine = CGPointMake(CGRectGetMidX(self.frame), textVPos);
-        CGPoint secondLine = CGPointMake(CGRectGetMidX(self.frame), textVPos-textVPadding);
-        CGPoint thirdLine = CGPointMake(CGRectGetMidX(self.frame), textVPos-(textVPadding*2));
+        CGPoint firstLine = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMaxY(self.frame)-textVPos);
+        CGPoint secondLine = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMaxY(self.frame)-textVPos-textVPadding);
+        CGPoint thirdLine = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMaxY(self.frame)-textVPos-(textVPadding*2));
         
         textLabel1 = [[SKLabelNode alloc] initWithFontNamed:@"Star Jedi"];
         textLabel1.alpha = 0;

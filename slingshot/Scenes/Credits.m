@@ -13,6 +13,7 @@
 
 @interface Credits() {
     SKLabelNode *backLabel;
+    BOOL transitioning;
 }
 @end
 
@@ -21,6 +22,9 @@
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
+        
+        
+        transitioning = false;
         
         [self setMusicURL:@"Credits.mp3"];
         [self startMusic];
@@ -68,13 +72,13 @@
     backLabel.position = CGPointMake(CGRectGetMidX(self.frame)-70,
                                CGRectGetMidY(self.frame));
     pau.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                   CGRectGetMidY(self.frame)-25);
+                                   CGRectGetMidY(self.frame)+25);
     jordi.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                   CGRectGetMidY(self.frame)-75);
+                                   CGRectGetMidY(self.frame)+75);
     kengo.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                 CGRectGetMidY(self.frame)+25);
+                                 CGRectGetMidY(self.frame)-75);
     alex.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                 CGRectGetMidY(self.frame)+75);
+                                 CGRectGetMidY(self.frame)-25);
 
     
     backLabel.text = NSLocalizedString(@"Back", nil);
@@ -133,7 +137,16 @@
 }
 
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
     [[Sling getIdlesling] touchesEnded:touches withEvent:event];
+    
+    for (UITouch *touch in touches) {
+        if ([backLabel containsPoint:[touch locationInNode:self.scene]]) {
+            [self goBack];
+            return;
+        }
+    }
+    
 }
 
 
@@ -151,14 +164,18 @@
 
 -(void)goBack {
     
-    [self stopMusic];
-    [[ViewController getSingleton] hideVolumeButton];
+    if (!transitioning){
     
-    SKTransition *trans = [SKTransition fadeWithDuration:1];
-    MainMenu *scene =    [MainMenu sceneWithSize:self.view.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
-    
-    [self.view presentScene:scene transition:trans];
+        transitioning=true;
+        [self stopMusic];
+        [[ViewController getSingleton] hideVolumeButton];
+        
+        SKTransition *trans = [SKTransition fadeWithDuration:1];
+        MainMenu *scene =    [MainMenu sceneWithSize:self.view.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        
+        [self.view presentScene:scene transition:trans];
+    }
     
 }
 

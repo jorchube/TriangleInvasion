@@ -162,7 +162,17 @@
 }
 
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
     [[Sling getIdlesling] touchesEnded:touches withEvent:event];
+    
+    for (UITouch *touch in touches) {
+        if ([newGame containsPoint:[touch locationInNode:self.scene]]) {
+            [self setNewGame];
+            return;
+        }else if ([credits containsPoint:[touch locationInNode:self.scene]]) {
+            [self showCredits];
+        }
+    }
 }
 
 
@@ -173,12 +183,10 @@
 	SKNode *bodyA = [contact bodyA].node;
 	SKNode *bodyB = [contact bodyB].node;
 
-    if (!transitioning && (bodyA == credits || bodyB == credits) ){
+    if (bodyA == credits || bodyB == credits){
         [self showCredits];
-        transitioning = true;
-    }else if (!transitioning && (bodyA == newGame || bodyB == newGame) ){
+    }else if (bodyA == newGame || bodyB == newGame){
         [self setNewGame];
-        transitioning = true;
     }
 }
 
@@ -188,53 +196,63 @@
 
 -(void) showCredits {
     
-    [playButton removeFromSuperview];
-    [self stopMusic];
+    if(!transitioning){
+        transitioning = true;
     
-    [[ViewController getSingleton] hideVolumeButton];
-    
-    Credits *creditView =    [Credits sceneWithSize:self.view.bounds.size];
-    creditView.scaleMode = SKSceneScaleModeAspectFill;
-    
-    SKAction *changeView = [SKAction runBlock:^{
-        SKTransition *trans = [SKTransition fadeWithDuration:1];
+        [playButton removeFromSuperview];
+        [self stopMusic];
         
-        [self.view presentScene:creditView transition:trans];
-    }];
-    
-    [self runAction:[SKAction sequence:@[[SKAction rotateByAngle:1 duration:3], changeView]]];
+        [[ViewController getSingleton] hideVolumeButton];
+        
+        Credits *creditView =    [Credits sceneWithSize:self.view.bounds.size];
+        creditView.scaleMode = SKSceneScaleModeAspectFill;
+        
+        SKAction *changeView = [SKAction runBlock:^{
+            SKTransition *trans = [SKTransition fadeWithDuration:1];
+            
+            [self.view presentScene:creditView transition:trans];
+        }];
+        
+        [self runAction:[SKAction sequence:@[[SKAction rotateByAngle:1 duration:3], changeView]]];
+    }
 }
 
 -(void) setNewGame {
     
-    [playButton removeFromSuperview];
-    [[ViewController getSingleton] removeAdButton];
-    [[ViewController getSingleton] hideVolumeButton];
-    [self stopMusic];
+    if (!transitioning){
+        
+        transitioning = true;
+        
+        [playButton removeFromSuperview];
+        [[ViewController getSingleton] removeAdButton];
+        [[ViewController getSingleton] hideVolumeButton];
+        [self stopMusic];
 
-    
-    SKScene *nextScene;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if (![defaults objectForKey:@"story"]){
-        nextScene = [[Story alloc ] initWithSize:self.view.bounds.size nextScene:next_game];
-        [defaults setObject:[NSNumber numberWithBool:true] forKey:@"story"];
-        [defaults synchronize];
-    }else{
-        nextScene = [Game sceneWithSize:self.view.bounds.size];
+        
+        SKScene *nextScene;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        if (![defaults objectForKey:@"story"]){
+            nextScene = [[Story alloc ] initWithSize:self.view.bounds.size nextScene:next_game];
+            [defaults setObject:[NSNumber numberWithBool:true] forKey:@"story"];
+            [defaults synchronize];
+        }else{
+            nextScene = [Game sceneWithSize:self.view.bounds.size];
+        }
+        nextScene.scaleMode = SKSceneScaleModeAspectFill;
+        
+        SKAction *changeView = [SKAction runBlock:^{
+            
+            SKTransition *trans = [SKTransition fadeWithDuration:1];
+            [self.view presentScene:nextScene transition:trans];
+            
+        }];
+        
+        [[ViewController getSingleton] hideAd];
+
+        [self runAction:[SKAction sequence:@[[SKAction rotateByAngle:-1 duration:3], changeView]]];
+        
     }
-    nextScene.scaleMode = SKSceneScaleModeAspectFill;
-    
-    SKAction *changeView = [SKAction runBlock:^{
-        
-        SKTransition *trans = [SKTransition fadeWithDuration:1];
-        [self.view presentScene:nextScene transition:trans];
-        
-    }];
-    
-    [[ViewController getSingleton] hideAd];
-
-    [self runAction:[SKAction sequence:@[[SKAction rotateByAngle:-1 duration:3], changeView]]];
 }
 
 
@@ -249,7 +267,7 @@
         UIImage *image = [UIImage imageNamed:@"play.png"];
         
         playButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        playButton.frame = CGRectMake(0, 0, 300, 50);
+        playButton.frame = CGRectMake(0, 0, 200, 50);
         playButton.center = CGPointMake(CGRectGetMidX(self.view.frame),CGRectGetMaxY(self.view.frame)-25);
         [playButton setImage:image forState:UIControlStateNormal];
         [playButton setTitle:NSLocalizedString(@"Watch story", nil) forState:UIControlStateNormal];
@@ -286,8 +304,6 @@
     
     
 }
-
-
 
 
 @end
