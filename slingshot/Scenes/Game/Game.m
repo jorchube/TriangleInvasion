@@ -197,6 +197,7 @@
 	scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
 	scoreLabel.text = @"";
 	scoreLabel.fontSize = 15;
+    scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
 	scoreLabel.position = CGPointMake(CGRectGetMaxX(self.frame)-20,
                                       CGRectGetMaxY(self.frame)-35);
 	
