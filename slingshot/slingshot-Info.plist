@@ -26,6 +26,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>star.ttf</string>
 		<string>fipps.ttf</string>
 	</array>
 	<key>UIMainStoryboardFile</key>

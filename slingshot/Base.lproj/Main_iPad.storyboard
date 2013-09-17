@@ -45,8 +45,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="volumeOFF.png" width="50" height="50"/>
-        <image name="volumeON.png" width="50" height="50"/>
+        <image name="volumeOFF.png" width="25" height="25"/>
+        <image name="volumeON.png" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <nil key="statusBar"/>
