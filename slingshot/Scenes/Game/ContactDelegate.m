@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "Game.h"
 #import "SKAction+Sound.h"
+#import <AudioToolbox/AudioServices.h>
 
 @interface ContactDelegate() {
     SKAction * collisionSound;
@@ -164,7 +165,10 @@
         [delegatorID addChild:sparks];
         
         [delegatorID runAction:[collisionTrianglesSound runActionChekingAudio]];
-  
+        
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+
+        
     }
     else {
         [body setVelocity:CGVectorMake(0, 0)];
