@@ -73,7 +73,7 @@
         
         self.backgroundColor = [SKColor blackColor];
 
-		[Sling addSlingAtScene:self];
+		[Sling addSlingAtScene:self withInfoSource:self];
 		
         currentTimeGeneration = initialTimeIntervalForFallingTriangles;
         
@@ -460,6 +460,16 @@
         [gameOverLabel removeFromSuperview];
         [punctuationLabel removeFromSuperview];
     }];
+}
+
+-(BOOL)isStoped {
+    return gameStoped;
+}
+
+-(void)cheatingDone {
+    
+    score += (score>0)?-CHEATINGPENALTY:CHEATINGPENALTY;
+    
 }
 
 @end

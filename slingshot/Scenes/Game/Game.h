@@ -33,6 +33,7 @@
 -(void)stopGame;
 -(void)resumeGame;
 
-
+-(BOOL)isStoped;
+-(void)cheatingDone;
 
 @end

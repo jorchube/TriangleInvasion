@@ -15,6 +15,8 @@
 
 #pragma mark Game
 
+#define MAXSLINGSTOP 20
+#define CHEATINGPENALTY 1000
 #define initialTimeIntervalForFallingTriangles 1.2
 
 #pragma mark difficulty settings:

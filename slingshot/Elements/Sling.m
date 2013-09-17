@@ -17,6 +17,7 @@
     CGPoint touchEndPos;
     Boolean touchMoved;
     CGPoint slingshotPosition;
+
 }
 @end
 
@@ -31,12 +32,19 @@ static SKShapeNode *hint;
 static __weak SKScene *lastScene;
 static Sling *bonusSlings[8];
 static SKAction *shootSound;
+static int slingStopCount;
+static id infoSource;
 
+-(void)setInfoSource:(id)source {
+    infoSource = source;
+}
 
 -(id) initWithFrame: (CGRect) frame{
 	self = [super init];
 	if (self)
 	{
+        
+        
         /* Where new slings born */
 		slingshotPosition = CGPointMake(CGRectGetMidX(frame)-slingshotHeight/2,
                                         CGRectGetMinY(frame)+slingshotYFromBottom);
@@ -131,49 +139,70 @@ static SKAction *shootSound;
 
 -(void) shotSling {
     
-    [self runAction:[shootSound runActionChekingAudio]];
-	
-    Sling *sling = idleSling;
-    
-	[sling.physicsBody setContactTestBitMask:cat_sling | cat_simpleObject];
-	[sling.physicsBody setDynamic:YES];
-	[sling.physicsBody setCategoryBitMask:cat_sling];
-	[sling.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject];
-    
-    CGVector impulse;
-    // Shooting as if were dragging the ball
-    if(touchInitPos.y - touchEndPos.y < 0) {
-        impulse = CGVectorMake((touchEndPos.x-touchInitPos.x)*slingshotForceMult,
-                               (touchEndPos.y-touchInitPos.y)*slingshotForceMult);
-    }
-    // Shooting as a slingshot
-    else {
-        impulse = CGVectorMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
-                               (touchInitPos.y-touchEndPos.y)*slingshotForceMult);
-    }
-    [sling.physicsBody applyImpulse:impulse];
-    
-    SKAction *scaleAction = [SKAction scaleBy:0.1 duration:slingLifespan];
-    [scaleAction setTimingMode:SKActionTimingEaseIn];
-    
-    [sling runAction:[SKAction sequence:@[
-                                          scaleAction,
-                                          [SKAction removeFromParent]
-                                          ]]];
-    
-    [Sling addSlingAtScene: self.scene];
-    
-    if(bonusSlings[0]){
-        [self shootBonusSlingsWithImpulse: impulse];
+    if ([infoSource class] == [Game class] ){
+        if ([infoSource isStoped]){
+            slingStopCount ++;
+            [infoSource cheatingDone];
+        }else{
+            slingStopCount = 0;
+        }
+        
     }
     
-    if(self.parent.class == [Game class]){
-        [Sling addBonusSlings:[(Game*)self.parent getComboCounter] AtScene:self.scene];
-    }
+    if (slingStopCount < MAXSLINGSTOP){
     
-    if (self.parent.class == [Game class]) {
-        [(Game*)self.parent updateScore:score_slingIsShot];
-        [(Game*)self.parent resetComboCounter];
+        [self runAction:[shootSound runActionChekingAudio]];
+        
+        Sling *sling = idleSling;
+        
+        [sling.physicsBody setContactTestBitMask:cat_sling | cat_simpleObject];
+        [sling.physicsBody setDynamic:YES];
+        [sling.physicsBody setCategoryBitMask:cat_sling];
+        [sling.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject];
+        
+        CGVector impulse;
+        // Shooting as if were dragging the ball
+        if(touchInitPos.y - touchEndPos.y < 0) {
+            impulse = CGVectorMake((touchEndPos.x-touchInitPos.x)*slingshotForceMult,
+                                   (touchEndPos.y-touchInitPos.y)*slingshotForceMult);
+        }
+        // Shooting as a slingshot
+        else {
+            impulse = CGVectorMake((touchInitPos.x-touchEndPos.x)*slingshotForceMult,
+                                   (touchInitPos.y-touchEndPos.y)*slingshotForceMult);
+        }
+        [sling.physicsBody applyImpulse:impulse];
+        
+        SKAction *scaleAction = [SKAction scaleBy:0.1 duration:slingLifespan];
+        [scaleAction setTimingMode:SKActionTimingEaseIn];
+        
+        [sling runAction:[SKAction sequence:@[
+                                              scaleAction,
+                                              [SKAction removeFromParent]
+                                              ]]];
+        
+        [Sling addSlingAtScene: self.scene];
+        
+        if(bonusSlings[0]){
+            [self shootBonusSlingsWithImpulse: impulse];
+        }
+        
+        if(self.parent.class == [Game class]){
+            [Sling addBonusSlings:[(Game*)self.parent getComboCounter] AtScene:self.scene];
+        }
+        
+        if (self.parent.class == [Game class]) {
+            [(Game*)self.parent updateScore:score_slingIsShot];
+            [(Game*)self.parent resetComboCounter];
+        }
+    }else {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Stop cheating!"
+                                                          message:@"This harms your score!"
+                                                         delegate:self
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
+        [infoSource resumeGame];
     }
     
 }
@@ -223,6 +252,28 @@ static SKAction *shootSound;
         [scene addChild:hint];
     }
 }
+
++(void) addSlingAtScene: (SKScene*) scene withInfoSource:(id)source {
+    idleSling = [[Sling alloc] initWithFrame: scene.frame];
+    
+    [idleSling setInfoSource:source];
+    
+    [scene addChild:idleSling];
+    
+    if (!hint) {
+        lastScene = scene;
+        hint = [[SKShapeNode alloc]init];
+        hint.alpha = 0.0;
+        [scene addChild:hint];
+    }else if(lastScene != scene){
+        lastScene = scene;
+        [hint removeFromParent];
+        [scene addChild:hint];
+    }
+    
+    
+}
+
 
 +(void) addBonusSlings:(int)slings AtScene: (SKScene *) scene {
     
