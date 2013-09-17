@@ -58,8 +58,7 @@
         [sparks advanceSimulationTime:100];
         [self addChild:sparks];
         
-        if (next != nil) nextSceneToShow = next;
-        else nextSceneToShow = next_game;
+        nextSceneToShow = next;
         
         //SKShapeNode *planet = [SKShapeNode ]
         
