@@ -209,17 +209,15 @@
     
     [playButton removeFromSuperview];
     [[ViewController getSingleton] removeAdButton];
-    [self stopMusic];
-    
     [[ViewController getSingleton] hideVolumeButton];
+    [self stopMusic];
 
     
     SKScene *nextScene;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     if (![defaults objectForKey:@"story"]){
-        
-        nextScene = [Story sceneWithSize:self.view.bounds.size];
+        nextScene = [[Story alloc ] initWithSize:self.view.bounds.size nextScene:next_game];
         [defaults setObject:[NSNumber numberWithBool:true] forKey:@"story"];
         [defaults synchronize];
     }else{
@@ -265,6 +263,24 @@
 }
 
 -(void)playStory {
+    
+    [[ViewController getSingleton] hideAd];
+    [[ViewController getSingleton] removeAdButton];
+    [[ViewController getSingleton] hideVolumeButton];
+    [playButton removeFromSuperview];
+    [self stopMusic];
+    
+    SKScene *nextScene = [[Story alloc ] initWithSize:self.view.bounds.size nextScene:next_mainmenu];
+    nextScene.scaleMode = SKSceneScaleModeAspectFill;
+    
+    SKAction *changeView = [SKAction runBlock:^{
+        
+        SKTransition *trans = [SKTransition fadeWithDuration:4];
+        [self.view presentScene:nextScene transition:trans];
+        
+    }];
+    
+    [self runAction:changeView];
     
     [playButton removeFromSuperview];
     
