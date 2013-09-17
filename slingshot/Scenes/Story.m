@@ -512,7 +512,21 @@
         }];
     }
     
-    if( nextSceneToShow == next_mainmenu){
+    else if( nextSceneToShow == next_mainmenu){
+        [self runAction:story completion:^{
+            
+            SKScene *nextScene = [MainMenu sceneWithSize:self.view.bounds.size];
+            nextScene.scaleMode = SKSceneScaleModeAspectFill;
+            
+            [self runAction:[SKAction runBlock:^{
+                
+                SKTransition *trans = [SKTransition fadeWithDuration:1];
+                [self.view presentScene:nextScene transition:trans];
+                
+            }]];
+        }];
+    }
+    else { /* default if no valid next */
         [self runAction:story completion:^{
             
             SKScene *nextScene = [MainMenu sceneWithSize:self.view.bounds.size];
