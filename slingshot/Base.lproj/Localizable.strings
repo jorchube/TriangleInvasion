@@ -1,9 +1,49 @@
-/* 
-  Localizable.strings
-  slingshot
-
-  Created by Pau Sastre Miguel on 10/09/13.
-  Copyright (c) 2013 Pau Sastre Miguel. All rights reserved.
-*/
+/*
+ Localizable.strings
+ slingshot
+ 
+ Created by Pau Sastre Miguel on 10/09/13.
+ Copyright (c) 2013 Pau Sastre Miguel. All rights reserved.
+ */
 
 "New Game" = "New Game";
+"Credits" = "Credits";
+
+"Back" = "Back";
+
+"Exit" = "Exit";
+"Continue" = "Continue";
+"Stop" = "Pause";
+"Main Menu" = "Main Menu";
+"Game Over" = "Game Over";
+
+"Remove Ads" = "Remove Ads";
+"Watch story" = "Watch story";
+
+"story11" = "Once upon a time";
+"story12" = "somewhere in the galaxy...";
+"story13" = "";
+
+"story21" = "...there was a peaceful planet";
+"story22" = "where every single inhabitant was happy.";
+"story23" = "It was the Fatdot planet.";
+
+"story31" = "But, someday,";
+"story32" = "something terrible happened...";
+"story33" = "";
+
+"story41" = "... Fatdot planet was being attacked";
+"story42" = " by an army of triangles!!!";
+"story43" = "There was no hope...";
+
+"story51" = "... or was there?";
+"story52" = "";
+"story53" = "";
+
+"story61" = "You, with your army of volunteers";
+"story62"= "are willing to protect the planet";
+"story63"= "as long as you can.";
+
+"story71" = "Good luck. You are our last hope.";
+"story72"= "";
+"story73"= "";
