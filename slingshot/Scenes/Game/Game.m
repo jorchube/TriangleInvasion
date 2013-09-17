@@ -111,6 +111,10 @@
     [self runAction:launch withKey:@"speedUpTimer"];
 }
 
+-(void) adjustFallingSpeedToScore {
+    if (score<0) speedVariation = (-score)*ratioScoreSpeed;
+    else speedVariation = score*ratioScoreSpeed;
+}
 
 -(void) updateScore:(double)scr {
     int mult = (comboCounter<=0)? 1 : comboCounter;
@@ -120,7 +124,7 @@
         score += scr;
     //if (score < 0) score = 0;
     self.scoreLabel.text = [NSString stringWithFormat:@"%.0f", score];
-    speedVariation = ((score<0)?-score:score)*ratioScoreSpeed;
+    [self adjustFallingSpeedToScore];
 }
 
 -(void) increaseComboCounter {

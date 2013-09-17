@@ -20,8 +20,8 @@
 #pragma mark difficulty settings:
 
 #define intervalForIncreasingTriangleCreationRate 10
-#define minIntervalCreationRate 0.4
-#define ratioScoreSpeed (1/20)
+#define minIntervalCreationRate 0.3
+#define ratioScoreSpeed 0.05
 #define intervalDecrementForCreationRate 0.1
 #define deadlineLifeDecreaseForAnImpact 0.4
 
