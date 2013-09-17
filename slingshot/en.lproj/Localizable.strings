@@ -23,12 +23,12 @@
 "story12" = "somewhere in the galaxy...";
 "story13" = "";
 
-"story21" = "... there was a peaceful planet";
+"story21" = "...there was a peaceful planet";
 "story22" = "where every single inhabitant was happy.";
 "story23" = "It was the Fatdot planet.";
 
-"story31" = "But, someday";
-"story32" = " something terrible happened...";
+"story31" = "But, someday,";
+"story32" = "something terrible happened...";
 "story33" = "";
 
 "story41" = "... Fatdot planet was being attacked";
@@ -41,7 +41,7 @@
 
 "story61" = "You, with your army of volunteers";
 "story62"= "are willing to protect the planet";
-"story63"= "as long as you can";
+"story63"= "as long as you can.";
 
 "story71" = "Good luck. You are our last hope.";
 "story72"= "";
