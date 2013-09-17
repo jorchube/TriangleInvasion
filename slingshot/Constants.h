@@ -92,4 +92,8 @@
 #define story_timeBetweenCuts 3
 #define story_timeForEachCut 5.5
 
+/* next Scene definitions for Story scene call */
+#define next_mainmenu 0
+#define next_game 1
+
 #endif
