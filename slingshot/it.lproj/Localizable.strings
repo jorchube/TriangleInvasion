@@ -13,12 +13,12 @@
 
 "Exit" = "Uscire";
 "Continue" = "Continuare";
-"Stop" = "Pausare";
+"Stop" = "Fermare";
 "Main Menu" = "Menu d'inizio";
 "Game Over" = "Game Over";
 
 "Remove Ads" = "Elimina pubblicità";
-"Watch story" = "Ver Historia";
+"Watch story" = "Vedere una storia";
 
 "story11" = "c'era una volta,";
 "story12" = "da qualche parte nella galassia...";
@@ -36,21 +36,14 @@
 "story42" = "attacando il pianeta punto grosso!!!";
 "story43" = "non c'era speranza...";
 
-"story51" = "... o si?";
+"story51" = "... forse si?";
 "story52" = "";
 "story53" = "";
 
-"story61" = "tu, con il tuo essercito difenderete";
-"story62" = "il pianeta il più tempo possibile.";
-"story63" = "";
+"story61" = "tu, con il tuo esercito di volontari";
+"story62" = "protegerete il pianeta il ";
+"story63" = "cosi come potrete.";
 
 "story71" = "buona fortuna. sei la nostra ";
 "story72" = "ultima speranza.";
 "story73" = "";
-
-
-
-
-
-
-
