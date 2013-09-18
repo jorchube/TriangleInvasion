@@ -35,9 +35,6 @@ static SKAction *shootSound;
 static int slingStopCount;
 static id infoSource;
 
--(void)setInfoSource:(id)source {
-    infoSource = source;
-}
 
 -(id) initWithFrame: (CGRect) frame{
 	self = [super init];
@@ -254,24 +251,8 @@ static id infoSource;
 }
 
 +(void) addSlingAtScene: (SKScene*) scene withInfoSource:(id)source {
-    idleSling = [[Sling alloc] initWithFrame: scene.frame];
-    
-    [idleSling setInfoSource:source];
-    
-    [scene addChild:idleSling];
-    
-    if (!hint) {
-        lastScene = scene;
-        hint = [[SKShapeNode alloc]init];
-        hint.alpha = 0.0;
-        [scene addChild:hint];
-    }else if(lastScene != scene){
-        lastScene = scene;
-        [hint removeFromParent];
-        [scene addChild:hint];
-    }
-    
-    
+    [Sling addSlingAtScene:scene];
+    infoSource = source;
 }
 
 
