@@ -193,8 +193,8 @@ static id infoSource;
             [(Game*)self.parent resetComboCounter];
         }
     }else {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Stop cheating!"
-                                                          message:@"This harms your score!"
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"cheattitle",nil)
+                                                          message:NSLocalizedString(@"cheatmsg",nil)
                                                          delegate:self
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
