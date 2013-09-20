@@ -138,10 +138,30 @@
     
     [delegatorID addChild:sparks];
 }
+
+-(void) emitParticlesForSling: (SKPhysicsBody*) sling atPoint: (CGPoint) point{
+    [self emitParticlesForSling:sling atPoint:point withScale:0];
+}
+
+-(void) emitParticlesForSling: (SKPhysicsBody*) sling atPoint:(CGPoint)point withScale: (float) scale {
+    [sling.node runAction:[SKAction removeFromParent]];
+    
+    SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                             [[NSBundle mainBundle] pathForResource:@"slingBreaks" ofType:@"sks"]];
+    sparks.position = point;
+    sparks.targetNode = delegatorID;
+    
+    if(scale != 0) sparks.particleScale = scale;
+    
+    [sparks runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
+    
+    [delegatorID addChild:sparks];
+}
+
 # pragma mark collisions
 
 -(void) sling: (SKPhysicsBody*) sling bouncedInWall: (SKPhysicsBody*) wall atPoint: (CGPoint) point {
-    
+    [self emitParticlesForSling:sling atPoint:point withScale:0.02];
 }
 
 -(void) killerWaveHitObject: (SKPhysicsBody*) object atPoint: (CGPoint) point{
@@ -173,16 +193,7 @@
     
     [self killSimpleObject:pow withTime:timeForObjectToDisappearAfterHit];
     
-    [sling.node runAction:[SKAction removeFromParent]];
-    
-    SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                             [[NSBundle mainBundle] pathForResource:@"slingBreaks" ofType:@"sks"]];
-    sparks.position = point;
-    sparks.targetNode = delegatorID;
-    
-    [sparks runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
-    
-    [delegatorID addChild:sparks];
+    [self emitParticlesForSling:sling atPoint:point];
     
     [delegatorID updateScore:score_slingHitsTriangle];
     

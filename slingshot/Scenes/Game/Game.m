@@ -602,6 +602,7 @@
     [leftWallPB setCollisionBitMask:cat_sling];
     [leftWallPB setContactTestBitMask:cat_bonuswall | cat_sling];
     
+    [leftWallPB setRestitution:1];
     [leftWallPB setAffectedByGravity:NO];
     [leftWallPB setUsesPreciseCollisionDetection:YES];
     [leftWallPB setDynamic:NO];
@@ -616,10 +617,12 @@
     rightWall.glowWidth = 1;
     
     SKPhysicsBody *rightWallPB = [SKPhysicsBody bodyWithPolygonFromPath:rightWall.path];
+    
     [rightWallPB setCategoryBitMask:cat_bonuswall];
     [rightWallPB setCollisionBitMask:cat_sling];
     [rightWallPB setContactTestBitMask:cat_bonuswall | cat_sling];
     
+    [rightWallPB setRestitution:1];
     [rightWallPB setAffectedByGravity:NO];
     [rightWallPB setUsesPreciseCollisionDetection:YES];
     [rightWallPB setDynamic:NO];

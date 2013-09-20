@@ -29,8 +29,10 @@
 #define minIntervalCreationRate 0.3
 #define ratioScoreSpeed 0.01
 #define intervalDecrementForCreationRate 0.1
-#define deadlineLifeDecreaseForAnImpact 0.4
+#define deadlineLifeDecreaseForAnImpact 0
 #define powerupPeriod 1 
+
+#define slingBounceOnWallSpeedUp 5
 
 #pragma mark slingshot body and position
 
