@@ -202,7 +202,7 @@
 	scoreLabel.text = @"";
 	scoreLabel.fontSize = 15;
     scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
-	scoreLabel.position = CGPointMake(CGRectGetMaxX(self.frame)-20,
+	scoreLabel.position = CGPointMake(CGRectGetMaxX(self.frame)-15,
                                       CGRectGetMaxY(self.frame)-35);
 	
 	[self addChild:scoreLabel];
@@ -595,6 +595,7 @@
                                                     5,
                                                     CGRectGetHeight(self.frame)), nil);
     leftWall.strokeColor = [SKColor greenColor];
+    leftWall.fillColor = [SKColor greenColor];
     leftWall.glowWidth = 1;
     
     SKPhysicsBody *leftWallPB = [SKPhysicsBody bodyWithPolygonFromPath:leftWall.path];
@@ -613,6 +614,7 @@
                                                     5,
                                                     CGRectGetHeight(self.frame)), nil);
     rightWall.strokeColor = [SKColor greenColor];
+    rightWall.fillColor = [SKColor greenColor];
     rightWall.glowWidth = 1;
     
     SKPhysicsBody *rightWallPB = [SKPhysicsBody bodyWithPolygonFromPath:rightWall.path];
@@ -631,13 +633,13 @@
     SKAction *glowEffect = [SKAction sequence:@[
                                                 [SKAction customActionWithDuration:0.5
                                                                        actionBlock:^(SKNode *node, CGFloat elapsedTime) {
-                                                                           rightWall.glowWidth = 1 + elapsedTime * 4;
-                                                                           leftWall.glowWidth = 1 + elapsedTime * 4;
+                                                                           rightWall.glowWidth = 1 + elapsedTime * 8;
+                                                                           leftWall.glowWidth = 1 + elapsedTime * 8;
                                                                        }],
                                                 [SKAction customActionWithDuration:0.5
                                                                        actionBlock:^(SKNode *node, CGFloat elapsedTime) {
-                                                                           rightWall.glowWidth = 5 - elapsedTime * 4;
-                                                                           leftWall.glowWidth = 5 - elapsedTime * 4;
+                                                                           rightWall.glowWidth = 5 - elapsedTime * 8;
+                                                                           leftWall.glowWidth = 5 - elapsedTime * 8;
                                                                        }]
                                                 ]];
     glowEffect.timingMode = SKActionTimingEaseInEaseOut;
