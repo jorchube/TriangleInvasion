@@ -608,7 +608,7 @@
                                                     5,
                                                     CGRectGetHeight(self.frame)), nil);
     rightWall.strokeColor = [SKColor greenColor];
-    rightWall.glowWidth = 2;
+    rightWall.glowWidth = 1;
     
     SKPhysicsBody *rightWallPB = [SKPhysicsBody bodyWithPolygonFromPath:rightWall.path];
     [rightWallPB setCategoryBitMask:cat_bonuswall];
@@ -622,8 +622,23 @@
     [self addChild:leftWall];
     [self addChild:rightWall];
     
+    SKAction *glowEffect = [SKAction sequence:@[
+                                                [SKAction customActionWithDuration:0.5
+                                                                       actionBlock:^(SKNode *node, CGFloat elapsedTime) {
+                                                                           rightWall.glowWidth = 1 + elapsedTime * 2;
+                                                                           leftWall.glowWidth = 1 + elapsedTime * 2;
+                                                                       }],
+                                                [SKAction customActionWithDuration:0.5
+                                                                       actionBlock:^(SKNode *node, CGFloat elapsedTime) {
+                                                                           rightWall.glowWidth = 3 - elapsedTime * 2;
+                                                                           leftWall.glowWidth = 3 - elapsedTime * 2;
+                                                                       }]
+                                                ]];
+    glowEffect.timingMode = SKActionTimingEaseInEaseOut;
+    
     [self runAction:[SKAction sequence:@[
-                                         [SKAction waitForDuration:10],
+                                         [SKAction repeatAction:glowEffect
+                                                          count:10],
                                          [SKAction runBlock:^{
                                             [leftWall removeFromParent];
                                             [rightWall removeFromParent];
