@@ -642,13 +642,13 @@
     SKAction *glowEffect = [SKAction sequence:@[
                                                 [SKAction customActionWithDuration:0.5
                                                                        actionBlock:^(SKNode *node, CGFloat elapsedTime) {
-                                                                           rightWall.glowWidth = 1 + elapsedTime * 8;
-                                                                           leftWall.glowWidth = 1 + elapsedTime * 8;
+                                                                           rightWall.glowWidth = 1 + elapsedTime * 20;
+                                                                           leftWall.glowWidth = 1 + elapsedTime * 20;
                                                                        }],
                                                 [SKAction customActionWithDuration:0.5
                                                                        actionBlock:^(SKNode *node, CGFloat elapsedTime) {
-                                                                           rightWall.glowWidth = 5 - elapsedTime * 8;
-                                                                           leftWall.glowWidth = 5 - elapsedTime * 8;
+                                                                           rightWall.glowWidth = 11 - elapsedTime * 20;
+                                                                           leftWall.glowWidth = 11 - elapsedTime * 20;
                                                                        }]
                                                 ]];
     
@@ -712,11 +712,12 @@
         lifes[i] = [[SKShapeNode alloc] init];
         lifes[i].path = CGPathCreateWithEllipseInRect(CGRectMake(CGRectGetMinX(self.frame)+20 + 20*i,
                                                         CGRectGetMinY(self.frame)+20,
-                                                        7,
-                                                        7), nil);
+                                                        8,
+                                                        8), nil);
         
         lifes[i].fillColor = [SKColor whiteColor];
         lifes[i].strokeColor = [SKColor whiteColor];
+        lifes[i].lineWidth = 0.1;
         lifes[i].zPosition = 40;
         [self addChild:lifes[i]];
     }

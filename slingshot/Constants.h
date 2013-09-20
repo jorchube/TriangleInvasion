@@ -15,9 +15,9 @@
 
 #pragma mark Game
 
-#define speedDown 0.1
+#define speedDown 0.09
 #define pow_enableButtonTime 0.5
-#define speedDownAnimationTime 0.5
+#define speedDownAnimationTime 1
 
 #define MAXSLINGSTOP 20
 #define CHEATINGPENALTY 1000
