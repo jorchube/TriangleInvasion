@@ -574,10 +574,14 @@
 
 -(void) slowTriangles {
     for (SKNode *node in [self children]) {
-        if ([node class] == [Triangle class] || [node class] == [Powerup class] ) {
-            CGVector newSpeed = CGVectorMake(node.physicsBody.velocity.dx*speedVariation,
-                                             node.physicsBody.velocity.dy*speedVariation);
-            node.physicsBody.velocity = newSpeed;
+        if ([node class] == [Triangle class] || [node class] == [Powerup class]) {
+            CGVector oldSpeed = node.physicsBody.velocity;
+            [node runAction:[SKAction customActionWithDuration:speedDownAnimationTime
+                                                   actionBlock:^(SKNode *node, CGFloat elapsedTime) {
+                                                       CGVector newSpeed = CGVectorMake(oldSpeed.dx-oldSpeed.dx*(1-speedDown)*elapsedTime,
+                                                                                        oldSpeed.dy-oldSpeed.dy*(1-speedDown)*elapsedTime);
+                                                       node.physicsBody.velocity = newSpeed;
+                                                   }]];
         }
     }
 }
@@ -591,11 +595,12 @@
                                                     5,
                                                     CGRectGetHeight(self.frame)), nil);
     leftWall.strokeColor = [SKColor greenColor];
-    leftWall.glowWidth = 2;
+    leftWall.glowWidth = 1;
     
     SKPhysicsBody *leftWallPB = [SKPhysicsBody bodyWithPolygonFromPath:leftWall.path];
     [leftWallPB setCategoryBitMask:cat_bonuswall];
     [leftWallPB setCollisionBitMask:cat_sling];
+    [leftWallPB setContactTestBitMask:cat_bonuswall | cat_sling];
     
     [leftWallPB setAffectedByGravity:NO];
     [leftWallPB setUsesPreciseCollisionDetection:YES];
@@ -613,6 +618,7 @@
     SKPhysicsBody *rightWallPB = [SKPhysicsBody bodyWithPolygonFromPath:rightWall.path];
     [rightWallPB setCategoryBitMask:cat_bonuswall];
     [rightWallPB setCollisionBitMask:cat_sling];
+    [rightWallPB setContactTestBitMask:cat_bonuswall | cat_sling];
     
     [rightWallPB setAffectedByGravity:NO];
     [rightWallPB setUsesPreciseCollisionDetection:YES];
@@ -625,23 +631,24 @@
     SKAction *glowEffect = [SKAction sequence:@[
                                                 [SKAction customActionWithDuration:0.5
                                                                        actionBlock:^(SKNode *node, CGFloat elapsedTime) {
-                                                                           rightWall.glowWidth = 1 + elapsedTime * 2;
-                                                                           leftWall.glowWidth = 1 + elapsedTime * 2;
+                                                                           rightWall.glowWidth = 1 + elapsedTime * 4;
+                                                                           leftWall.glowWidth = 1 + elapsedTime * 4;
                                                                        }],
                                                 [SKAction customActionWithDuration:0.5
                                                                        actionBlock:^(SKNode *node, CGFloat elapsedTime) {
-                                                                           rightWall.glowWidth = 3 - elapsedTime * 2;
-                                                                           leftWall.glowWidth = 3 - elapsedTime * 2;
+                                                                           rightWall.glowWidth = 5 - elapsedTime * 4;
+                                                                           leftWall.glowWidth = 5 - elapsedTime * 4;
                                                                        }]
                                                 ]];
     glowEffect.timingMode = SKActionTimingEaseInEaseOut;
     
     [self runAction:[SKAction sequence:@[
                                          [SKAction repeatAction:glowEffect
-                                                          count:10],
+                                                          count:20],
                                          [SKAction runBlock:^{
                                             [leftWall removeFromParent];
                                             [rightWall removeFromParent];
+                                            powerup[2].userInteractionEnabled = YES;
                                             }]
                                          ]]];
     
@@ -661,6 +668,7 @@
 
 -(void)powerup3 {
     powerup[2].enabled = NO;
+    powerup[2].userInteractionEnabled = NO;
     [self addWalls];
 }
 

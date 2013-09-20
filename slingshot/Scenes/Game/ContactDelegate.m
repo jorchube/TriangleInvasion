@@ -98,6 +98,11 @@
         if (AMask == cat_powerup) [self killerWaveHitObject:bodyA atPoint:collisionPoint];
         else [self killerWaveHitObject:bodyB atPoint:collisionPoint];
     }
+    
+    else if ( (AMask | BMask) == (cat_sling | cat_bonuswall )) {
+        if (AMask == cat_sling) [self sling:bodyA bouncedInWall:bodyB atPoint:collisionPoint];
+        else [self sling:bodyB bouncedInWall:bodyA atPoint:collisionPoint];
+    }
 }
 
 -(void) didEndContact:(SKPhysicsContact *)contact {
@@ -134,6 +139,10 @@
     [delegatorID addChild:sparks];
 }
 # pragma mark collisions
+
+-(void) sling: (SKPhysicsBody*) sling bouncedInWall: (SKPhysicsBody*) wall atPoint: (CGPoint) point {
+    
+}
 
 -(void) killerWaveHitObject: (SKPhysicsBody*) object atPoint: (CGPoint) point{
     [self killSimpleObject:object withTime:0];

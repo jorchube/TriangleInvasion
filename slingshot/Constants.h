@@ -11,12 +11,13 @@
 
 #pragma mark scene
 
-#define Xmargin 20
+#define Xmargin 40
 
 #pragma mark Game
 
 #define speedDown 0.25
 #define pow_enableButtonTime 0.5
+#define speedDownAnimationTime 0.5
 
 #define MAXSLINGSTOP 20
 #define CHEATINGPENALTY 1000
@@ -47,9 +48,9 @@
 #define  cat_simpleObject   0x1 << 1
 #define  cat_powerup        0x1 << 2
 
+#define  cat_bonuswall      0x1 << 29
 #define  cat_killerWave     0x1 << 30
 #define  cat_deadline       0x1 << 31
-#define  cat_bonuswall      0x1 << 29
 
 #define  slingshotMass  1.0
 #define  slingshotForceMult  2.5

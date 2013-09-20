@@ -155,7 +155,7 @@ static id infoSource;
         [sling.physicsBody setContactTestBitMask:cat_sling | cat_simpleObject | cat_powerup];
         [sling.physicsBody setDynamic:YES];
         [sling.physicsBody setCategoryBitMask:cat_sling];
-        [sling.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject | cat_powerup];
+        [sling.physicsBody setCollisionBitMask:cat_sling | cat_simpleObject | cat_powerup | cat_bonuswall];
         
         CGVector impulse;
         // Shooting as if were dragging the ball
