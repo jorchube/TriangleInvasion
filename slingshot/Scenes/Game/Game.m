@@ -594,6 +594,7 @@
     
     SKPhysicsBody *leftWallPB = [SKPhysicsBody bodyWithPolygonFromPath:leftWall.path];
     [leftWallPB setCategoryBitMask:cat_bonuswall];
+    [leftWallPB setCollisionBitMask:cat_sling];
     
     [leftWallPB setAffectedByGravity:NO];
     [leftWallPB setUsesPreciseCollisionDetection:YES];
@@ -610,6 +611,7 @@
     
     SKPhysicsBody *rightWallPB = [SKPhysicsBody bodyWithPolygonFromPath:rightWall.path];
     [rightWallPB setCategoryBitMask:cat_bonuswall];
+    [rightWallPB setCollisionBitMask:cat_sling];
     
     [rightWallPB setAffectedByGravity:NO];
     [rightWallPB setUsesPreciseCollisionDetection:YES];
