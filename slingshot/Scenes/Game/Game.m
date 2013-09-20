@@ -571,23 +571,89 @@
     
 }
 
+-(void) slowTriangles {
+    for (SKNode *node in [self children]) {
+        if ([node class] == [Triangle class]) {
+            CGVector newSpeed = CGVectorMake(node.physicsBody.velocity.dx*speedVariation,
+                                             node.physicsBody.velocity.dy*speedVariation);
+            node.physicsBody.velocity = newSpeed;
+        }
+    }
+}
+
+
+-(void) addWalls {
+    
+    SKShapeNode *leftWall = [[SKShapeNode alloc] init];
+    leftWall.path = CGPathCreateWithRect(CGRectMake(CGRectGetMinX(self.frame),
+                                                    CGRectGetMinY(self.frame),
+                                                    5,
+                                                    CGRectGetHeight(self.frame)), nil);
+    leftWall.strokeColor = [SKColor greenColor];
+    leftWall.glowWidth = 2;
+    
+    SKPhysicsBody *leftWallPB = [SKPhysicsBody bodyWithPolygonFromPath:leftWall.path];
+    [leftWallPB setCategoryBitMask:cat_bonuswall];
+    [leftWallPB setCollisionBitMask:cat_sling];
+    
+    [leftWallPB setAffectedByGravity:NO];
+    [leftWallPB setUsesPreciseCollisionDetection:YES];
+    [leftWallPB setDynamic:NO];
+    leftWall.physicsBody = leftWallPB;
+    
+    SKShapeNode *rightWall = [[SKShapeNode alloc] init];
+    rightWall.path = CGPathCreateWithRect(CGRectMake(CGRectGetMaxX(self.frame)-5,
+                                                    CGRectGetMinY(self.frame),
+                                                    5,
+                                                    CGRectGetHeight(self.frame)), nil);
+    rightWall.strokeColor = [SKColor greenColor];
+    rightWall.glowWidth = 2;
+    
+    SKPhysicsBody *rightWallPB = [SKPhysicsBody bodyWithPolygonFromPath:rightWall.path];
+    [rightWallPB setCategoryBitMask:cat_bonuswall];
+    [rightWallPB setCollisionBitMask:cat_sling];
+    
+    [rightWallPB setAffectedByGravity:NO];
+    [rightWallPB setUsesPreciseCollisionDetection:YES];
+    [rightWallPB setDynamic:NO];
+    rightWall.physicsBody = rightWallPB;
+    
+    [self addChild:leftWall];
+    [self addChild:rightWall];
+    
+    [self runAction:[SKAction sequence:@[
+                                         [SKAction waitForDuration:10],
+                                         [SKAction runBlock:^{
+                                            [leftWall removeFromParent];
+                                            [rightWall removeFromParent];
+                                            }]
+                                         ]]];
+    
+}
 
 #pragma mark powerup functions
 
 -(void)powerup1 {
-    
+    powerup[0].enabled = NO;
+    [self slowTriangles];
 }
 
 -(void)powerup2 {
+    powerup[1].enabled = NO;
     [self unleashKillerWave];
 }
 
 -(void)powerup3 {
-    
+    powerup[2].enabled = NO;
+    [self addWalls];
 }
 
 -(CGPoint)getPowerUpButtonPosition:(int)button {
     return powerup[button].center;
+}
+
+-(void)enablePowerUp:(int)button {
+    powerup[button].enabled = YES;
 }
 
 @end
