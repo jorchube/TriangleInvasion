@@ -91,7 +91,7 @@
 
 -(void) launchTimer {
     SKAction *launch = [SKAction repeatActionForever:[SKAction sequence:@[[SKAction waitForDuration:currentTimeGeneration],
-                                                                          [SKAction runBlock:^{[self launchTriangle];}],
+                                                                          [SKAction runBlock:^{[self decideObjectToLaunch];}],
                                                                           ]]];
     [self runAction:launch withKey:@"launchTime"];
 }
@@ -224,6 +224,16 @@
 
 
 # pragma mark object launchers
+
+-(void) decideObjectToLaunch {
+    if ((rand()%powerupPeriod) == 0) [self launchPowerup];
+    else [self launchTriangle];
+}
+
+-(void) launchPowerup {
+    Powerup *pow = [[Powerup alloc]init];
+    [self launchObject:pow];
+}
 
 -(void) launchTriangle {
 	Triangle *tri = [[Triangle alloc]init];

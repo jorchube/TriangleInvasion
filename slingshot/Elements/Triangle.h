@@ -7,9 +7,10 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "Constants.h"
 
 @interface Triangle : SKShapeNode
+
+-(id) init;
 
 @property Boolean isAlive;
 

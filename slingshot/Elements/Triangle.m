@@ -34,8 +34,8 @@
 		SKPhysicsBody *pb = [SKPhysicsBody bodyWithPolygonFromPath:path];
 		
 		[pb setCategoryBitMask:cat_simpleObject];
-		[pb setCollisionBitMask:cat_simpleObject | cat_sling | cat_deadline];
-        [pb setContactTestBitMask:cat_simpleObject | cat_sling | cat_deadline];
+		[pb setCollisionBitMask:cat_simpleObject | cat_sling | cat_deadline | cat_powerup];
+        [pb setContactTestBitMask:cat_simpleObject | cat_sling | cat_deadline | cat_powerup];
 		[pb setMass:triangleMass];
 		[pb setFriction:0.0];
 		[pb setLinearDamping:0.0];

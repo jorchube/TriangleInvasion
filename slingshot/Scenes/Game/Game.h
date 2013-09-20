@@ -13,6 +13,7 @@
 #import "ContactDelegate.h"
 #import "Triangle.h"
 #import "Deadline.h"
+#import "Powerup.h"
 
 #import "SceneImplementation.h"
 
@@ -35,5 +36,7 @@
 
 -(BOOL)isStoped;
 -(void)cheatingDone;
+
+-(void) unleashKillerWave;
 
 @end
