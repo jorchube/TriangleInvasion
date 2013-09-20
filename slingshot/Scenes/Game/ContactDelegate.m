@@ -180,6 +180,7 @@
 }
 
 -(void) collisionBetweenSling: (SKPhysicsBody*) sling andPowerup:(SKPhysicsBody*)pow at:(CGPoint)point {
+    [delegatorID runAction:[collisionSound runActionChekingAudio]];
     
     int type =  [self getPowerupType:pow];
     
