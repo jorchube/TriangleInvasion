@@ -62,7 +62,9 @@
 
 #pragma mark powerup
 
-#define  pow_none  0
+#define  pow_time 0
+#define  pow_wave 1
+#define  pow_wall 2
 
 #pragma mark actions
 

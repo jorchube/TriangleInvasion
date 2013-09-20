@@ -128,8 +128,20 @@
     [delegatorID updateScore:score_slingHitsTriangle];
 }
 
+-(int) getPowerupType: (SKPhysicsBody*) pow{
+    return [(Powerup*)pow.node type];
+}
+/*
+-(CGPoint) getPowButtonPoint: (int) type{
+    switch (type){
+        case pow_time:
+            return [delegatorID ]
+    }
+}
+*/
 -(void) collisionBetweenSling: (SKPhysicsBody*) sling andPowerup:(SKPhysicsBody*)pow at:(CGPoint)point {
-    /* Effect for enabling powerup button */
+    
+  //  CGPoint target = [self getPowButtonPoint:[self getPowerupType:pow]];
     
     [self killSimpleObject:pow withTime:timeForObjectToDisappearAfterHit];
     

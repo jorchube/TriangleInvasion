@@ -11,7 +11,7 @@
 
 @interface Powerup : Triangle
 
-@property Boolean parallized;
+@property int type;
 
 -(id) init;
 

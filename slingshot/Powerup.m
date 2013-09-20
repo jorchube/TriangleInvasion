@@ -11,22 +11,38 @@
 
 @implementation Powerup
 
-@synthesize parallized;
+@synthesize type;
 
 -(id) init {
     self = [super init];
     if (self) {
-        self.fillColor = self.strokeColor;
+        [self setType];
         
         self.physicsBody.categoryBitMask = cat_powerup;
         self.physicsBody.collisionBitMask = cat_simpleObject | cat_sling | cat_deadline | cat_powerup;
         self.physicsBody.contactTestBitMask = cat_simpleObject | cat_sling | cat_deadline | cat_powerup;
         
         self.physicsBody.mass = powerupMass;
-        self.parallized = false;
-        
     }
     return self;
+}
+
+-(void) setType {
+    self.type = rand()%3;
+    switch (self.type) {
+        case pow_time:
+            self.fillColor = [UIColor cyanColor];
+            self.strokeColor = [UIColor cyanColor];
+            break;
+        case pow_wall:
+            self.fillColor = [UIColor greenColor];
+            self.strokeColor = [UIColor greenColor];
+            break;
+        case pow_wave:
+            self.fillColor = [UIColor orangeColor];
+            self.strokeColor = [UIColor orangeColor];
+            break;
+    }
 }
 
 @end
