@@ -88,7 +88,7 @@
 
 -(void) launchTimer {
     SKAction *launch = [SKAction repeatActionForever:[SKAction sequence:@[[SKAction waitForDuration:currentTimeGeneration],
-                                                                          [SKAction runBlock:^{[self launchTriangle];}],
+                                                                          [SKAction runBlock:^{[self decideObjectToLaunch];}],
                                                                           ]]];
     [self runAction:launch withKey:@"launchTime"];
 }
@@ -221,6 +221,16 @@
 
 
 # pragma mark object launchers
+
+-(void) decideObjectToLaunch {
+    if ((rand()%powerupPeriod) == 0) [self launchPowerup];
+    else [self launchTriangle];
+}
+
+-(void) launchPowerup {
+    Powerup *pow = [[Powerup alloc]init];
+    [self launchObject:pow];
+}
 
 -(void) launchTriangle {
 	Triangle *tri = [[Triangle alloc]init];
@@ -471,5 +481,38 @@
     score += (score>0)?-CHEATINGPENALTY:CHEATINGPENALTY;
     
 }
+
+-(void) unleashKillerWave {
+    SKShapeNode *line = [[SKShapeNode alloc]init];
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, nil, 0, 100);
+    CGPathAddLineToPoint(path, nil, CGRectGetMaxX(self.frame), 100);
+    CGPathAddLineToPoint(path, Nil, CGRectGetMaxX(self.frame), 95);
+    CGPathAddLineToPoint(path, Nil, 0, 95);
+    CGPathCloseSubpath(path);
+    line.path = path;
+    line.alpha = 0;
+    
+    SKPhysicsBody *pb = [SKPhysicsBody bodyWithPolygonFromPath:path];
+    pb.categoryBitMask = cat_killerWave;
+    pb.collisionBitMask = cat_simpleObject;
+    pb.contactTestBitMask = cat_simpleObject;
+    
+    line.physicsBody = pb;
+    
+    //SKAction *tiraParribaDeMierda = [SKAction moveToY:CGRectGetMaxY(self.frame) duration:5];
+    [self addChild:line];
+    //[line runAction:tiraParribaDeMierda];
+    line.physicsBody.affectedByGravity = NO;
+    line.physicsBody.mass = INT64_MAX;
+    line.physicsBody.velocity = CGVectorMake(0, 500);
+    
+    [line runAction:[SKAction sequence:@[[SKAction waitForDuration:5],[SKAction removeFromParent]]]];
+    
+}
+
+
+
 
 @end

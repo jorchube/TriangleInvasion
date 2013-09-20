@@ -56,18 +56,44 @@
     
 	if ( (AMask | BMask) == cat_sling)
 		[self collisionBetweenSlings:bodyA and:bodyB At:collisionPoint];
+    
     else if( (AMask | BMask) == (cat_sling | cat_simpleObject) ) {
         if(AMask == cat_sling)
             [self sling:bodyA hitSimpleObject:bodyB At:collisionPoint];
         else [self sling:bodyB hitSimpleObject:bodyA At:collisionPoint];
     }
+    
     else if( (AMask | BMask) == cat_simpleObject)
         [self collisionBetweenSimpleObjects:bodyA and:bodyB At:collisionPoint];
+    
     else if( (AMask | BMask) == (cat_simpleObject | cat_deadline) ){
         if(AMask == cat_simpleObject)
             [self reachedDeadlineObject:bodyA At:collisionPoint];
         else [self reachedDeadlineObject:bodyB At:collisionPoint];
     }
+    
+    else if( (AMask | BMask) == (cat_sling | cat_powerup)){
+        if(AMask == cat_powerup) [self collisionBetweenSling:bodyB andPowerup:bodyA at:collisionPoint];
+        else [self collisionBetweenSling:bodyA andPowerup:bodyB at:collisionPoint];
+    }
+    
+    else if( (AMask | BMask) == (cat_simpleObject | cat_powerup ) ){
+        if (AMask == cat_powerup) [self collisionBetweenSimpleObject:bodyB andPowerup:bodyA at:collisionPoint];
+        else [self collisionBetweenSimpleObject:bodyA andPowerup:bodyB at:collisionPoint];
+    }
+    
+    else if ( (AMask | BMask) == cat_powerup)
+        [self collisionBetweenPowerups:bodyA and:bodyB At:collisionPoint];
+    else if ( (AMask | BMask) == (cat_powerup | cat_deadline) ){
+        if (AMask == cat_powerup) [self reachedDeadlineObject:bodyA At:collisionPoint];
+        else [self reachedDeadlineObject:bodyB At:collisionPoint];
+    }
+    
+    else if ( (AMask | BMask) == (cat_killerWave | cat_simpleObject)) {
+        if (AMask == cat_simpleObject) [self killerWaveHitObject:bodyA atPoint:collisionPoint];
+        else [self killerWaveHitObject:bodyB atPoint:collisionPoint];
+    }
+    
 }
 
 -(void) didEndContact:(SKPhysicsContact *)contact {
@@ -81,7 +107,54 @@
                 }];
 }
 
+-(void) emitExplosionFromBody: (SKPhysicsBody*) body atPoint: (CGPoint) point {
+    SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                             [[NSBundle mainBundle] pathForResource:@"collisionSparks" ofType:@"sks"]];
+    sparks.position = point;
+    sparks.targetNode = delegatorID;
+    sparks.particleColor = ((SKShapeNode*)body.node).strokeColor;
+    
+    [sparks runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
+    
+    [delegatorID addChild:sparks];
+}
+
 # pragma mark collisions
+
+-(void) killerWaveHitObject: (SKPhysicsBody*) object atPoint: (CGPoint) point{
+    [self killSimpleObject:object withTime:0];
+    [self emitExplosionFromBody:object atPoint:point];
+    
+    [delegatorID updateScore:score_slingHitsTriangle];
+}
+
+-(void) collisionBetweenSling: (SKPhysicsBody*) sling andPowerup:(SKPhysicsBody*)pow at:(CGPoint)point {
+    /* Effect for enabling powerup button */
+    
+    [self killSimpleObject:pow withTime:timeForObjectToDisappearAfterHit];
+    
+    [sling.node runAction:[SKAction removeFromParent]];
+    
+    SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                             [[NSBundle mainBundle] pathForResource:@"slingBreaks" ofType:@"sks"]];
+    sparks.position = point;
+    sparks.targetNode = delegatorID;
+    
+    [sparks runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
+    
+    [delegatorID addChild:sparks];
+    
+    [delegatorID updateScore:score_slingHitsTriangle];
+    
+}
+
+-(void) collisionBetweenPowerups:(SKPhysicsBody*) bodyA and:(SKPhysicsBody*) bodyB At:(CGPoint) point {
+    [self collisionBetweenSimpleObjects:bodyA and:bodyB At:point];
+}
+
+-(void) collisionBetweenSimpleObject: (SKPhysicsBody*) object andPowerup: (SKPhysicsBody*) pow at: (CGPoint) point{
+    [self collisionBetweenSimpleObjects:object and:pow At:point];
+}
 
 -(void) collisionBetweenSlings: (SKPhysicsBody*) slingA and: (SKPhysicsBody*) slingB At: (CGPoint) point {
 	//NSLog(@"two slings collide");
@@ -94,16 +167,7 @@
     [self killSimpleObject:body withTime:timeForObjectToDisappearAfterHit];
     [(Triangle*)body.node setIsAlive:NO];
     
-    SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                             [[NSBundle mainBundle] pathForResource:@"collisionSparks" ofType:@"sks"]];
-    sparks.position = point;
-    sparks.targetNode = delegatorID;
-    sparks.particleColor = ((SKShapeNode*)body.node).strokeColor;
-    
-    [sparks runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
-    
-    //NSLog(@"child count %d", [[delegatorID children]count]);
-    [delegatorID addChild:sparks];
+    [self emitExplosionFromBody:body atPoint:point];
     [delegatorID increaseComboCounter];
     [delegatorID updateScore:score_slingHitsTriangle];
 }
@@ -118,24 +182,8 @@
     [(Triangle*)bodyA.node setIsAlive:NO];
     [(Triangle*)bodyB.node setIsAlive:NO];
     
-    SKEmitterNode *sparksA = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                              [[NSBundle mainBundle] pathForResource:@"collisionSparks" ofType:@"sks"]];
-    sparksA.position = point;
-    sparksA.numParticlesToEmit = 5;
-    sparksA.targetNode = delegatorID;
-    sparksA.particleColor = ((SKShapeNode*)bodyA.node).strokeColor;
-    [sparksA runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
-    
-    SKEmitterNode *sparksB = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                              [[NSBundle mainBundle] pathForResource:@"collisionSparks" ofType:@"sks"]];
-    sparksB.position = point;
-    sparksB.numParticlesToEmit = 5;
-    sparksB.targetNode = delegatorID;
-    sparksB.particleColor = ((SKShapeNode*)bodyB.node).strokeColor;
-    [sparksB runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
-    
-    [delegatorID addChild:sparksA];
-    [delegatorID addChild:sparksB];
+    [self emitExplosionFromBody:bodyA atPoint:point];
+    [self emitExplosionFromBody:bodyB atPoint:point];
     
     if([delegatorID getComboCounter] > 1) [delegatorID increaseComboCounter];
     [delegatorID updateScore:score_triangleHitsTriangle];

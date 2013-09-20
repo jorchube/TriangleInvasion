@@ -26,6 +26,7 @@
 #define ratioScoreSpeed 0.01
 #define intervalDecrementForCreationRate 0.1
 #define deadlineLifeDecreaseForAnImpact 0.4
+#define powerupPeriod 15 
 
 #pragma mark slingshot body and position
 
@@ -38,11 +39,13 @@
 
 #pragma mark slingshot physic parameters
 
-#define  cat_notCollide 0x0
-#define  cat_sling  0x1 << 0
-#define  cat_simpleObject  0x1 << 1
+#define  cat_notCollide     0x0
+#define  cat_sling          0x1 << 0
+#define  cat_simpleObject   0x1 << 1
+#define  cat_powerup        0x1 << 2
 
-#define  cat_deadline  0x1 << 31
+#define  cat_killerWave     0x1 << 30
+#define  cat_deadline       0x1 << 31
 
 #define  slingshotMass  1.0
 #define  slingshotForceMult  2.5
@@ -54,6 +57,7 @@
 
 #define  triangleScale  0.5
 #define  triangleMass  slingshotMass/2
+#define  powerupMass triangleMass*10
 
 
 #pragma mark powerup
