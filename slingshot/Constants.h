@@ -29,8 +29,8 @@
 #define minIntervalCreationRate 0.3
 #define ratioScoreSpeed 0.01
 #define intervalDecrementForCreationRate 0.1
-#define deadlineLifeDecreaseForAnImpact 0
-#define powerupPeriod 1 
+#define deadlineLifeDecreaseForAnImpact 0.4
+#define powerupPeriod 50
 
 #define slingBounceOnWallSpeedUp 5
 

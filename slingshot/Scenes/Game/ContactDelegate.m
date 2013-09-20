@@ -140,18 +140,21 @@
 }
 
 -(void) emitParticlesForSling: (SKPhysicsBody*) sling atPoint: (CGPoint) point{
-    [self emitParticlesForSling:sling atPoint:point withScale:0];
+    [self emitParticlesForSling:sling atPoint:point withMaxParticles:0 killingTheSling:YES];
 }
 
--(void) emitParticlesForSling: (SKPhysicsBody*) sling atPoint:(CGPoint)point withScale: (float) scale {
-    [sling.node runAction:[SKAction removeFromParent]];
+-(void) emitParticlesForSling: (SKPhysicsBody*) sling
+                      atPoint:(CGPoint)point
+             withMaxParticles: (NSUInteger) maxPart killingTheSling:(Boolean) killable{
+    
+    if (killable) [sling.node runAction:[SKAction removeFromParent]];
     
     SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
                              [[NSBundle mainBundle] pathForResource:@"slingBreaks" ofType:@"sks"]];
     sparks.position = point;
     sparks.targetNode = delegatorID;
     
-    if(scale != 0) sparks.particleScale = scale;
+    if(maxPart != 0) sparks.numParticlesToEmit = maxPart;
     
     [sparks runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
     
@@ -160,8 +163,9 @@
 
 # pragma mark collisions
 
--(void) sling: (SKPhysicsBody*) sling bouncedInWall: (SKPhysicsBody*) wall atPoint: (CGPoint) point {
-    [self emitParticlesForSling:sling atPoint:point withScale:0.02];
+-(void) sling: (SKPhysicsBody*) sling bouncedInWall: (SKPhysicsBody*) wall
+      atPoint: (CGPoint) point {
+    [self emitParticlesForSling:sling atPoint:point withMaxParticles:10 killingTheSling:NO];
 }
 
 -(void) killerWaveHitObject: (SKPhysicsBody*) object atPoint: (CGPoint) point{
@@ -219,6 +223,8 @@
     [(Triangle*)body.node setIsAlive:NO];
     
     [self emitExplosionFromBody:body atPoint:point];
+    [self emitParticlesForSling:sling atPoint:point withMaxParticles:10 killingTheSling:NO];
+    
     [delegatorID increaseComboCounter];
     [delegatorID updateScore:score_slingHitsTriangle];
 }
