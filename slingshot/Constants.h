@@ -15,7 +15,7 @@
 
 #pragma mark Game
 
-#define speedDown 0.25
+#define speedDown 0.1
 #define pow_enableButtonTime 0.5
 #define speedDownAnimationTime 0.5
 
@@ -29,7 +29,7 @@
 #define minIntervalCreationRate 0.3
 #define ratioScoreSpeed 0.002
 #define intervalDecrementForCreationRate 0.1
-#define deadlineLifeDecreaseForAnImpact 0.2
+#define deadlineLifeDecreaseForAnImpact 0.21
 #define powerupPeriod 25
 
 

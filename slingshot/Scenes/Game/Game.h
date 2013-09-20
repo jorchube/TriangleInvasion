@@ -43,4 +43,6 @@
 
 -(void)enablePowerUp:(int)button;
 
+-(void)removeLife;
+
 @end

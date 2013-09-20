@@ -265,6 +265,9 @@
     /* Game over, substracting one life... whatever */
     
     if([(Triangle*)body.node isAlive]){
+        
+        [delegatorID removeLife];
+        
         [(Triangle*)body.node setIsAlive:NO];
         [body setVelocity:CGVectorMake(0, 0)];
         [body setAngularVelocity:0];

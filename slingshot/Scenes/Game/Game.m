@@ -35,6 +35,8 @@
     BOOL gameEnded;
     BOOL gameStoped;
     UIButton *powerup[3];
+    SKShapeNode *lifes[5];
+    int currentLife;
 }
 
 @end
@@ -49,10 +51,14 @@
         [self setMusicURL:@"Game.mp3"];
         [self startMusic];
         
+        [self addLives];
+        
         [[ViewController getSingleton] showVolumeButton];
         
         gameEnded = false;
         gameStoped = false;
+        
+        currentLife = 5;
         
 		contactDelegate = [[ContactDelegate alloc]initWithPhysicsWorld:self.physicsWorld andDelegator:self];
 		[self.physicsWorld setContactDelegate:contactDelegate];
@@ -327,27 +333,27 @@
     
     //add powerup buttons
     powerup[0] = [UIButton buttonWithType:UIButtonTypeCustom];
-    powerup[0].frame = CGRectMake(-17, -17, 35, 35);
+    powerup[0].frame = CGRectMake(-17, -17, 40, 40);
     [powerup[0] setImage:[UIImage imageNamed:@"clk.png"] forState:UIControlStateNormal];
     [powerup[0] setImage:[UIImage imageNamed:@"clk_w.png"] forState:UIControlStateDisabled];
     [powerup[0] addTarget:self action:@selector(powerup1) forControlEvents:UIControlEventTouchUpInside];
-    powerup[0].center = CGPointMake(CGRectGetMaxX(self.frame)-25,CGRectGetMinY(self.frame)+70);
+    powerup[0].center = CGPointMake(25,CGRectGetMaxY(self.frame)-280);
     powerup[0].enabled = NO;
     
     powerup[1] = [UIButton buttonWithType:UIButtonTypeCustom];
-    powerup[1].frame = CGRectMake(-17, -17, 35, 35);
+    powerup[1].frame = CGRectMake(-17, -17, 40, 40);
     [powerup[1] setImage:[UIImage imageNamed:@"exp.png"] forState:UIControlStateNormal];
     [powerup[1] setImage:[UIImage imageNamed:@"exp_w.png"] forState:UIControlStateDisabled];
     [powerup[1] addTarget:self action:@selector(powerup2) forControlEvents:UIControlEventTouchUpInside];
-    powerup[1].center = CGPointMake(CGRectGetMaxX(self.frame)-25,CGRectGetMinY(self.frame)+110);
+    powerup[1].center = CGPointMake(25,CGRectGetMaxY(self.frame)-320);
     powerup[1].enabled = NO;
     
     powerup[2] = [UIButton buttonWithType:UIButtonTypeCustom];
-    powerup[2].frame = CGRectMake(-17, -17, 35, 35);
+    powerup[2].frame = CGRectMake(-17, -17, 40, 40);
     [powerup[2] setImage:[UIImage imageNamed:@"wall.png"] forState:UIControlStateNormal];
     [powerup[2] setImage:[UIImage imageNamed:@"wall_w.png"] forState:UIControlStateDisabled];
     [powerup[2] addTarget:self action:@selector(powerup3) forControlEvents:UIControlEventTouchUpInside];
-    powerup[2].center = CGPointMake(CGRectGetMaxX(self.frame)-25,CGRectGetMinY(self.frame)+150);
+    powerup[2].center = CGPointMake(25,CGRectGetMaxY(self.frame)-360);
     powerup[2].enabled = NO;
     
     [self.view addSubview:powerup[0]];
@@ -645,11 +651,22 @@
                                                                            leftWall.glowWidth = 5 - elapsedTime * 8;
                                                                        }]
                                                 ]];
+    
+    SKAction *colorEffect = [SKAction runBlock:^{
+        rightWall.strokeColor = [SKColor orangeColor];
+        rightWall.fillColor = [SKColor orangeColor];
+        leftWall.strokeColor = [SKColor orangeColor];
+        leftWall.fillColor = [SKColor orangeColor];
+    }];
+    
     glowEffect.timingMode = SKActionTimingEaseInEaseOut;
     
     [self runAction:[SKAction sequence:@[
                                          [SKAction repeatAction:glowEffect
-                                                          count:20],
+                                                          count:18],
+                                         colorEffect,
+                                         [SKAction repeatAction:glowEffect
+                                                          count:2],
                                          [SKAction runBlock:^{
                                             [leftWall removeFromParent];
                                             [rightWall removeFromParent];
@@ -684,5 +701,32 @@
 -(void)enablePowerUp:(int)button {
     powerup[button].enabled = YES;
 }
+
+
+
+#pragma mark add lifes
+
+-(void)addLives {
+    
+    for (int i = 0 ; i < 5; i++){
+        lifes[i] = [[SKShapeNode alloc] init];
+        lifes[i].path = CGPathCreateWithEllipseInRect(CGRectMake(CGRectGetMinX(self.frame)+20 + 20*i,
+                                                        CGRectGetMinY(self.frame)+20,
+                                                        7,
+                                                        7), nil);
+        
+        lifes[i].fillColor = [SKColor whiteColor];
+        lifes[i].strokeColor = [SKColor whiteColor];
+        lifes[i].zPosition = 40;
+        [self addChild:lifes[i]];
+    }
+    
+}
+
+-(void)removeLife {
+    if (currentLife > 0)
+        lifes[--currentLife].fillColor = [SKColor clearColor];
+}
+
 
 @end
