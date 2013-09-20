@@ -150,6 +150,7 @@
 		7CB2517117DA1DDD00FA592D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7CB2517317DA1DDD00FA592D /* slingshotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = slingshotTests.m; sourceTree = "<group>"; };
 		7CB2518117DA2F4E00FA592D /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		7CCC089D17E9C43800EB5737 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7CDD204B17E2374F0039F9E3 /* appicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = appicon.png; path = Resources/images/appicon.png; sourceTree = "<group>"; };
 		7CDD204C17E2374F0039F9E3 /* hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hand.png; path = Resources/images/hand.png; sourceTree = "<group>"; };
 		7CDD204D17E2374F0039F9E3 /* line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = line.png; path = Resources/images/line.png; sourceTree = "<group>"; };
@@ -499,6 +500,7 @@
 				de,
 				ja,
 				it,
+				"zh-Hans",
 			);
 			mainGroup = 7CB2513217DA1DDC00FA592D;
 			productRefGroup = 7CB2513C17DA1DDC00FA592D /* Products */;
@@ -640,6 +642,7 @@
 				B5D6348A17E1388A0065FF8D /* de */,
 				7C74DCC217E3EFCC000499A2 /* ja */,
 				7C404EFD17E501FD00C3EB33 /* it */,
+				7CCC089D17E9C43800EB5737 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

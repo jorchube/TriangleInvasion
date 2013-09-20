@@ -10,6 +10,8 @@
 #import "MainMenu.h"
 #import "GameKit.h"
 
+#define POWERUPS 3
+
 @interface Game() {
     @private
     Sling *idleSling;
@@ -31,6 +33,7 @@
     int maxCombo;
     BOOL gameEnded;
     BOOL gameStoped;
+    UIButton *combos[3];
 }
 
 @end
@@ -318,6 +321,51 @@
         stopButton.alpha = 1;
     }];
     
+    
+    
+    
+    //add powerup buttons
+    combos[0] = [UIButton buttonWithType:UIButtonTypeSystem];
+    combos[0].frame = CGRectMake(-17, -17, 35, 35);
+    [combos[0] setImage:[UIImage imageNamed:@"clk.png"] forState:UIControlStateNormal];
+    [combos[0] setImage:[UIImage imageNamed:@"clk_w.png"] forState:UIControlStateDisabled];
+    [combos[0] addTarget:self action:@selector(powerup1) forControlEvents:UIControlEventTouchUpInside];
+    combos[0].center = CGPointMake(CGRectGetMaxX(self.frame)-30,CGRectGetMaxY(self.frame)-100);
+    combos[0].enabled = NO;
+    
+    combos[1] = [UIButton buttonWithType:UIButtonTypeSystem];
+    combos[1].frame = CGRectMake(-17, -17, 35, 35);
+    [combos[1] setImage:[UIImage imageNamed:@"exp.png"] forState:UIControlStateNormal];
+    [combos[1] setImage:[UIImage imageNamed:@"exp_w.png"] forState:UIControlStateDisabled];
+    [combos[1] addTarget:self action:@selector(powerup2) forControlEvents:UIControlEventTouchUpInside];
+    combos[1].center = CGPointMake(CGRectGetMaxX(self.frame)-30,CGRectGetMaxY(self.frame)-140);
+    combos[1].enabled = NO;
+    
+    combos[2] = [UIButton buttonWithType:UIButtonTypeSystem];
+    combos[2].frame = CGRectMake(-17, -17, 35, 35);
+    [combos[2] setImage:[UIImage imageNamed:@"wall.png"] forState:UIControlStateNormal];
+    [combos[2] setImage:[UIImage imageNamed:@"wall_w.png"] forState:UIControlStateDisabled];
+    [combos[2] addTarget:self action:@selector(powerup2) forControlEvents:UIControlEventTouchUpInside];
+    combos[2].center = CGPointMake(CGRectGetMaxX(self.frame)-30,CGRectGetMaxY(self.frame)-170);
+    combos[2].enabled = NO;
+    
+    [self.view addSubview:combos[0]];
+    [self.view addSubview:combos[1]];
+    [self.view addSubview:combos[2]];
+    
+}
+
+-(void)removeButtons {
+    
+    [UIView animateWithDuration:1 animations:^{
+        combos[0].alpha = 0;
+        combos[1].alpha = 0;
+        combos[2].alpha = 0;
+    } completion:^(BOOL finished) {
+        [combos[0] removeFromSuperview];
+        [combos[1] removeFromSuperview];
+        [combos[2] removeFromSuperview];
+    }];
 }
 
 -(void)stopGame {
@@ -368,6 +416,7 @@
 -(void)exitGame {
     
     [self stopMusic];
+    [self removeButtons];
     
     self.view.paused = false;
     SKTransition *trans = [SKTransition fadeWithDuration:1];
@@ -408,7 +457,7 @@
     [[GameKit singleton] saveScore:score];
     [[GameKit singleton] saveMaxBonus:maxCombo];
     
-    
+    [self removeButtons];
     
     gameOverLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMidX(self.frame)-150, -100, 300, 50)];
     gameOverLabel.font = [UIFont fontWithName:@"fipps" size:35];
@@ -513,6 +562,18 @@
 }
 
 
+#pragma mark powerup functions
 
+-(void)powerup1 {
+    
+}
+
+-(void)powerup2 {
+    [self unleashKillerWave];
+}
+
+-(void)powerup3 {
+    
+}
 
 @end
