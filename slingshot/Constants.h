@@ -57,7 +57,7 @@
 
 #define  triangleScale  0.5
 #define  triangleMass  slingshotMass/2
-#define  powerupMass triangleMass*10
+#define  powerupMass triangleMass
 
 
 #pragma mark powerup
