@@ -39,4 +39,6 @@
 
 -(void) unleashKillerWave;
 
+-(CGPoint)getPowerUpButtonPosition:(int)button;
+
 @end
