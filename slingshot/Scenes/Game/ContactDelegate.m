@@ -89,11 +89,15 @@
         else [self reachedDeadlineObject:bodyB At:collisionPoint];
     }
     
-    else if ( (AMask | BMask) == (cat_killerWave | cat_simpleObject)) {
+    else if ( (AMask | BMask) == (cat_killerWave | cat_simpleObject )) {
         if (AMask == cat_simpleObject) [self killerWaveHitObject:bodyA atPoint:collisionPoint];
         else [self killerWaveHitObject:bodyB atPoint:collisionPoint];
     }
     
+    else if ( (AMask | BMask) == (cat_killerWave | cat_powerup )) {
+        if (AMask == cat_powerup) [self killerWaveHitObject:bodyA atPoint:collisionPoint];
+        else [self killerWaveHitObject:bodyB atPoint:collisionPoint];
+    }
 }
 
 -(void) didEndContact:(SKPhysicsContact *)contact {
@@ -120,6 +124,11 @@
     sparks.xAcceleration = accel.dx;
     sparks.yAcceleration = accel.dy;
     
+    if(accel.dx != 0 && accel.dy != 0) {
+        sparks.particleSpeed /= 10;
+        sparks.particleSpeedRange /= 10;
+    }
+    
     [sparks runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
     
     [delegatorID addChild:sparks];
@@ -139,9 +148,17 @@
 
 -(void) collisionBetweenSling: (SKPhysicsBody*) sling andPowerup:(SKPhysicsBody*)pow at:(CGPoint)point {
     
-    CGPoint target = [delegatorID getPowerUpButtonPosition:[self getPowerupType:pow]];
+    int type =  [self getPowerupType:pow];
+    
+    [delegatorID runAction:[SKAction sequence:@[
+                                                [SKAction waitForDuration:pow_enableButtonTime],
+                                                [SKAction runBlock:^{[delegatorID enablePowerUp:type];}]
+                                                ]]];
+    
+    CGPoint target = [delegatorID getPowerUpButtonPosition:type];
                       
-    CGVector particlesDirection = CGVectorMake((point.x-target.x)*10, (target.y-point.y)*10);
+    CGVector particlesDirection = CGVectorMake((target.x-point.x)*10,
+                                               ([delegatorID frame].size.height-target.y-point.y)*10);
     
     [self emitExplosionFromBody:pow atPoint:point withAccel:particlesDirection];
     

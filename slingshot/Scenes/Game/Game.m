@@ -9,6 +9,7 @@
 #import "Game.h"
 #import "MainMenu.h"
 #import "GameKit.h"
+#import "Powerup.h"
 
 #define POWERUPS 3
 
@@ -325,7 +326,7 @@
     
     
     //add powerup buttons
-    powerup[0] = [UIButton buttonWithType:UIButtonTypeSystem];
+    powerup[0] = [UIButton buttonWithType:UIButtonTypeCustom];
     powerup[0].frame = CGRectMake(-17, -17, 35, 35);
     [powerup[0] setImage:[UIImage imageNamed:@"clk.png"] forState:UIControlStateNormal];
     [powerup[0] setImage:[UIImage imageNamed:@"clk_w.png"] forState:UIControlStateDisabled];
@@ -333,7 +334,7 @@
     powerup[0].center = CGPointMake(CGRectGetMaxX(self.frame)-25,CGRectGetMinY(self.frame)+70);
     powerup[0].enabled = NO;
     
-    powerup[1] = [UIButton buttonWithType:UIButtonTypeSystem];
+    powerup[1] = [UIButton buttonWithType:UIButtonTypeCustom];
     powerup[1].frame = CGRectMake(-17, -17, 35, 35);
     [powerup[1] setImage:[UIImage imageNamed:@"exp.png"] forState:UIControlStateNormal];
     [powerup[1] setImage:[UIImage imageNamed:@"exp_w.png"] forState:UIControlStateDisabled];
@@ -341,11 +342,11 @@
     powerup[1].center = CGPointMake(CGRectGetMaxX(self.frame)-25,CGRectGetMinY(self.frame)+110);
     powerup[1].enabled = NO;
     
-    powerup[2] = [UIButton buttonWithType:UIButtonTypeSystem];
+    powerup[2] = [UIButton buttonWithType:UIButtonTypeCustom];
     powerup[2].frame = CGRectMake(-17, -17, 35, 35);
     [powerup[2] setImage:[UIImage imageNamed:@"wall.png"] forState:UIControlStateNormal];
     [powerup[2] setImage:[UIImage imageNamed:@"wall_w.png"] forState:UIControlStateDisabled];
-    [powerup[2] addTarget:self action:@selector(powerup2) forControlEvents:UIControlEventTouchUpInside];
+    [powerup[2] addTarget:self action:@selector(powerup3) forControlEvents:UIControlEventTouchUpInside];
     powerup[2].center = CGPointMake(CGRectGetMaxX(self.frame)-25,CGRectGetMinY(self.frame)+150);
     powerup[2].enabled = NO;
     
@@ -555,8 +556,8 @@
     
     SKPhysicsBody *pb = [SKPhysicsBody bodyWithPolygonFromPath:path];
     pb.categoryBitMask = cat_killerWave;
-    pb.collisionBitMask = cat_simpleObject;
-    pb.contactTestBitMask = cat_simpleObject;
+    pb.collisionBitMask = cat_simpleObject | cat_powerup;
+    pb.contactTestBitMask = cat_simpleObject | cat_powerup;
     
     line.physicsBody = pb;
     
@@ -573,7 +574,7 @@
 
 -(void) slowTriangles {
     for (SKNode *node in [self children]) {
-        if ([node class] == [Triangle class]) {
+        if ([node class] == [Triangle class] || [node class] == [Powerup class] ) {
             CGVector newSpeed = CGVectorMake(node.physicsBody.velocity.dx*speedVariation,
                                              node.physicsBody.velocity.dy*speedVariation);
             node.physicsBody.velocity = newSpeed;

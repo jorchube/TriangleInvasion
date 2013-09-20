@@ -41,4 +41,6 @@
 
 -(CGPoint)getPowerUpButtonPosition:(int)button;
 
+-(void)enablePowerUp:(int)button;
+
 @end
