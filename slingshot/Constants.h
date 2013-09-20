@@ -26,7 +26,7 @@
 #define ratioScoreSpeed 0.01
 #define intervalDecrementForCreationRate 0.1
 #define deadlineLifeDecreaseForAnImpact 0.4
-#define powerupPeriod 15 
+#define powerupPeriod 1 
 
 #pragma mark slingshot body and position
 

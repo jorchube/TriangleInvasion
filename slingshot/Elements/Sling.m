@@ -23,7 +23,7 @@
 
 @implementation Sling
 
-@synthesize powerup;
+//@synthesize powerup;
 
 static Sling *idleSling;
 static Sling *rightBonusSling;
@@ -49,7 +49,7 @@ static id infoSource;
         self.antialiased = NO;
 		self.strokeColor = [SKColor whiteColor];
 		self.fillColor = [SKColor whiteColor];
-		[self setPowerup:pow_none];
+		//[self setPowerup:pow_none];
         
         self.path = CGPathCreateWithEllipseInRect(CGRectMake(0.0,
                                                              0.0,

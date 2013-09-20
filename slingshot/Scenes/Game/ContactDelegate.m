@@ -108,17 +108,22 @@
 }
 
 -(void) emitExplosionFromBody: (SKPhysicsBody*) body atPoint: (CGPoint) point {
+    [self emitExplosionFromBody:body atPoint:point withAccel:CGVectorMake(0, 0)];
+}
+
+-(void) emitExplosionFromBody: (SKPhysicsBody*) body atPoint: (CGPoint) point withAccel: (CGVector) accel{
     SKEmitterNode *sparks = [NSKeyedUnarchiver unarchiveObjectWithFile:
                              [[NSBundle mainBundle] pathForResource:@"collisionSparks" ofType:@"sks"]];
     sparks.position = point;
     sparks.targetNode = delegatorID;
     sparks.particleColor = ((SKShapeNode*)body.node).strokeColor;
+    sparks.xAcceleration = accel.dx;
+    sparks.yAcceleration = accel.dy;
     
     [sparks runAction:[SKAction sequence:@[[SKAction waitForDuration:1],[SKAction removeFromParent]]]];
     
     [delegatorID addChild:sparks];
 }
-
 # pragma mark collisions
 
 -(void) killerWaveHitObject: (SKPhysicsBody*) object atPoint: (CGPoint) point{
@@ -131,17 +136,14 @@
 -(int) getPowerupType: (SKPhysicsBody*) pow{
     return [(Powerup*)pow.node type];
 }
-/*
--(CGPoint) getPowButtonPoint: (int) type{
-    switch (type){
-        case pow_time:
-            return [delegatorID ]
-    }
-}
-*/
+
 -(void) collisionBetweenSling: (SKPhysicsBody*) sling andPowerup:(SKPhysicsBody*)pow at:(CGPoint)point {
     
-  //  CGPoint target = [self getPowButtonPoint:[self getPowerupType:pow]];
+    CGPoint target = [delegatorID getPowerUpButtonPosition:[self getPowerupType:pow]];
+                      
+    CGVector particlesDirection = CGVectorMake((point.x-target.x)*10, (target.y-point.y)*10);
+    
+    [self emitExplosionFromBody:pow atPoint:point withAccel:particlesDirection];
     
     [self killSimpleObject:pow withTime:timeForObjectToDisappearAfterHit];
     

@@ -12,7 +12,7 @@
 
 @interface Sling : SKShapeNode
 
-@property int powerup;
+//@property int powerup;
 
 /*-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 -(void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
