@@ -208,6 +208,21 @@
 }
 
 -(void) collisionBetweenSimpleObject: (SKPhysicsBody*) object andPowerup: (SKPhysicsBody*) pow at: (CGPoint) point{
+    int type =  [self getPowerupType:pow];
+    
+    [delegatorID runAction:[SKAction sequence:@[
+                                                [SKAction waitForDuration:pow_enableButtonTime],
+                                                [SKAction runBlock:^{[delegatorID enablePowerUp:type];}]
+                                                ]]];
+    
+    CGPoint target = [delegatorID getPowerUpButtonPosition:type];
+    
+    CGVector particlesDirection = CGVectorMake((target.x-point.x)*10,
+                                               ([delegatorID frame].size.height-target.y-point.y)*10);
+    
+    [self emitExplosionFromBody:pow atPoint:point withAccel:particlesDirection];
+    
+    [self killSimpleObject:pow withTime:timeForObjectToDisappearAfterHit];
     [self collisionBetweenSimpleObjects:object and:pow At:point];
 }
 
