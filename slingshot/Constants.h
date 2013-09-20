@@ -27,10 +27,11 @@
 
 #define intervalForIncreasingTriangleCreationRate 10
 #define minIntervalCreationRate 0.3
-#define ratioScoreSpeed 0.01
+#define ratioScoreSpeed 0.002
 #define intervalDecrementForCreationRate 0.1
-#define deadlineLifeDecreaseForAnImpact 0.4
-#define powerupPeriod 50
+#define deadlineLifeDecreaseForAnImpact 0.2
+#define powerupPeriod 25
+
 
 #define slingBounceOnWallSpeedUp 5
 
@@ -84,10 +85,10 @@
 
 #pragma mark scoring
 
-#define score_slingHitsTriangle 10.0
-#define score_triangleHitsTriangle 5.0
-#define score_triangleHitsDeadline -10.0
-#define score_slingIsShot -5.0
+#define score_slingHitsTriangle 25.0
+#define score_triangleHitsTriangle 10.0
+#define score_triangleHitsDeadline -100.0
+#define score_slingIsShot -25.0
 
 #pragma mark colors
 
