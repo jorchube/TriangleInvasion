@@ -129,6 +129,7 @@
 		7C74DCC217E3EFCC000499A2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C883DCB17E75BBD0010C95C /* Shoot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Shoot.mp3; path = Resources/Sounds/Shoot.mp3; sourceTree = "<group>"; };
 		7C9189E417E11CEF007F3CBC /* universe.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = universe.sks; path = Resources/universe.sks; sourceTree = "<group>"; };
+		7C949AE317EDE63000EB2551 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7CB0FD8F17E5FC8900785934 /* SceneImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneImplementation.h; path = Helpers/SceneImplementation.h; sourceTree = "<group>"; };
 		7CB2513B17DA1DDC00FA592D /* slingshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slingshot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CB2513E17DA1DDC00FA592D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -501,6 +502,7 @@
 				ja,
 				it,
 				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 7CB2513217DA1DDC00FA592D;
 			productRefGroup = 7CB2513C17DA1DDC00FA592D /* Products */;
@@ -643,6 +645,7 @@
 				7C74DCC217E3EFCC000499A2 /* ja */,
 				7C404EFD17E501FD00C3EB33 /* it */,
 				7CCC089D17E9C43800EB5737 /* zh-Hans */,
+				7C949AE317EDE63000EB2551 /* zh-Hant */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

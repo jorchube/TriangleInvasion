@@ -6,44 +6,37 @@
  Copyright (c) 2013 Pau Sastre Miguel. All rights reserved.
  */
 
-"New Game" = "New Game";
-"Credits" = "Credits";
+"New Game" = "新游戏";
+"Credits" = "积分";
+"Back" = "返回";
+"Exit" = "离开";
+"Continue" = "继续";
+"Stop" = "暂停";
+"Main Menu" = "目录";
+"Game Over" = "游戏结束";
+"Remove Ads" = "移除广告";
+"Watch story" = "观看故事";
+"cheattitle" = "停止作弊!";
+"cheatmsg" = "权力越大承担责任越多.";
 
-"Back" = "Back";
-
-"Exit" = "Exit";
-"Continue" = "Continue";
-"Stop" = "Pause";
-"Main Menu" = "Main Menu";
-"Game Over" = "Game Over";
-
-"Remove Ads" = "Remove Ads";
-"Watch story" = "Watch story";
-
-"story11" = "once upon a time";
-"story12" = "somewhere in the galaxy...";
+"story11" = "从前";
+"story12" = "银河系某处...";
 "story13" = "";
-
-"story21" = "...there was a peaceful planet";
-"story22" = "where every single inhabitant was happy.";
-"story23" = "it was the fatdot planet.";
-
-"story31" = "but, someday,";
-"story32" = "something terrible happened...";
+"story21" = "...有一个和平的星球";
+"story22" = "每个居民都很高兴.";
+"story23" = "是 ‘fatdot’星球.";
+"story31" = "但是，有一日.";
+"story32" = "可怕的事情发生了...";
 "story33" = "";
-
-"story41" = "... fatdot planet was being attacked";
-"story42" = " by an army of triangles!!!";
-"story43" = "there was no hope...";
-
-"story51" = "... or was there?";
+"story41" = "... ‘fatdot’星球被攻击";
+"story42" = " 被三角军队!!!";
+"story43" = "没有希望了...";
+"story51" = "... 或是有希望?";
 "story52" = "";
-"story53" = "";
-
-"story61" = "you, with your army of volunteers";
-"story62"= "are willing to protect the planet";
-"story63"= "as long as you can.";
-
-"story71" = "good luck. you are our last hope.";
+ "story53" = "";
+"story61" = "你和你的志愿者军队";
+"story62"= "都愿意保护星球";
+ "story63"= "只要你能.";
+"story71" = "祝你好运，你是我们最后希望。";
 "story72"= "";
-"story73"= "";
+ "story73"= "";

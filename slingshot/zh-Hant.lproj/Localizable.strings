@@ -1,0 +1,43 @@
+/*
+ Localizable.strings
+ slingshot
+ 
+ Created by Pau Sastre Miguel on 10/09/13.
+ Copyright (c) 2013 Pau Sastre Miguel. All rights reserved.
+ */
+
+"New Game" = "新遊戲";
+"Credits" = "積分";
+"Back" = "返回";
+"Exit" = "離開";
+"Continue" = "繼續";
+"Stop" = "暫停";
+"Main Menu" = "目錄";
+"Game Over" = "遊戲結束";
+"Remove Ads" = "移除廣告";
+"Watch story" = "觀看故事";
+"cheattitle" = "停止作弊!";
+"cheatmsg" = "權力越大承擔責任越多.";
+
+"story11" = "從前";
+"story12" = "銀河系某處...";
+"story13" = "";
+"story21" = "...有一個和平的星球";
+"story22" = "每個居民都很高興.";
+"story23" = "是 ‘fatdot’星球.";
+"story31" = "但是，有一日.";
+"story32" = "可怕的事情發生了...";
+"story33" = "";
+"story41" = "... ‘fatdot’星球被攻擊";
+"story42" = " 被三角軍隊!!!";
+"story43" = "沒有希望了...";
+"story51" = "... 或是有希望?";
+"story52" = "";
+"story53" = "";
+"story61" = "你和你的志願者軍隊";
+"story62"= "都願意保護星球";
+"story63"= "只要你能.";
+"story71" = "祝你好運，你是我們最後希望。";
+"story72"= "";
+"story73"= "";
+

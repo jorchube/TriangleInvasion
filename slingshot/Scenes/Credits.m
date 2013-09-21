@@ -61,24 +61,33 @@
     SKLabelNode *jordi = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
     SKLabelNode *kengo = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
     SKLabelNode *alex = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
+    SKLabelNode *joey = [SKLabelNode labelNodeWithFontNamed:@"Helvetica Neue"];
     
     backLabel.fontSize = 18;
     pau.fontSize = 18;
     jordi.fontSize = 18;
     kengo.fontSize = 18;
     alex.fontSize = 18;
+    joey.fontSize = 18;
     
     
     backLabel.position = CGPointMake(CGRectGetMidX(self.frame)-70,
                                CGRectGetMidY(self.frame));
+    
     pau.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                   CGRectGetMidY(self.frame)+25);
+                                   CGRectGetMidY(self.frame)+50);
+    
     jordi.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                   CGRectGetMidY(self.frame)+75);
+                                   CGRectGetMidY(self.frame)+100);
+    
     kengo.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                 CGRectGetMidY(self.frame)-75);
+                                 CGRectGetMidY(self.frame)-50);
+    
     alex.position = CGPointMake(CGRectGetMidX(self.frame)+70,
-                                 CGRectGetMidY(self.frame)-25);
+                                 CGRectGetMidY(self.frame));
+    
+    joey.position = CGPointMake(CGRectGetMidX(self.frame)+70,
+                                CGRectGetMidY(self.frame)-100);
 
     
     backLabel.text = NSLocalizedString(@"Back", nil);
@@ -86,6 +95,8 @@
     jordi.text = @"Jordi Chulia";
     kengo.text = @"白木研伍";
     alex.text = @"Alex Ortiz";
+    joey.text = @"曾祖儀";
+    
     
     
     SKPhysicsBody *backLabelPB = [SKPhysicsBody bodyWithRectangleOfSize:pau.frame.size];
@@ -93,6 +104,7 @@
     SKPhysicsBody *jordiPB = [SKPhysicsBody bodyWithRectangleOfSize:jordi.frame.size];
     SKPhysicsBody *kengoPB = [SKPhysicsBody bodyWithRectangleOfSize:kengo.frame.size];
     SKPhysicsBody *alexPB = [SKPhysicsBody bodyWithRectangleOfSize:kengo.frame.size];
+    SKPhysicsBody *joeyPB = [SKPhysicsBody bodyWithRectangleOfSize:kengo.frame.size];
     
 
     [backLabelPB setDynamic:NO];
@@ -109,18 +121,23 @@
     
     [alexPB setDynamic:NO];
     [alexPB setAffectedByGravity:NO];
+    
+    [joeyPB setDynamic:NO];
+    [joeyPB setAffectedByGravity:NO];
 
     [backLabel setPhysicsBody:backLabelPB];
     [pau setPhysicsBody:pauPB];
     [kengo setPhysicsBody:kengoPB];
     [jordi setPhysicsBody:jordiPB];
     [alex setPhysicsBody:alexPB];
+    [joey setPhysicsBody:joeyPB];
     
     [self addChild:backLabel];
     [self addChild:pau];
     [self addChild:jordi];
     [self addChild:kengo];
     [self addChild:alex];
+    [self addChild:joey];
     
 }
 
