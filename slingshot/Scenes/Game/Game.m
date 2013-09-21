@@ -710,18 +710,26 @@
     
     for (int i = 0 ; i < 5; i++){
         lifes[i] = [[SKShapeNode alloc] init];
-        lifes[i].path = CGPathCreateWithEllipseInRect(CGRectMake(CGRectGetMinX(self.frame)+20 + 20*i,
-                                                        CGRectGetMinY(self.frame)+20,
-                                                        8,
-                                                        8), nil);
         
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+            lifes[i].path = CGPathCreateWithEllipseInRect(CGRectMake(CGRectGetMinX(self.frame)+20,
+                                                                     CGRectGetMinY(self.frame)+20 + 20*i,
+                                                                     8,
+                                                                     8), nil);
+        }else {
+            lifes[i].path = CGPathCreateWithEllipseInRect(CGRectMake(CGRectGetMinX(self.frame)+20 + 20*i,
+                                                                     CGRectGetMinY(self.frame)+20,
+                                                                     8,
+                                                                     8), nil);
+
+        }
         lifes[i].fillColor = [SKColor whiteColor];
         lifes[i].strokeColor = [SKColor whiteColor];
         lifes[i].lineWidth = 0.1;
         lifes[i].zPosition = 40;
         [self addChild:lifes[i]];
     }
-    
+
 }
 
 -(void)removeLife {

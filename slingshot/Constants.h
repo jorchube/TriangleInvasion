@@ -13,6 +13,8 @@
 
 #define Xmargin 40
 
+#define IPAD_SCALING_FACTOR 2
+
 #pragma mark Game
 
 #define speedDown 0.09

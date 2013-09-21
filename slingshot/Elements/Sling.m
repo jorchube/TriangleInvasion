@@ -51,13 +51,16 @@ static id infoSource;
 		self.fillColor = [SKColor whiteColor];
 		//[self setPowerup:pow_none];
         
+        double diameter = slingshotHeight; //(iphone) default
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) diameter *=IPAD_SCALING_FACTOR;
+        
         self.path = CGPathCreateWithEllipseInRect(CGRectMake(0.0,
                                                              0.0,
-                                                             slingshotHeight,
-                                                             slingshotWidth),
+                                                             diameter,
+                                                             diameter),
                                                   nil);
         
-		SKPhysicsBody *pb = [SKPhysicsBody bodyWithCircleOfRadius:slingshotHeight/2];
+		SKPhysicsBody *pb = [SKPhysicsBody bodyWithCircleOfRadius:diameter/2];
 		
 		[pb setCategoryBitMask:cat_notCollide];
 		[pb setCollisionBitMask:cat_notCollide];
@@ -264,7 +267,10 @@ static id infoSource;
     for (i = 0; i < numberOfSlings; i++) {
         bonusSlings[i] = [[Sling alloc] initWithFrame:scene.frame];
         
-        [bonusSlings[i] runAction:[SKAction moveTo:CGPointMake(bonusSlings[i].position.x+((i%2)?33*((i/2)+1):-33*((i/2)+1)),
+        double offset = 33;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) offset *= IPAD_SCALING_FACTOR;
+        
+        [bonusSlings[i] runAction:[SKAction moveTo:CGPointMake(bonusSlings[i].position.x+((i%2)?offset*((i/2)+1):-offset*((i/2)+1)),
                                                               bonusSlings[i].position.y- ((i/2)+1)*2 )
                                          duration:0.2]];
         

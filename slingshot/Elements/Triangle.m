@@ -19,10 +19,13 @@
 		self.strokeColor = [self getColor];
         self.antialiased = NO;
         
+        double scale = triangleScale; //(iphone) defaulf
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) scale *=IPAD_SCALING_FACTOR;
+        
         CGMutablePathRef path = CGPathCreateMutable();
 		CGPathMoveToPoint(path, nil, 0, 0);
-		CGPathAddLineToPoint(path, nil, 50*triangleScale, 0);
-		CGPathAddLineToPoint(path, nil, 25*triangleScale, 43*triangleScale);
+		CGPathAddLineToPoint(path, nil, 50*scale, 0);
+		CGPathAddLineToPoint(path, nil, 25*scale, 43*scale);
 		CGPathCloseSubpath(path);
         
         isAlive = YES;
