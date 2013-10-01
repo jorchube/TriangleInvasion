@@ -15,6 +15,8 @@
 #import "ViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMotion/CoreMotion.h>
+#import "GAIDictionaryBuilder.h"
+#import "GAI.h"
 
 @interface MainMenu() {
     @private
@@ -68,6 +70,13 @@
             [defaults setObject:[NSNumber numberWithBool:true] forKey:@"hand"];
             [defaults synchronize];
         }
+        
+        id<GAITracker> tracker= [[GAI sharedInstance] defaultTracker];
+        
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"view"        // Event category (required)
+                                                              action:@"enter_scene" // Event action (required)
+                                                               label:@"MainMenu"    // Event label
+                                                               value:nil] build]];  // Event value
         
     }
     return self;

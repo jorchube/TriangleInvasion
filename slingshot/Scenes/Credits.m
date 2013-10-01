@@ -10,6 +10,8 @@
 #import "Sling.h"
 #import "Deadline.h"
 #import "MainMenu.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAI.h"
 
 @interface Credits() {
     SKLabelNode *backLabel;
@@ -47,6 +49,13 @@
         
         
         [self.physicsWorld setContactDelegate:self];
+        
+        id<GAITracker> tracker= [[GAI sharedInstance] defaultTracker];
+        
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"view"        // Event category (required)
+                                                              action:@"enter_scene" // Event action (required)
+                                                               label:@"credits"     // Event label
+                                                               value:nil] build]];  // Event value
         
     }
     return self;

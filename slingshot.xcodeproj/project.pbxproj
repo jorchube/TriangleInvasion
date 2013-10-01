@@ -31,6 +31,10 @@
 		7C623F8417E1491800E2F1E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C623F8317E1491800E2F1E4 /* StoreKit.framework */; };
 		7C623F8617E1CCE400E2F1E4 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C623F8517E1CCE400E2F1E4 /* iAd.framework */; };
 		7C6A96D217E61CD90093B30B /* collisionSparks.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7C2AAAF117DE83DF00A9AD29 /* collisionSparks.sks */; };
+		7C6CBA5817FAC32D00EE04D3 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6CBA5717FAC32D00EE04D3 /* libGoogleAnalyticsServices.a */; };
+		7C6CBA5A17FAC4B000EE04D3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6CBA5917FAC4B000EE04D3 /* SystemConfiguration.framework */; };
+		7C6CBA5C17FAC4B900EE04D3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6CBA5B17FAC4B900EE04D3 /* libz.dylib */; };
+		7C6CBA5E17FAC4C400EE04D3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6CBA5D17FAC4C400EE04D3 /* CoreData.framework */; };
 		7C883DCC17E75BBD0010C95C /* Shoot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7C883DCB17E75BBD0010C95C /* Shoot.mp3 */; };
 		7C9189E617E11CEF007F3CBC /* universe.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7C9189E417E11CEF007F3CBC /* universe.sks */; };
 		7CB2513F17DA1DDC00FA592D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB2513E17DA1DDC00FA592D /* Foundation.framework */; };
@@ -126,6 +130,16 @@
 		7C623F8117E1454F00E2F1E4 /* GameKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameKit.m; path = Helpers/GameKit.m; sourceTree = "<group>"; };
 		7C623F8317E1491800E2F1E4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		7C623F8517E1CCE400E2F1E4 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		7C6CBA4F17FAC0B500EE04D3 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = Helpers/GoogleAnalytics/GAI.h; sourceTree = "<group>"; };
+		7C6CBA5017FAC0B500EE04D3 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = Helpers/GoogleAnalytics/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		7C6CBA5117FAC0B500EE04D3 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIFields.h; path = Helpers/GoogleAnalytics/GAIFields.h; sourceTree = "<group>"; };
+		7C6CBA5217FAC0B500EE04D3 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAILogger.h; path = Helpers/GoogleAnalytics/GAILogger.h; sourceTree = "<group>"; };
+		7C6CBA5317FAC0B500EE04D3 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = Helpers/GoogleAnalytics/GAITrackedViewController.h; sourceTree = "<group>"; };
+		7C6CBA5417FAC0B500EE04D3 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = Helpers/GoogleAnalytics/GAITracker.h; sourceTree = "<group>"; };
+		7C6CBA5717FAC32D00EE04D3 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = Helpers/GoogleAnalytics/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		7C6CBA5917FAC4B000EE04D3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7C6CBA5B17FAC4B900EE04D3 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		7C6CBA5D17FAC4C400EE04D3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7C74DCC217E3EFCC000499A2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7C883DCB17E75BBD0010C95C /* Shoot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Shoot.mp3; path = Resources/Sounds/Shoot.mp3; sourceTree = "<group>"; };
 		7C9189E417E11CEF007F3CBC /* universe.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = universe.sks; path = Resources/universe.sks; sourceTree = "<group>"; };
@@ -195,9 +209,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C6CBA5E17FAC4C400EE04D3 /* CoreData.framework in Frameworks */,
+				7C6CBA5C17FAC4B900EE04D3 /* libz.dylib in Frameworks */,
+				7C6CBA5A17FAC4B000EE04D3 /* SystemConfiguration.framework in Frameworks */,
 				7C404EFC17E4FDC000C3EB33 /* AudioToolbox.framework in Frameworks */,
 				7C623F8617E1CCE400E2F1E4 /* iAd.framework in Frameworks */,
 				7CB2514117DA1DDD00FA592D /* CoreGraphics.framework in Frameworks */,
+				7C6CBA5817FAC32D00EE04D3 /* libGoogleAnalyticsServices.a in Frameworks */,
 				7CB2514317DA1DDD00FA592D /* UIKit.framework in Frameworks */,
 				7CB2514517DA1DDD00FA592D /* SpriteKit.framework in Frameworks */,
 				7C623F8417E1491800E2F1E4 /* StoreKit.framework in Frameworks */,
@@ -265,6 +283,7 @@
 		7C623F7F17E1453200E2F1E4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7C6CBA4E17FAC06F00EE04D3 /* GoogleAnalytics */,
 				7C623F8017E1454F00E2F1E4 /* GameKit.h */,
 				7C623F8117E1454F00E2F1E4 /* GameKit.m */,
 				7CB0FD8F17E5FC8900785934 /* SceneImplementation.h */,
@@ -273,6 +292,20 @@
 				7C33558417E603D2007F133C /* SKAction+Sound.m */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		7C6CBA4E17FAC06F00EE04D3 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				7C6CBA4F17FAC0B500EE04D3 /* GAI.h */,
+				7C6CBA5017FAC0B500EE04D3 /* GAIDictionaryBuilder.h */,
+				7C6CBA5117FAC0B500EE04D3 /* GAIFields.h */,
+				7C6CBA5217FAC0B500EE04D3 /* GAILogger.h */,
+				7C6CBA5317FAC0B500EE04D3 /* GAITrackedViewController.h */,
+				7C6CBA5417FAC0B500EE04D3 /* GAITracker.h */,
+				7C6CBA5717FAC32D00EE04D3 /* libGoogleAnalyticsServices.a */,
+			);
+			name = GoogleAnalytics;
 			sourceTree = "<group>";
 		};
 		7C9189E817E13A9B007F3CBC /* fonts */ = {
@@ -306,6 +339,9 @@
 		7CB2513D17DA1DDC00FA592D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7C6CBA5D17FAC4C400EE04D3 /* CoreData.framework */,
+				7C6CBA5B17FAC4B900EE04D3 /* libz.dylib */,
+				7C6CBA5917FAC4B000EE04D3 /* SystemConfiguration.framework */,
 				7C404EFB17E4FDC000C3EB33 /* AudioToolbox.framework */,
 				7C623F8517E1CCE400E2F1E4 /* iAd.framework */,
 				7C623F8317E1491800E2F1E4 /* StoreKit.framework */,
@@ -742,6 +778,7 @@
 		7CB2517817DA1DDD00FA592D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jordi Chulia (9RL5HTHXQS)";
@@ -749,9 +786,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "slingshot/slingshot-Prefix.pch";
 				INFOPLIST_FILE = "slingshot/slingshot-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/pasasmi/Documents/code/slingshot/slingshot/Helpers/GoogleAnalytics,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -759,6 +801,7 @@
 		7CB2517917DA1DDD00FA592D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jordi Chulia (9RL5HTHXQS)";
@@ -766,9 +809,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "slingshot/slingshot-Prefix.pch";
 				INFOPLIST_FILE = "slingshot/slingshot-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/pasasmi/Documents/code/slingshot/slingshot/Helpers/GoogleAnalytics,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

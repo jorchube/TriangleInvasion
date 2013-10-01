@@ -10,6 +10,8 @@
 #import "Game.h"
 #import "MainMenu.h"
 #import <AVFoundation/AVFoundation.h>
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface Story() {
     SKShapeNode *bg_1;
@@ -46,6 +48,13 @@
 
 -(id)initWithSize:(CGSize)size nextScene:(int)next {
     if (self = [super initWithSize:size]) {
+        
+        id<GAITracker> tracker= [[GAI sharedInstance] defaultTracker];
+        
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"view"        // Event category (required)
+                                                              action:@"enter_scene" // Event action (required)
+                                                               label:@"Story"    // Event label
+                                                               value:nil] build]];  // Event value
         
         [self setMusicURL:@"Story.mp3"];
         

@@ -10,6 +10,8 @@
 #import "MainMenu.h"
 #import "GameKit.h"
 #import "Powerup.h"
+#import "GAIDictionaryBuilder.h"
+#import "GAI.h"
 
 #define POWERUPS 3
 
@@ -89,6 +91,13 @@
         
         [self launchTimer];
 		[self speedUpTimer];
+        
+        id<GAITracker> tracker= [[GAI sharedInstance] defaultTracker];
+        
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"view"        // Event category (required)
+                                                              action:@"enter_scene" // Event action (required)
+                                                               label:@"Game_start"  // Event label
+                                                               value:nil] build]];  // Event value
         
     }
     return self;
@@ -511,6 +520,13 @@
     } completion:^(BOOL finished) {
         [stopButton removeFromSuperview];
     }];
+    
+    id<GAITracker> tracker= [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"view"        // Event category (required)
+                                                          action:@"enter_scene" // Event action (required)
+                                                           label:@"Game_over"        // Event label
+                                                           value:nil] build]];  // Event value
+    
 }
 
 -(void) goMainMenuFromEnd {
