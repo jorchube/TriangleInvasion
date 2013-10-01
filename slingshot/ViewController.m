@@ -16,6 +16,7 @@
 @interface ViewController() {
     SKView *mainView;
     UIButton *removeAdButton;
+    UIButton *restoreBuy;
     
     //variable for the payment process
     SKPayment *payment;
@@ -33,7 +34,12 @@ static ViewController *viewController;
 
 - (void)viewDidLoad
 {
+
     [super viewDidLoad];
+
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"removeAd"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     
     _musicEnable = true;
     
@@ -141,8 +147,10 @@ static ViewController *viewController;
 -(void)removeAdButton {
     [UIView animateWithDuration:.5 animations:^{
         removeAdButton.alpha = 0;
+        restoreBuy.alpha = 0;
     } completion:^(BOOL finished) {
         [removeAdButton setHidden:YES];
+        [restoreBuy setHidden:YES];
     }];
 }
 
@@ -154,10 +162,10 @@ static ViewController *viewController;
         
         [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
         
-        if (removeAdButton == nil){
+        if (!removeAdButton){
             
             removeAdButton = [UIButton buttonWithType:UIButtonTypeSystem];
-            removeAdButton.frame = CGRectMake(0, 65, self.view.frame.size.width, 50);
+            removeAdButton.frame = CGRectMake(0, 65, self.view.frame.size.width/2, 50);
             [removeAdButton setTitle:NSLocalizedString(@"Remove Ads", nil) forState:UIControlStateNormal];
             removeAdButton.titleLabel.font = [UIFont systemFontOfSize:18];
             removeAdButton.alpha = 0;
@@ -166,14 +174,47 @@ static ViewController *viewController;
             [self.view addSubview:removeAdButton];
             
         }
+        if (!restoreBuy) {
+            restoreBuy = [UIButton buttonWithType:UIButtonTypeSystem];
+            restoreBuy.frame = CGRectMake(self.view.frame.size.width/2, 65, self.view.frame.size.width/2, 50);
+            [restoreBuy setTitle:NSLocalizedString(@"Restore", nil) forState:UIControlStateNormal];
+            restoreBuy.titleLabel.font = [UIFont systemFontOfSize:18];
+            restoreBuy.alpha = 0;
+            [restoreBuy addTarget:self action:@selector(restorePurchase) forControlEvents:UIControlEventTouchUpInside];
+            
+            [self.view addSubview:restoreBuy];
+        }
         
         [removeAdButton setHidden:NO];
+        [restoreBuy setHidden:NO];
+        
         [UIView animateWithDuration:1 animations:^{
             removeAdButton.alpha = 1;
+            restoreBuy.alpha = 1;
         }];
         
     }
 }
+
+#pragma mark restoring purchases
+
+-(void)restorePurchase{
+    [[SKPaymentQueue defaultQueue]   restoreCompletedTransactions];
+}
+
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
+
+    NSLog(@"Restored Transactions are once again in Queue for purchasing");
+    
+    for (SKPaymentTransaction *transaction in queue.transactions) {
+        NSString *productID = transaction.payment.productIdentifier;
+        if ([productID isEqualToString:@"removeAd"]) {
+            [self removeAdPurchased];
+        }
+    }
+}
+
+#pragma mark buying purchases
 
 -(void)buyRemoveAd {
     
@@ -236,7 +277,7 @@ static ViewController *viewController;
     
 }
 
-
+#pragma mark volume buttons
 -(void)hideVolumeButton {
     _volumeButton.hidden = true;
 }
