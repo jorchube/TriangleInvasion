@@ -37,8 +37,8 @@ static ViewController *viewController;
 
     [super viewDidLoad];
 
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"removeAd"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    //[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"removeAd"];
+    //[[NSUserDefaults standardUserDefaults] synchronize];
 
     
     _musicEnable = true;
@@ -210,6 +210,14 @@ static ViewController *viewController;
         NSString *productID = transaction.payment.productIdentifier;
         if ([productID isEqualToString:@"removeAd"]) {
             [self removeAdPurchased];
+        }
+        else {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Nothing to restore"
+                                                              message:@"You don't have any purchase to be restored"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+            [message show];
         }
     }
 }
