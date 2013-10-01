@@ -37,8 +37,8 @@ static ViewController *viewController;
 
     [super viewDidLoad];
 
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"removeAd"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    //[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"removeAd"];
+    //[[NSUserDefaults standardUserDefaults] synchronize];
 
     
     _musicEnable = true;
@@ -205,6 +205,15 @@ static ViewController *viewController;
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
 
     NSLog(@"Restored Transactions are once again in Queue for purchasing");
+    
+    if(queue.transactions.count == 0){
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Nothing to restore"
+                                                          message:@"You don't have any purchase to be restored"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
+    }
     
     for (SKPaymentTransaction *transaction in queue.transactions) {
         NSString *productID = transaction.payment.productIdentifier;
