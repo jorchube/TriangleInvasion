@@ -31,7 +31,6 @@
 		7C623F8417E1491800E2F1E4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C623F8317E1491800E2F1E4 /* StoreKit.framework */; };
 		7C623F8617E1CCE400E2F1E4 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C623F8517E1CCE400E2F1E4 /* iAd.framework */; };
 		7C6A96D217E61CD90093B30B /* collisionSparks.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7C2AAAF117DE83DF00A9AD29 /* collisionSparks.sks */; };
-		7C6CBA5817FAC32D00EE04D3 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6CBA5717FAC32D00EE04D3 /* libGoogleAnalyticsServices.a */; };
 		7C6CBA5A17FAC4B000EE04D3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6CBA5917FAC4B000EE04D3 /* SystemConfiguration.framework */; };
 		7C6CBA5C17FAC4B900EE04D3 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6CBA5B17FAC4B900EE04D3 /* libz.dylib */; };
 		7C6CBA5E17FAC4C400EE04D3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6CBA5D17FAC4C400EE04D3 /* CoreData.framework */; };
@@ -64,6 +63,7 @@
 		7CFB362C17E6231F00BCB235 /* CollisionTriangle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CFB362B17E6231F00BCB235 /* CollisionTriangle.mp3 */; };
 		7CFF4E6B17E879E40054EC94 /* fipps.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CFF4E6917E879E40054EC94 /* fipps.ttf */; };
 		7CFF4E6C17E879E40054EC94 /* star.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CFF4E6A17E879E40054EC94 /* star.ttf */; };
+		B56EB70A17FAC67A00CA360D /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6CBA5717FAC32D00EE04D3 /* libGoogleAnalyticsServices.a */; };
 		B56FDBD817EB2B8800B0CDAC /* Powerup.m in Sources */ = {isa = PBXBuildFile; fileRef = B56FDBD717EB2B8800B0CDAC /* Powerup.m */; };
 		B56FDBDB17EB3D5A00B0CDAC /* slingBreaks.sks in Resources */ = {isa = PBXBuildFile; fileRef = B56FDBD917EB3D5A00B0CDAC /* slingBreaks.sks */; };
 		B56FDBE917EC2E4E00B0CDAC /* clk_w.png in Resources */ = {isa = PBXBuildFile; fileRef = B56FDBDD17EC2E4E00B0CDAC /* clk_w.png */; };
@@ -209,13 +209,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B56EB70A17FAC67A00CA360D /* libGoogleAnalyticsServices.a in Frameworks */,
 				7C6CBA5E17FAC4C400EE04D3 /* CoreData.framework in Frameworks */,
 				7C6CBA5C17FAC4B900EE04D3 /* libz.dylib in Frameworks */,
 				7C6CBA5A17FAC4B000EE04D3 /* SystemConfiguration.framework in Frameworks */,
 				7C404EFC17E4FDC000C3EB33 /* AudioToolbox.framework in Frameworks */,
 				7C623F8617E1CCE400E2F1E4 /* iAd.framework in Frameworks */,
 				7CB2514117DA1DDD00FA592D /* CoreGraphics.framework in Frameworks */,
-				7C6CBA5817FAC32D00EE04D3 /* libGoogleAnalyticsServices.a in Frameworks */,
 				7CB2514317DA1DDD00FA592D /* UIKit.framework in Frameworks */,
 				7CB2514517DA1DDD00FA592D /* SpriteKit.framework in Frameworks */,
 				7C623F8417E1491800E2F1E4 /* StoreKit.framework in Frameworks */,
@@ -781,18 +781,21 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jordi Chulia (9RL5HTHXQS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jordi Chulia (9RL5HTHXQS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "slingshot/slingshot-Prefix.pch";
 				INFOPLIST_FILE = "slingshot/slingshot-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/pasasmi/Documents/code/slingshot/slingshot/Helpers/GoogleAnalytics,
+					/Users/jorchube/Documents/code/slingshot/slingshot/Helpers/GoogleAnalytics,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "19AC4472-A254-4F39-A452-C9C63318D71B";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -804,18 +807,21 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jordi Chulia (9RL5HTHXQS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jordi Chulia (9RL5HTHXQS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "slingshot/slingshot-Prefix.pch";
 				INFOPLIST_FILE = "slingshot/slingshot-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/pasasmi/Documents/code/slingshot/slingshot/Helpers/GoogleAnalytics,
+					/Users/jorchube/Documents/code/slingshot/slingshot/Helpers/GoogleAnalytics,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "19AC4472-A254-4F39-A452-C9C63318D71B";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

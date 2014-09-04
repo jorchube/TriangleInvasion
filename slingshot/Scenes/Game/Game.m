@@ -583,9 +583,7 @@
     
     line.physicsBody = pb;
     
-    //SKAction *tiraParribaDeMierda = [SKAction moveToY:CGRectGetMaxY(self.frame) duration:5];
     [self addChild:line];
-    //[line runAction:tiraParribaDeMierda];
     line.physicsBody.affectedByGravity = NO;
     line.physicsBody.mass = INT64_MAX;
     line.physicsBody.velocity = CGVectorMake(0, 500);
